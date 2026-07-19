@@ -85,6 +85,7 @@ function createApp(database) {
   }
 
   function isMonday(date, date2) {
+    date2.dayOfWeek;
     return date.getUTCDay() === 1;
   }
 
