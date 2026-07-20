@@ -27,16 +27,6 @@ Below follows an analysis and definition of the requirement/game rules of tetris
 - When a row is removed the player is awarded ***
 - Shapes may be one of the following: 
 
-| Name | Shape |
-| ---- | -------------------------------- |
-| I    | ####                             |
-| O    | ##<br/>##                        |
-| T    | ###<br/>&nbsp;&nbsp;#            |
-| J    | ###<br>&nbsp;&nbsp;&nbsp;&nbsp;# |
-| L    | ###<br/>#                        |
-| S    | &nbsp;&nbsp;##<br/>##            |
-| Z    | ##<br/>&nbsp;&nbsp;##            |
-
 
 | Name   | I    | O            | T                     | J                                 | L         | S                     | Z                     |
 |--------|------|--------------|-----------------------|-----------------------------------|-----------|-----------------------|-----------------------|
