@@ -53,7 +53,13 @@ export class Board {
       this.row1 = "..."
       this.row2 = `.${this.currentShape}.`
       this.drawBoard()
-    } if (this.tickCount === 2) {
+    } 
+    if (this.tickCount === 4) {
+      this.row1 = "..."
+      this.row2 = `.${this.currentShape}.`
+      this.drawBoard()
+    }
+    if (this.tickCount === 2) {
       this.row2 = "..."
       this.row3 = `.${this.currentShape}.`
       this.clearShape()
@@ -61,11 +67,7 @@ export class Board {
     } if (this.tickCount === 3) {
       this.isFalling = false
       this.drawBoard()
-    } if (this.tickCount === 4) {
-      this.row1 = "..."
-      this.row2 = `.${this.currentShape}.`
-      this.drawBoard()
-    } if (this.tickCount === 5) {
+    }  if (this.tickCount === 5) {
       this.isFalling = false
       this.drawBoard()
     }
