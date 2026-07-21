@@ -10,7 +10,7 @@ export class Board {
   board = "...\n...\n...\n"
 
   drop(shape) {
-    this.board = ".X.\n...\n...\n"
+    this.board = `.${shape}.\n...\n...\n`
   }
 
   tick() {
