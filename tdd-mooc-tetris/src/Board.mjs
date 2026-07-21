@@ -10,10 +10,14 @@ export class Board {
   board = "...\n...\n...\n"
   currentShape;
 
+  setFirstShape(firstShape){
+    this.currentShape = firstShape
+  }
+
 
   drop(shape) {
     if (this.currentShape === undefined) {
-      this.currentShape = shape
+      this.setFirstShape(shape)
     }
 
     if (shape !== this.currentShape) {
