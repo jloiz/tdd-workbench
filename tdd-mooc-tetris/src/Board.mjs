@@ -6,7 +6,7 @@ export class Board {
     this.width = width;
     this.height = height;
   }
-  
+
   board = "...\n...\n...\n"
   currentShape;
 
@@ -16,11 +16,11 @@ export class Board {
       this.currentShape = shape
     }
 
-   if (shape !== this.currentShape) {
-    throw new Error("already falling")
-   }
-   this.currentShape = shape
-   this.board = `.${this.currentShape}.\n...\n...\n`
+    if (shape !== this.currentShape) {
+      throw new Error("already falling")
+    }
+    this.currentShape = shape
+    this.board = `.${this.currentShape}.\n...\n...\n`
   }
 
   tick() {
@@ -28,7 +28,7 @@ export class Board {
   }
 
   toString() {
-   console.log("here", this.width, this.height)
+    console.log("here", this.width, this.height)
     return this.board;
   }
 }
