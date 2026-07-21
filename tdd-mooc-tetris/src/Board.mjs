@@ -7,7 +7,11 @@ export class Board {
     this.height = height;
   }
 
-  board = "...\n...\n...\n"
+  row1;
+  row2;
+  row3;
+
+  board = `${this.row1}\n${this.row2}\n${this.row3}\n`
   currentShape;
   tickCount = 0
 
