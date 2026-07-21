@@ -39,7 +39,11 @@ export class Board {
   }
 
   hasFalling() {
-    return true
+    if (this.tickCount <= 2) {
+      return true
+    } else {
+      return false
+    }
   }
 
   toString() {
