@@ -13,18 +13,18 @@ Below follows an analysis and definition of the requirement/game rules of tetris
 - Only one full shape may be moving downwards
 - The only shape a player can control is the shape moving downwards
 - A shape may move left or right at any time
-- A shape may rotate 90 degrees left or right at amy time
+- A shape may rotate 90 degrees left or right at any time
 - A shape stops falling when the bottom of edge of a shape **in it's current orientation** when:
     - Touches the bottom edge of the board
     - Touches any part of the top edge of another shape
 - A shape may immediately move to the lowest position as allowed from the previous rule
 - The fall rate of a shape may be increased 
 - When shape stops moving a new one is spawned
-- The games is over when a shape cannot spawn without overlapping another shape
+- The game is over when a shape cannot spawn without overlapping another shape
 - When the squares of a shape are alligned such that they fill the board horizontally that row of shapes is removed and 
 - Multiple rows may be removed simulataneously 
 - When a row is cleared all squares above them are joined into groups. These groups fall until they hit the top of any square or the bottom of the board c.f.: https://harddrop.com/wiki/Line_clear
-- When a row is removed the player is awarded ***
+- When a row is removed the player is awarded 40 points
 - Shapes may be one of the following: 
 
 

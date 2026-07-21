@@ -8,6 +8,7 @@ export class Board {
   }
 
   toString() {
-    return "TODO";
+   console.log("here", this.width, this.height)
+    return "...\n...\n...\n";
   }
 }
