@@ -10,7 +10,10 @@ export class Board {
   board = "...\n...\n...\n"
 
   drop(shape) {
-    this.board = `.${shape}.\n...\n...\n`
+   if (shape === "Y") {
+    throw new Error("already falling")
+   }
+   this.board = `.${shape}.\n...\n...\n`
   }
 
   tick() {
