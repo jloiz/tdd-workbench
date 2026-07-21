@@ -32,11 +32,12 @@ export class Board {
     this.tickCount++
     console.log("here", this.tickCount)
     if (this.tickCount === 1) {
-      this.board = "...\n.X.\n...\n"
+      this.board = `...\n.${this.currentShape}.\n...\n`
     } else {
-      this.board = "...\n...\n.X.\n"
+      this.board = `...\n...\n.${this.currentShape}.\n`
     }
   }
+
   hasFalling() {
     return true
   }
