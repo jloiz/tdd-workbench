@@ -9,8 +9,8 @@ export class Board {
   
   board = "...\n...\n...\n"
 
-  drop(shape){
-    return ".X.\n...\n...\n"
+  drop(shape) {
+    this.board = ".X.\n...\n...\n"
   }
 
   toString() {
