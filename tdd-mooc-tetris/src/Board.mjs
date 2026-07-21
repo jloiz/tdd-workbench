@@ -42,9 +42,15 @@ export class Board {
     this.tickCount++
     console.log("here", this.tickCount)
     if (this.tickCount === 1) {
-      this.board = `...\n.${this.currentShape}.\n...\n`
-    } else {
-      this.board = `...\n...\n.${this.currentShape}.\n`
+      this.row1 = "..."
+      this.row2 = `.${this.currentShape}.`
+      this.drawBoard()
+    } else if (this.tickCount === 2){
+      this.row2 = "..."
+      this.row3 = `.${this.currentShape}.`
+      this.drawBoard()
+    } else if {
+      
     }
   }
 
