@@ -9,7 +9,7 @@ export class Board {
   currentShape = "NO_SHAPE"
   tickCount = 0
   board = `${this.row1}\n${this.row2}\n${this.row3}\n`
-  isFalling = true
+  isFalling;
 
   constructor(width, height) {
     this.width = width;
@@ -20,8 +20,9 @@ export class Board {
     this.board = `${this.row1}\n${this.row2}\n${this.row3}\n`
   }
 
-  setNewShape(firstShape) {
-    this.currentShape = firstShape
+  setNewShape(newShape) {
+    this.currentShape = newShape
+    this.isFalling = true
   }
 
 
@@ -54,6 +55,12 @@ export class Board {
       this.drawBoard()
     } else if (this.tickCount === 3) {
       this.isFalling = false
+      this.drawBoard()
+    } else if (this.tickCount === 4) {
+      console.log("BOARD\n", this.board)
+      this.row1 = "..."
+      this.row2 = `.${this.currentShape}.`
+      this.drawBoard()
     }
   }
 
