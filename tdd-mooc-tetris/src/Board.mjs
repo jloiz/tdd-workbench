@@ -32,10 +32,10 @@ export class Board {
     if (shape !== this.currentShape) {
       throw new Error("already falling")
     }
+
     this.currentShape = shape
-    this.row1 = `.${this.currentShape}`
-    //drawBoard()
-    this.board = `.${this.currentShape}.\n...\n...\n`
+    this.row1 = `.${this.currentShape}.`
+    this.drawBoard()
   }
 
   tick() {
