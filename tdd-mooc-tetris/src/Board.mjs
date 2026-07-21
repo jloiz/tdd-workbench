@@ -2,11 +2,6 @@ export class Board {
   width;
   height;
 
-  constructor(width, height) {
-    this.width = width;
-    this.height = height;
-  }
-
   row1 = "..."
   row2 = "..."
   row3 = "..."
@@ -14,6 +9,11 @@ export class Board {
   currentShape = "NO_SHAPE"
   tickCount = 0
   board = `${this.row1}\n${this.row2}\n${this.row3}\n`
+
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
 
   drawBoard() {
     this.board = `${this.row1}\n${this.row2}\n${this.row3}\n`
