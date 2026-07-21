@@ -13,6 +13,10 @@ export class Board {
     this.board = ".X.\n...\n...\n"
   }
 
+  tick() {
+    this.board = "...\n.X.\n...\n"
+  }
+
   toString() {
    console.log("here", this.width, this.height)
     return this.board;
