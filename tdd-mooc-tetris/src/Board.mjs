@@ -11,7 +11,7 @@ export class Board {
   currentShape;
   tickCount = 0
 
-  setFirstShape(firstShape){
+  setFirstShape(firstShape) {
     this.currentShape = firstShape
   }
 
@@ -33,10 +33,11 @@ export class Board {
     console.log("here", this.tickCount)
     if (this.tickCount === 1) {
       this.board = "...\n.X.\n...\n"
-    } else {this.board = "...\n...\n.X.\n"
+    } else {
+      this.board = "...\n...\n.X.\n"
     }
   }
-  hasFalling(){
+  hasFalling() {
     return true
   }
 
