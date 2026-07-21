@@ -11,7 +11,7 @@ export class Board {
   row2 = "..."
   row3 = "..."
 
-  currentShape;
+  currentShape = "NO_SHAPE"
   tickCount = 0
   board = `${this.row1}\n${this.row2}\n${this.row3}\n`
 
@@ -19,14 +19,14 @@ export class Board {
     this.board = `${this.row1}\n${this.row2}\n${this.row3}\n`
   }
 
-  setFirstShape(firstShape) {
+  setNewShape(firstShape) {
     this.currentShape = firstShape
   }
 
 
   drop(shape) {
-    if (this.currentShape === undefined) {
-      this.setFirstShape(shape)
+    if (this.currentShape === "NO_SHAPE") {
+      this.setNewShape(shape)
     }
 
     if (shape !== this.currentShape) {
@@ -48,10 +48,9 @@ export class Board {
     } else if (this.tickCount === 2){
       this.row2 = "..."
       this.row3 = `.${this.currentShape}.`
+      this.currentShape = "NO_SHAPE" // reset current shape
       this.drawBoard()
-    } else if {
-      
-    }
+    } 
   }
 
   hasFalling() {
