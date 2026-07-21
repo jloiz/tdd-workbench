@@ -20,6 +20,10 @@ export class Board {
     this.board = `${this.row1}\n${this.row2}\n${this.row3}\n`
   }
 
+  clearShape() {
+    this.currentShape = "NO_SHAPE"
+  }
+
   setNewShape(newShape) {
     this.currentShape = newShape
     this.isFalling = true
@@ -52,7 +56,7 @@ export class Board {
     } else if (this.tickCount === 2){
       this.row2 = "..."
       this.row3 = `.${this.currentShape}.`
-      this.currentShape = "NO_SHAPE" // reset current shape
+      this.clearShape()
       this.drawBoard()
     } else if (this.tickCount === 3) {
       this.isFalling = false
@@ -64,6 +68,7 @@ export class Board {
       this.drawBoard()
     } else if (this.tickCount === 5) {
       this.isFalling = false
+      this.drawBoard()
     }
   }
 
