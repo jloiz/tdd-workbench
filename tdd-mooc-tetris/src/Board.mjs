@@ -7,13 +7,17 @@ export class Board {
     this.height = height;
   }
 
-  row1;
-  row2;
-  row3;
+  row1 = "..."
+  row2 = "..."
+  row3 = "..."
 
-  board = `${this.row1}\n${this.row2}\n${this.row3}\n`
   currentShape;
   tickCount = 0
+  board = `${this.row1}\n${this.row2}\n${this.row3}\n`
+
+  drawBoard() {
+    this.board = `${this.row1}\n${this.row2}\n${this.row3}\n`
+  }
 
   setFirstShape(firstShape) {
     this.currentShape = firstShape
@@ -29,6 +33,8 @@ export class Board {
       throw new Error("already falling")
     }
     this.currentShape = shape
+    this.row1 = `.${this.currentShape}`
+    //drawBoard()
     this.board = `.${this.currentShape}.\n...\n...\n`
   }
 
@@ -51,7 +57,6 @@ export class Board {
   }
 
   toString() {
-    console.log("here", this.width, this.height)
     return this.board;
   }
 }
