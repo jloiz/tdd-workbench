@@ -29,6 +29,9 @@ export class Board {
     this.isFalling = true
   }
 
+  isShapesFirstTick(count) {
+    return (count%3 === 1) ? true : false
+  }
 
   drop(shape) {
     if (this.currentShape === "NO_SHAPE") {
@@ -47,18 +50,18 @@ export class Board {
   tick() {
     // TODO: REFACTOR THIS DEPSERATELY
     this.tickCount++
-    console.log("tickCount:", this.tickCount, "tickCount%3", this.tickCount % 3)
+    console.log("tickCount:", this.tickCount, this.isShapesFirstTick(this.tickCount))
     // ToDo: Maybe loop on new shape
-    if (this.tickCount === 1) {
+    if ((this.tickCount === 1) || (this.tickCount === 4)) {
       this.row1 = "..."
       this.row2 = `.${this.currentShape}.`
       this.drawBoard()
     } 
-    if (this.tickCount === 4) {
-      this.row1 = "..."
-      this.row2 = `.${this.currentShape}.`
-      this.drawBoard()
-    }
+    // if (this.tickCount%3 === 1) {
+    //   this.row1 = "..."
+    //   this.row2 = `.${this.currentShape}.`
+    //   this.drawBoard()
+    // }
     if (this.tickCount === 2) {
       this.row2 = "..."
       this.row3 = `.${this.currentShape}.`
