@@ -47,24 +47,25 @@ export class Board {
   tick() {
     // TODO: REFACTOR THIS DEPSERATELY
     this.tickCount++
+    console.log("tickCount:", this.tickCount, "tickCount%3", this.tickCount % 3)
     // ToDo: Maybe loop on new shape
     if (this.tickCount === 1) {
       this.row1 = "..."
       this.row2 = `.${this.currentShape}.`
       this.drawBoard()
-    } else if (this.tickCount === 2) {
+    } if (this.tickCount === 2) {
       this.row2 = "..."
       this.row3 = `.${this.currentShape}.`
       this.clearShape()
       this.drawBoard()
-    } else if (this.tickCount === 3) {
+    } if (this.tickCount === 3) {
       this.isFalling = false
       this.drawBoard()
-    } else if (this.tickCount === 4) {
+    } if (this.tickCount === 4) {
       this.row1 = "..."
       this.row2 = `.${this.currentShape}.`
       this.drawBoard()
-    } else if (this.tickCount === 5) {
+    } if (this.tickCount === 5) {
       this.isFalling = false
       this.drawBoard()
     }
