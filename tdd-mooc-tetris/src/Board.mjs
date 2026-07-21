@@ -8,12 +8,19 @@ export class Board {
   }
   
   board = "...\n...\n...\n"
+  currentShape;
+
 
   drop(shape) {
-   if (shape === "Y") {
+    if (this.currentShape === undefined) {
+      this.currentShape = shape
+    }
+
+   if (shape !== this.currentShape) {
     throw new Error("already falling")
    }
-   this.board = `.${shape}.\n...\n...\n`
+   this.currentShape = shape
+   this.board = `.${this.currentShape}.\n...\n...\n`
   }
 
   tick() {
