@@ -6,9 +6,15 @@ export class Board {
     this.width = width;
     this.height = height;
   }
+  
+  board = "...\n...\n...\n"
+
+  drop(shape){
+    return ".X.\n...\n...\n"
+  }
 
   toString() {
    console.log("here", this.width, this.height)
-    return "...\n...\n...\n";
+    return this.board;
   }
 }
