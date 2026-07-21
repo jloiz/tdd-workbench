@@ -52,7 +52,7 @@ export class Board {
     this.tickCount++
     console.log("tickCount:", this.tickCount, this.isShapesFirstTick(this.tickCount))
     // ToDo: Maybe loop on new shape
-    if ((this.tickCount === 1) || (this.tickCount === 4)) {
+    if (this.isShapesFirstTick(this.tickCount)) {
       this.row1 = "..."
       this.row2 = `.${this.currentShape}.`
       this.drawBoard()
