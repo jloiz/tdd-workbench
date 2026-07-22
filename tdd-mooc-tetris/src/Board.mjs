@@ -7,7 +7,6 @@ export class Board {
   row3 = "..."
 
   currentShape = "NO_SHAPE"
-  tickCount = 0
   board = `${this.row1}\n${this.row2}\n${this.row3}\n`
   isFalling;
 
@@ -45,9 +44,6 @@ export class Board {
   }
 
   tick() {
-    // TODO: REFACTOR THIS DEPSERATELY
-    this.tickCount++
-    console.log("tickCount:", this.tickCount, "tickCount%3", this.tickCount % 3)
     // ToDo: Maybe loop on new shape
     if (this.row1 != "...") {
       this.row1 = "..."
@@ -58,10 +54,10 @@ export class Board {
       this.row3 = `.${this.currentShape}.`
       this.clearShape()
       this.drawBoard()
-    } else if (this.tickCount === 3) {
+    } else if (this.row3 != "...") {
       this.isFalling = false
       this.drawBoard()
-    } else if (this.tickCount === 5) {
+    } else if (this.row2 != "..." && this.row3 != "...") {
       this.isFalling = false
       this.drawBoard()
     }
