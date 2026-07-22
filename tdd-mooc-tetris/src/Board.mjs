@@ -32,12 +32,11 @@ export class Board {
   tick() {
     // ToDo: Maybe loop on new shape
     if (this.row1 != "...") {
-      this.row1 = "..."
-      this.row2 = `.${this.currentShape}.`
+      this.fallFromTo("row1", "row2")
       this.drawBoard()
     } else if (this.row2 != "..." && this.row3 === "...") {
-      this.row2 = "..."
-      this.row3 = `.${this.currentShape}.`
+      this.fallFromTo("row2", "row3")
+
       this.clearShape()
       this.drawBoard()
     } else if (this.row3 != "...") {
@@ -51,6 +50,11 @@ export class Board {
 
   hasFalling() {
     return this.isFalling
+  }
+
+  fallFromTo(startRow, endRow) {
+    this[startRow] = "..."
+    this[endRow] = `.${this.currentShape}.`
   }
 
   clearShape() {
