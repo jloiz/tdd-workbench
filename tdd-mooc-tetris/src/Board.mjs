@@ -47,8 +47,9 @@ export class Board {
     }
   }
 
-  hasFalling() {
-    return this.isFalling
+  setNewShape(newShape) {
+    this.currentShape = newShape
+    this.setIsFalling(true)
   }
 
   fallFromTo(startRow, endRow) {
@@ -56,29 +57,24 @@ export class Board {
     this[endRow] = `.${this.currentShape}.`
   }
 
-  isRowEmpty(row) {
-    if (row === "...") {
-      return true
-    } else {
-      return false
-    }
+  setIsFalling(isFalling) {
+    this.isFalling = isFalling
   }
 
   clearCurrentShape() {
     this.currentShape = "NO_SHAPE"
   }
 
-  setNewShape(newShape) {
-    this.currentShape = newShape
-    this.isFalling = true
-  }
-
-  setIsFalling(isFalling) {
-    this.isFalling = isFalling
-  }
-
   drawBoard() {
     this.board = `${this.row1}\n${this.row2}\n${this.row3}\n`
+  }
+ 
+  isRowEmpty(row) {
+    return row === "..." 
+  }
+
+  hasFalling() {
+    return this.isFalling
   }
 
   toString() {
