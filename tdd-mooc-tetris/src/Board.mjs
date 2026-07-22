@@ -35,13 +35,14 @@ export class Board {
       this.drawBoard()
     } else if (!this.isRowEmpty(this.row2) && this.isRowEmpty(this.row3)) {
       this.fallFromTo("row2", "row3")
-      this.clearShape()
       this.drawBoard()
     } else if (!this.isRowEmpty(this.row3)) {
       this.setIsFalling(false)
+      this.clearShape()
       this.drawBoard()
     } else if (!this.isRowEmpty(this.row2) && !this.isRowEmpty(this.row3)) {
       this.setIsFalling(false)
+      this.clearShape()
       this.drawBoard()
     }
   }
