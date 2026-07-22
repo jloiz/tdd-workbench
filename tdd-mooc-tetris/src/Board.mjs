@@ -30,19 +30,17 @@ export class Board {
   }
 
   tick() {
-    // ToDo: Maybe loop on new shape
-    if (this.row1 != "...") {
+    if (!this.isRowEmpty(this.row1)) {
       this.fallFromTo("row1", "row2")
       this.drawBoard()
-    } else if (this.row2 != "..." && this.row3 === "...") {
+    } else if (!this.isRowEmpty(this.row2) && this.isRowEmpty(this.row3)) {
       this.fallFromTo("row2", "row3")
-
       this.clearShape()
       this.drawBoard()
-    } else if (this.row3 != "...") {
+    } else if (!this.isRowEmpty(this.row3)) {
       this.setIsFalling(false)
       this.drawBoard()
-    } else if (this.row2 != "..." && this.row3 != "...") {
+    } else if (!this.isRowEmpty(this.row2) && !this.isRowEmpty(this.row3)) {
       this.setIsFalling(false)
       this.drawBoard()
     }
@@ -55,6 +53,14 @@ export class Board {
   fallFromTo(startRow, endRow) {
     this[startRow] = "..."
     this[endRow] = `.${this.currentShape}.`
+  }
+
+  isRowEmpty(row) {
+    if (row === "...") {
+      return true
+    } else {
+      return false
+    }
   }
 
   clearShape() {
