@@ -15,19 +15,6 @@ export class Board {
     this.height = height;
   }
 
-  drawBoard() {
-    this.board = `${this.row1}\n${this.row2}\n${this.row3}\n`
-  }
-
-  clearShape() {
-    this.currentShape = "NO_SHAPE"
-  }
-
-  setNewShape(newShape) {
-    this.currentShape = newShape
-    this.isFalling = true
-  }
-
 
   drop(shape) {
     if (this.currentShape === "NO_SHAPE") {
@@ -65,6 +52,19 @@ export class Board {
 
   hasFalling() {
     return this.isFalling
+  }
+
+  drawBoard() {
+    this.board = `${this.row1}\n${this.row2}\n${this.row3}\n`
+  }
+
+  clearShape() {
+    this.currentShape = "NO_SHAPE"
+  }
+
+  setNewShape(newShape) {
+    this.currentShape = newShape
+    this.isFalling = true
   }
 
   toString() {
