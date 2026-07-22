@@ -38,11 +38,11 @@ export class Board {
       this.drawBoard()
     } else if (!this.isRowEmpty(this.row3)) {
       this.setIsFalling(false)
-      this.clearShape()
+      this.clearCurrentShape()
       this.drawBoard()
     } else if (!this.isRowEmpty(this.row2) && !this.isRowEmpty(this.row3)) {
       this.setIsFalling(false)
-      this.clearShape()
+      this.clearCurrentShape()
       this.drawBoard()
     }
   }
@@ -64,7 +64,7 @@ export class Board {
     }
   }
 
-  clearShape() {
+  clearCurrentShape() {
     this.currentShape = "NO_SHAPE"
   }
 
