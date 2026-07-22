@@ -24,7 +24,6 @@ export class Board {
       throw new Error("already falling")
     }
 
-    this.currentShape = shape
     this.row1 = `.${this.currentShape}.`
     this.drawBoard()
   }
