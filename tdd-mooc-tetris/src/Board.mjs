@@ -53,7 +53,7 @@ export class Board {
       this.row1 = "..."
       this.row2 = `.${this.currentShape}.`
       this.drawBoard()
-    } if (this.tickCount === 2) {
+    } else if (this.row2 != "..." && this.row3 === "...") {
       this.row2 = "..."
       this.row3 = `.${this.currentShape}.`
       this.clearShape()
