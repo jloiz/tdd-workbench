@@ -1,18 +1,18 @@
 export class Board {
   width;
   height;
-
-  row1 = "..."
-  row2 = "..."
-  row3 = "..."
-
-  currentShape = "NO_SHAPE"
-  board = `${this.row1}\n${this.row2}\n${this.row3}\n`
+  board;
+  currentShape;
   isFalling;
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
+    this.currentShape = "NO_SHAPE"
+    this.row1 = "..."
+    this.row2 = "..."
+    this.row3 = "..."
+    this.board = `${this.row1}\n${this.row2}\n${this.row3}\n`
   }
 
   drop(shape) {
@@ -68,9 +68,9 @@ export class Board {
   drawBoard() {
     this.board = `${this.row1}\n${this.row2}\n${this.row3}\n`
   }
- 
+
   isRowEmpty(row) {
-    return row === "..." 
+    return row === "..."
   }
 
   hasFalling() {
