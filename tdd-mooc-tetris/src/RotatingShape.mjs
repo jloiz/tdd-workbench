@@ -1,27 +1,27 @@
 export class RotatingShape {
     #shape;
 
-    constructor(shapeString){
+    constructor(shapeString) {
         this.#shape = shapeString
         Object.freeze(this)
     }
 
-    static fromString(shapeString){
-        var formattedShape = `${shapeString.replaceAll(' ','')}\n`
+    static fromString(shapeString) {
+        var formattedShape = `${shapeString.replaceAll(' ', '')}\n`
         return new RotatingShape(formattedShape)
     }
 
-    rotateRight(){
-       var  hardcoded =
-     `GDA
+    rotateRight() {
+        var hardcoded =
+            `GDA
        HEB
        IFC`
 
-        var formattedShape = `${hardcoded.replaceAll(' ','')}\n`
+        var formattedShape = `${hardcoded.replaceAll(' ', '')}\n`
         return new RotatingShape(formattedShape)
     }
 
-    toString(){
+    toString() {
         return this.#shape
     }
 }
