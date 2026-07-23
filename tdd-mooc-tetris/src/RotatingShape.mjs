@@ -15,15 +15,13 @@ export class RotatingShape {
         var hardcoded =
             `GDA\nHEB\nIFC\n`
         // var rows = this.#shape.split('\n')    
-        var rows = hardcoded.split('/n')
-        rows = rows.map(row => {
-            return row
-        })
-        console.log(rows)
+        var rows = hardcoded.split('\n')
+        
+        var elements = rows.map(row => row.split(''))
+
+        console.log(elements)
 
         var newRows = rows.join('\n')
-
-        console.log(newRows)
 
         return new RotatingShape(newRows)
     }
