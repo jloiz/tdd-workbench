@@ -14,14 +14,14 @@ export class RotatingShape {
     rotateRight() {
         var hardcoded =
             `GDA\nHEB\nIFC\n`
-       // var rows = this.#shape.split('\n')    
-            var rows = hardcoded.split('/n')
+        // var rows = this.#shape.split('\n')    
+        var rows = hardcoded.split('/n')
         rows = rows.map(row => {
             return row
         })
-       console.log(rows)
+        console.log(rows)
 
-       var newRows = rows.join('\n')
+        var newRows = rows.join('\n')
 
         console.log(newRows)
 
@@ -30,7 +30,7 @@ export class RotatingShape {
 
     rotateLeft() {
         var hardcoded =
-        `CFI
+            `CFI
        BEH
        ADG`
 
