@@ -13,12 +13,11 @@ export class RotatingShape {
 
     rotateRight() {
         var hardcoded =
-            `GDA
-       HEB
-       IFC`
+            `GDA\nHEB\nIFC\n`
 
-        var formattedShape = `${hardcoded.replaceAll(' ', '')}\n`
-        return new RotatingShape(formattedShape)
+       console.log(hardcoded)
+
+        return new RotatingShape(hardcoded)
     }
 
     rotateLeft() {
