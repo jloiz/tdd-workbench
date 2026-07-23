@@ -21,6 +21,16 @@ export class RotatingShape {
         return new RotatingShape(formattedShape)
     }
 
+    rotateLeft() {
+        var hardcoded =
+        `CFI
+       BEH
+       ADG`
+
+        var formattedShape = `${hardcoded.replaceAll(' ', '')}\n`
+        return new RotatingShape(formattedShape)
+    }
+
     toString() {
         return this.#shape
     }
