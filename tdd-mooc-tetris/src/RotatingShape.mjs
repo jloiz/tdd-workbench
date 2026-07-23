@@ -1,8 +1,9 @@
 export class RotatingShape {
-    shape;
+    #shape;
 
     constructor(shapeString){
-        this.shape = shapeString
+        this.#shape = shapeString
+        Object.freeze(this)
     }
 
     static fromString(shapeString){
@@ -11,6 +12,6 @@ export class RotatingShape {
     }
 
     toString(){
-        return this.shape
+        return this.#shape
     }
 }
