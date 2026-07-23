@@ -1,9 +1,16 @@
 export class RotatingShape {
     shape;
 
-    static fromString(shapeString){
-        this.shape = `${shapeString.replaceAll(' ','')}\n`
-        return this.shape
+    constructor(shapeString){
+        this.shape = shapeString
     }
 
+    static fromString(shapeString){
+        var formattedShape = `${shapeString.replaceAll(' ','')}\n`
+        return new RotatingShape(formattedShape)
+    }
+
+    toString(){
+        return this.shape
+    }
 }
