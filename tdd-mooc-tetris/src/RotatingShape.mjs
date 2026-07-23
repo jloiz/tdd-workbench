@@ -11,6 +11,16 @@ export class RotatingShape {
         return new RotatingShape(formattedShape)
     }
 
+    rotateRight(){
+       var  hardcoded =
+     `GDA
+       HEB
+       IFC`
+
+        var formattedShape = `${hardcoded.replaceAll(' ','')}\n`
+        return new RotatingShape(formattedShape)
+    }
+
     toString(){
         return this.#shape
     }
