@@ -27,14 +27,14 @@ export class RotatingShape {
         }
 
         // Reverse rows
-        var newShapeMatrix = newShapeMatrix.map(row => {return row.reverse()}) 
+        var rotatedShapeMatrix = newShapeMatrix.map(row => {return row.reverse()}) 
         
-        var newShapeRows = newShapeMatrix.map(row => {return row.join('')})
+        var rotatedShapeRows = rotatedShapeMatrix.map(row => {return row.join('')})
 
-        var newShape = newShapeRows.join('\n')
-        newShape = `${newShape}\n`
+        var rotatedShape = rotatedShapeRows.join('\n')
+        rotatedShape = `${rotatedShape}\n`
 
-        return new RotatingShape(newShape)
+        return new RotatingShape(rotatedShape)
     }
 
     rotateLeft() {
