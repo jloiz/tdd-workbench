@@ -21,12 +21,11 @@ export class RotatingShape {
         // Reverse rows
         const rotatedShapeMatrix = transposedShapeMatrix.map(row => { return row.reverse() })
         // Rejoin elements into row
-        const rotatedShapeRows = rotatedShapeMatrix.map(row => { return row.join('') })
+        const rotatedShape = rotatedShapeMatrix.map(row => { return row.join('') })
 
-        let rotatedShape = rotatedShapeRows.join('\n')
-        rotatedShape = `${rotatedShape}\n`
+        var formattedShape = this.formatShape(rotatedShape)
 
-        return new RotatingShape(rotatedShape)
+        return new RotatingShape(formattedShape)
     }
 
     rotateLeft() {
@@ -37,11 +36,12 @@ export class RotatingShape {
 
         var transposedShapeMatrix = this.transpose(shapeMatrix)
 
-        // Reverse columns
+        // Join elements in row
         var newShapeRows = transposedShapeMatrix.map(row => { return row.join('') })
+        // Reverse columns
         var rotatedShape = newShapeRows.reverse()
 
-        var formattedShape = `${rotatedShape.join('\n')}\n`
+        var formattedShape = this.formatShape(rotatedShape)
         return new RotatingShape(formattedShape)
     }
 
@@ -69,6 +69,10 @@ export class RotatingShape {
             }
         }
         return transposedMatrix
+    }
+
+    formatShape(shapeStr){
+        return `${shapeStr.join('\n')}\n`
     }
 
     toString() {
