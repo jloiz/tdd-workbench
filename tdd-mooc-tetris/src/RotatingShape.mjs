@@ -16,19 +16,10 @@ export class RotatingShape {
 
         const [shapeMatrix, shapeMatrixLength, shapeMatrixHeight] = this.matrixFromShape(cleanShape)
 
-        const newShapeMatrix = structuredClone(shapeMatrix)
-        // Algorithm to rotate a matrix clockwise is to transpose and reverse rows
-
-        // Transpose matrix
-        for (let i = 0; i < shapeMatrixHeight; i++) {
-            for (let j = 0; j < shapeMatrixLength; j++) {
-                newShapeMatrix[i][j] = shapeMatrix[j][i]
-            }
-        }
+        const transposedShapeMatrix = this.transpose(shapeMatrix)
 
         // Reverse rows
-        const rotatedShapeMatrix = newShapeMatrix.map(row => { return row.reverse() })
-
+        const rotatedShapeMatrix = transposedShapeMatrix.map(row => { return row.reverse() })
         // Rejoin elements into row
         const rotatedShapeRows = rotatedShapeMatrix.map(row => { return row.join('') })
 
@@ -46,13 +37,11 @@ export class RotatingShape {
 
         var transposedShapeMatrix = this.transpose(shapeMatrix)
 
-
         // Reverse columns
         var newShapeRows = transposedShapeMatrix.map(row => { return row.join('') })
-        var rotatedShapeMatrix = newShapeRows.reverse()
+        var rotatedShape = newShapeRows.reverse()
 
-
-        var formattedShape = `${rotatedShapeMatrix.join('\n')}\n`
+        var formattedShape = `${rotatedShape.join('\n')}\n`
         return new RotatingShape(formattedShape)
     }
 
@@ -73,14 +62,12 @@ export class RotatingShape {
         const length = matrix[0].length
         const height = matrix.length
         const transposedMatrix = structuredClone(matrix)
-        // Transpose matrix
+
         for (let i = 0; i < height; i++) {
             for (let j = 0; j < length; j++) {
                 transposedMatrix[i][j] = matrix[j][i]
             }
         }
-
-
         return transposedMatrix
     }
 
