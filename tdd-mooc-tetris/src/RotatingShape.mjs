@@ -15,8 +15,7 @@ export class RotatingShape {
         const cleanShape = this.cleanShape(this.#shape)
 
 
-        const shapeMatrix = this.matrixFromShape(cleanShape)
-        const shapeMatrixHeight = shapeMatrix.length
+        const [shapeMatrix, shapeMatrixHeight] = this.matrixFromShape(cleanShape)
         const shapeMatrixLength = shapeMatrix[0].length
 
         const newShapeMatrix = structuredClone(shapeMatrix)
@@ -75,7 +74,8 @@ export class RotatingShape {
     matrixFromShape(shape) {
         const rows = shape.split('\n')
         const matrix = rows.map(row => row.split(''))
-        return matrix
+        const matrixHeight = matrix.length
+        return [matrix, matrixHeight]
     }
 
     toString() {
