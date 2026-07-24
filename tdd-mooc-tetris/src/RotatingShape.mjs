@@ -16,24 +16,25 @@ export class RotatingShape {
         var rows = cleanShape.split('\n')
         var shapeMatrix = rows.map(row => row.split(''))       
 
-        var newElements = structuredClone(shapeMatrix)
+        var newShapeMatrix = structuredClone(shapeMatrix)
         // Algorithm to rotate a matrix clockwise is to transpose and reverse rows
 
         // Transpse matrix
         for (let i=0; i < 3; i++){
             for(let j=0; j < 3; j++){
-                newElements[i][j] = shapeMatrix[j][i]
+                newShapeMatrix[i][j] = shapeMatrix[j][i]
             }
         }
 
         // Reverse rows
-        var newElements2 = newElements.map(row => {return row.reverse()}) 
-        newElements2 = newElements2.map(row => {return row.join('')})
+        var newShapeMatrix = newShapeMatrix.map(row => {return row.reverse()}) 
+        
+        var newShapeRows = newShapeMatrix.map(row => {return row.join('')})
 
-        var newRows = newElements2.join('\n')
-        newRows = `${newRows}\n`
+        var newShape = newShapeRows.join('\n')
+        newShape = `${newShape}\n`
 
-        return new RotatingShape(newRows)
+        return new RotatingShape(newShape)
     }
 
     rotateLeft() {
