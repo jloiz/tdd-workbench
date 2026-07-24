@@ -13,9 +13,9 @@ export class RotatingShape {
 
     rotateRight() {
         const cleanShape = this.cleanShape(this.#shape)
+        const shapeMatrix = this.matrixFromShape(cleanShape)
 
-        const [shapeMatrix, shapeMatrixLength, shapeMatrixHeight] = this.matrixFromShape(cleanShape)
-
+        // Algorithm to rotate matrix right is to transpose and reverse rows
         const transposedShapeMatrix = this.transpose(shapeMatrix)
 
         // Reverse rows
@@ -24,16 +24,14 @@ export class RotatingShape {
         const rotatedShape = rotatedShapeMatrix.map(row => { return row.join('') })
 
         var formattedShape = this.formatShape(rotatedShape)
-
         return new RotatingShape(formattedShape)
     }
 
     rotateLeft() {
         const cleanShape = this.cleanShape(this.#shape)
+        const shapeMatrix = this.matrixFromShape(cleanShape)
 
-        const [shapeMatrix, shapeMatrixLength, shapeMatrixHeight] = this.matrixFromShape(cleanShape)
-        // Algorithm to rotate a matrix clockwise is to transpose and reverse columns
-
+        // Algorithm to rotate a matrix anticlockwise is to transpose and reverse columnns
         var transposedShapeMatrix = this.transpose(shapeMatrix)
 
         // Join elements in row
@@ -52,9 +50,7 @@ export class RotatingShape {
     matrixFromShape(shape) {
         const rows = shape.split('\n')
         const matrix = rows.map(row => row.split(''))
-        const height = matrix.length
-        const length = matrix[0].length
-        return [matrix, length, height]
+        return matrix
     }
 
     // ToDo Create matrix object with the properties
@@ -71,7 +67,7 @@ export class RotatingShape {
         return transposedMatrix
     }
 
-    formatShape(shapeStr){
+    formatShape(shapeStr) {
         return `${shapeStr.join('\n')}\n`
     }
 
