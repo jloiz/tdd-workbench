@@ -55,7 +55,7 @@ describe("Rotating 5x5 shape", () => {
     );
   });
 
-  test.skip("can be rotated right/clockwise", () => {
+  test("can be rotated right/clockwise", () => {
     expect(shape.rotateRight().toString()).to.equalShape(
       `UPKFA
        VQLGB
