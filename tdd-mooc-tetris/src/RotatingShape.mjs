@@ -12,7 +12,7 @@ export class RotatingShape {
     }
 
     rotateRight() {
-        const cleanShape = this.#shape.substring(0, this.#shape.length - 1)
+        const cleanShape = this.cleanShape(this.#shape)
 
         const rows = cleanShape.split('\n')
 
@@ -43,8 +43,7 @@ export class RotatingShape {
     }
 
     rotateLeft() {
-        const cleanShape = this.#shape.substring(0, this.#shape.length - 1)
-
+        const cleanShape = this.cleanShape(this.#shape)
         const rows = cleanShape.split('\n')
 
         const shapeMatrix = rows.map(row => row.split(''))
@@ -70,7 +69,9 @@ export class RotatingShape {
         return new RotatingShape(formattedShape)
     }
 
-    
+    cleanShape(unformattedShape) {
+        return unformattedShape.substring(0, this.#shape.length - 1)
+}
 
     toString() {
         return this.#shape
