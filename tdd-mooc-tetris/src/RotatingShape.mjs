@@ -14,7 +14,6 @@ export class RotatingShape {
     rotateRight() {
         const cleanShape = this.cleanShape(this.#shape)
 
-
         const [shapeMatrix, shapeMatrixLength, shapeMatrixHeight] = this.matrixFromShape(cleanShape)
 
         const newShapeMatrix = structuredClone(shapeMatrix)
@@ -41,12 +40,8 @@ export class RotatingShape {
 
     rotateLeft() {
         const cleanShape = this.cleanShape(this.#shape)
-        const rows = cleanShape.split('\n')
 
-        const shapeMatrix = rows.map(row => row.split(''))
-        const shapeMatrixHeight = shapeMatrix.length
-        const shapeMatrixLength = shapeMatrix[0].length
-
+        const [shapeMatrix, shapeMatrixLength, shapeMatrixHeight] = this.matrixFromShape(cleanShape)
         const newShapeMatrix = structuredClone(shapeMatrix)
         // Algorithm to rotate a matrix clockwise is to transpose and reverse columns
 
