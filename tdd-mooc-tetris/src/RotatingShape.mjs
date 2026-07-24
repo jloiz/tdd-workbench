@@ -7,16 +7,15 @@ export class RotatingShape {
     }
 
     static fromString(shapeString) {
-        var formattedShape = `${shapeString.replaceAll(' ', '')}\n`
+        const formattedShape = `${shapeString.replaceAll(' ', '')}\n`
         return new RotatingShape(formattedShape)
     }
 
     rotateRight() {   
-        var cleanShape = this.#shape.substring(0, this.#shape.length -1)
-        var rows = cleanShape.split('\n')
-        var shapeMatrix = rows.map(row => row.split(''))       
-
-        var newShapeMatrix = structuredClone(shapeMatrix)
+        const cleanShape = this.#shape.substring(0, this.#shape.length -1)
+        const rows = cleanShape.split('\n')
+        const shapeMatrix = rows.map(row => row.split(''))       
+        const newShapeMatrix = structuredClone(shapeMatrix)
         // Algorithm to rotate a matrix clockwise is to transpose and reverse rows
 
         // Transpse matrix
@@ -27,11 +26,11 @@ export class RotatingShape {
         }
 
         // Reverse rows
-        var rotatedShapeMatrix = newShapeMatrix.map(row => {return row.reverse()}) 
+        const rotatedShapeMatrix = newShapeMatrix.map(row => {return row.reverse()}) 
         
-        var rotatedShapeRows = rotatedShapeMatrix.map(row => {return row.join('')})
+        const rotatedShapeRows = rotatedShapeMatrix.map(row => {return row.join('')})
 
-        var rotatedShape = rotatedShapeRows.join('\n')
+        let rotatedShape = rotatedShapeRows.join('\n')
         rotatedShape = `${rotatedShape}\n`
 
         return new RotatingShape(rotatedShape)
