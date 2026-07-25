@@ -2,10 +2,11 @@ import { RotatingShape } from "./RotatingShape.mjs"
 
 export class Tetromino {
     
-    tetromino;
+    #tetromino;
+    // put rot shape here
 
-    constructor(tetrominoShape){
-        this.tetromino = tetrominoShape
+    constructor(tetrominoString){
+        this.tetromino = tetrominoString
     }
 
     static T_SHAPE = Tetromino.fromString('.T.\nTTT\n...\n')
@@ -17,6 +18,8 @@ export class Tetromino {
     } 
 
     rotateRight() {
+        let shape = new RotatingShape(this.#tetromino)
+
         return Tetromino.fromString('.T.\n.TT\n.T.\n')
     }
 
