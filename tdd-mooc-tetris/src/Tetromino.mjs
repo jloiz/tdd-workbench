@@ -3,11 +3,9 @@ import { RotatingShape } from "./RotatingShape.mjs"
 export class Tetromino {
     
     tetromino;
-    tetrominoState
 
-    constructor(initialState){
-        this.tetromino;
-        this.tetrominoState = initialState
+    constructor(tetrominoShape){
+        this.tetromino = tetrominoShape
     }
 
     static T_SHAPE = Tetromino.fromString('.T.\nTTT\n...\n')
@@ -16,10 +14,9 @@ export class Tetromino {
     static fromString(tetrominoString) {
         this.tetromino = tetrominoString;
         return new Tetromino(tetrominoString)
-       // return new RotatingShape(tetrominoString)
     } 
 
     toString() {
-        return this.tetrominoState
+        return this.tetromino
     }
 }
