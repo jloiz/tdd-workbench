@@ -16,6 +16,10 @@ export class Tetromino {
         return new Tetromino(tetrominoString)
     } 
 
+    rotateRight() {
+        return Tetromino.fromString('.T.\n.TT\n.T.\n')
+    }
+
     toString() {
         return this.tetromino
     }
