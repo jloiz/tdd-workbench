@@ -15,11 +15,11 @@ export class Tetromino {
 
     static fromString(tetrominoString) {
         this.tetromino = tetrominoString;
-        test = new Tetromino(tetrominoString)
-        return new RotatingShape(tetrominoString)
+        return new Tetromino(tetrominoString)
+       // return new RotatingShape(tetrominoString)
     } 
 
     toString() {
-        return this.tetromino
+        return this.tetrominoState
     }
 }
