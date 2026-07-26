@@ -41,13 +41,17 @@ export class Tetromino {
 
         let tetrominoIsAtBottomOfBox = tetrominoString.substring(0, 5) === '.....'
         if (tetrominoIsAtBottomOfBox) {
-            tetrominoString = tetrominoString.split('\n').reverse().join('\n')
-            tetrominoString = `${tetrominoString.slice(1)}\n`
+            tetrominoString = this.pushToTopOfBox(tetrominoString)
         }
 
         return Tetromino.fromString(tetrominoString)
     }
 
+    pushToTopOfBox(tetrominoString) {
+        tetrominoString = tetrominoString.split('\n').reverse().join('\n')
+        tetrominoString = `${tetrominoString.slice(1)}\n`
+        return tetrominoString
+    }
 
 
     toString() {
