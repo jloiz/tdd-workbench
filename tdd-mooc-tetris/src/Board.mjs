@@ -26,13 +26,15 @@ export class Board {
       throw new Error("already falling")
     }
 
-    this.row1 = `.${this.currentShape}.`
+    this.rows[0] = `.${this.currentShape}.\n`
     this.drawBoard()
   }
 
   tick() {
-    if (!this.isRowEmpty(this.row1)) {
-      this.fallFromTo("row1", "row2")
+    if (!this.isRowEmpty(this.rows[0])) {
+
+      this.fallFromTo(0, 1)
+      console.log(this.rows)
       this.drawBoard()
     } else if (!this.isRowEmpty(this.row2) && this.isRowEmpty(this.row3)) {
       this.fallFromTo("row2", "row3")
@@ -54,8 +56,8 @@ export class Board {
   }
 
   fallFromTo(startRow, endRow) {
-    this[startRow] = "..."
-    this[endRow] = `.${this.currentShape}.`
+    this.rows[startRow] = "...\n"
+    this.rows[endRow] = `.${this.currentShape}.\n`
   }
 
   setIsFalling(isFalling) {
@@ -67,7 +69,7 @@ export class Board {
   }
 
   drawBoard() {
-    this.board = `${this.row1}\n${this.row2}\n${this.row3}\n`
+    this.board = `${this.rows.join('')}`
   }
 
   isRowEmpty(row) {
