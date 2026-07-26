@@ -22,10 +22,8 @@ export class Tetromino {
         let shape = new RotatingShape(this.tetromino)
         let rotatedShape = shape.rotateRight()
         let tetrominoString = rotatedShape.toString()
-
-        let tetrominoIsAtBottomOfBox = tetrominoString.substring(0, 3) === '...'
         // Make a special case for O
-        if (tetrominoIsAtBottomOfBox && tetrominoString.includes('O')) {
+        if (this.isAtBottomOfBox(tetrominoString) && tetrominoString.includes('O')) {
             tetrominoString = this.pushToTopOfBox(tetrominoString)
         }
 
@@ -38,8 +36,8 @@ export class Tetromino {
         let rotatedShape = shape.rotateLeft()
         let tetrominoString = rotatedShape.toString()
 
-        let tetrominoIsAtBottomOfBox = tetrominoString.substring(0, 5) === '.....'
-        if (tetrominoIsAtBottomOfBox) {
+        
+        if (this.isAtBottomOfBox(tetrominoString)) {
             tetrominoString = this.pushToTopOfBox(tetrominoString)
         }
         // make special case for O
@@ -58,6 +56,10 @@ export class Tetromino {
     
     pushToRightOfBox(tetrominoString){
         return tetrominoString.split('\n').map(row => {return row.split('').reverse().join('')}).join('\n') 
+    }
+
+    isAtBottomOfBox(tetrominoString){
+        return (tetrominoString.substring(0, 5) === '.....') || tetrominoString.substring(0, 3) === '...'
     }
 
 
