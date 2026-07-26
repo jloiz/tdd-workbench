@@ -37,16 +37,18 @@ export class Tetromino {
     rotateLeft() {
         let shape = new RotatingShape(this.tetromino)
         let rotatedShape = shape.rotateLeft()
-        let shapeString = rotatedShape.toString()
+        let tetrominoString = rotatedShape.toString()
 
-        let shapeIsAtBottomOfBox = shapeString.substring(0, 5) === '.....'
-        if (shapeIsAtBottomOfBox) {
-            shapeString = shapeString.split('\n').reverse().join('\n')
-            shapeString = `${shapeString.slice(1)}\n`
+        let tetrominoIsAtBottomOfBox = tetrominoString.substring(0, 5) === '.....'
+        if (tetrominoIsAtBottomOfBox) {
+            tetrominoString = tetrominoString.split('\n').reverse().join('\n')
+            tetrominoString = `${tetrominoString.slice(1)}\n`
         }
 
-        return Tetromino.fromString(shapeString)
+        return Tetromino.fromString(tetrominoString)
     }
+
+
 
     toString() {
         return this.tetromino
