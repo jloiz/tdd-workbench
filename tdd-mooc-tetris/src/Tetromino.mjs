@@ -3,7 +3,6 @@ import { RotatingShape } from "./RotatingShape.mjs"
 export class Tetromino {
     
     tetromino;
-    // put rot shape here
     // make private
 
     constructor(tetrominoString){
@@ -31,6 +30,13 @@ export class Tetromino {
         let rotatedShape = shape.rotateLeft()
         let shapeString = rotatedShape.toString()
 
+        let shapeIsAtBottomOfBox = shapeString.substring(0, 5) === '.....'
+         if (shapeIsAtBottomOfBox) {
+             shapeString = shapeString.split('').reverse().join('')
+             shapeString = `${shapeString.slice(1)}\n`
+         }
+        
+        console.log(shapeString)
         return Tetromino.fromString(shapeString)
     }
 
