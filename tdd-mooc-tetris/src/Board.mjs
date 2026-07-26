@@ -6,15 +6,15 @@ export class Board {
   currentShape;
   isFalling;
 
+  EMPTY_ROW;
+
   constructor(width, height) {
     this.width = width;
     this.height = height;
     this.currentShape = "NO_SHAPE"
-    this.row1 = "..."
     this.rows = new Array(height).fill(`${".".repeat(width)}\n`)
-    this.row2 = "..."
-    this.row3 = "..."
     this.board = `${this.rows.join('')}`
+    this.EMPTY_ROW = this.rows[0]
   }
 
   drop(shape) {
@@ -39,16 +39,17 @@ export class Board {
     } else if (!this.isRowEmpty(this.rows[1]) && this.isRowEmpty(this.rows[2])) {
       this.fallFromTo(1, 2)
       this.drawBoard()
-    } else if (!this.isRowEmpty(this.row3)) {
+    } else if (!this.isRowEmpty(this.rows[2])) {
       this.setIsFalling(false)
       this.clearCurrentShape()
       this.drawBoard()
-    } else if (!this.isRowEmpty(this.row2) && !this.isRowEmpty(this.row3)) {
+    } else if (!this.isRowEmpty(this.rows[1]) && !this.isRowEmpty(this.rows[2])) {
       this.setIsFalling(false)
       this.clearCurrentShape()
       this.drawBoard()
     }
   }
+
 
   setNewShape(newShape) {
     this.currentShape = newShape
@@ -56,7 +57,8 @@ export class Board {
   }
 
   fallFromTo(startRow, endRow) {
-    this.rows[startRow] = "...\n"
+    this.rows[startRow] = this.EMPTY_ROW
+    //TODO: Make not width dependent
     this.rows[endRow] = `.${this.currentShape}.\n`
   }
 
@@ -73,7 +75,7 @@ export class Board {
   }
 
   isRowEmpty(row) {
-    return row === "...\n"
+    return row === this.EMPTY_ROW
   }
 
   hasFalling() {
