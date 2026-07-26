@@ -21,16 +21,14 @@ export class Tetromino {
     rotateRight() {
         let shape = new RotatingShape(this.tetromino)
         let rotatedShape = shape.rotateRight()
-        let shapeString = rotatedShape.toString()
+        let tetrominoString = rotatedShape.toString()
 
-        let shapeIsAtBottomOfBox = shapeString.substring(0, 3) === '...'
-        if (shapeIsAtBottomOfBox && shapeString.includes('O')) {
-            console.log(shapeString.split('\n').reverse())
-            shapeString = shapeString.split('\n').reverse().join('\n')
-            shapeString = `${shapeString.slice(1)}\n`
+        let tetrominoIsAtBottomOfBox = tetrominoString.substring(0, 3) === '...'
+        if (tetrominoIsAtBottomOfBox && tetrominoString.includes('O')) {
+            tetrominoString = this.pushToTopOfBox(tetrominoString)
         }
 
-        return Tetromino.fromString(shapeString)
+        return Tetromino.fromString(tetrominoString)
     }
 
 
