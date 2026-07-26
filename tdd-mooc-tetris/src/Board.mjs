@@ -36,8 +36,8 @@ export class Board {
       this.fallFromTo(0, 1)
       console.log(this.rows)
       this.drawBoard()
-    } else if (!this.isRowEmpty(this.row2) && this.isRowEmpty(this.row3)) {
-      this.fallFromTo("row2", "row3")
+    } else if (!this.isRowEmpty(this.rows[1]) && this.isRowEmpty(this.rows[2])) {
+      this.fallFromTo(1, 2)
       this.drawBoard()
     } else if (!this.isRowEmpty(this.row3)) {
       this.setIsFalling(false)
@@ -73,7 +73,7 @@ export class Board {
   }
 
   isRowEmpty(row) {
-    return row === "..."
+    return row === "...\n"
   }
 
   hasFalling() {
