@@ -2,10 +2,10 @@ import { RotatingShape } from "./RotatingShape.mjs"
 
 export class Tetromino {
 
-    tetromino;
+    #tetromino;
 
     constructor(tetrominoString) {
-        this.tetromino = tetrominoString
+        this.#tetromino = tetrominoString
     }
 
     static T_SHAPE = Tetromino.fromString('.T.\nTTT\n...\n')
@@ -17,12 +17,11 @@ export class Tetromino {
     static Z_SHAPE = Tetromino.fromString('ZZ.\n.ZZ\n...\n')
 
     static fromString(tetrominoString) {
-        this.tetromino = tetrominoString;
         return new Tetromino(tetrominoString)
     }
 
     rotateRight() {
-        let shape = new RotatingShape(this.tetromino)
+        let shape = new RotatingShape(this.#tetromino)
         let rotatedShape = shape.rotateRight()
         let tetrominoString = rotatedShape.toString()
         // Make a special case for O
@@ -35,7 +34,7 @@ export class Tetromino {
 
 
     rotateLeft() {
-        let shape = new RotatingShape(this.tetromino)
+        let shape = new RotatingShape(this.#tetromino)
         let rotatedShape = shape.rotateLeft()
         let tetrominoString = rotatedShape.toString()
 
@@ -67,6 +66,6 @@ export class Tetromino {
 
 
     toString() {
-        return this.tetromino
+        return this.#tetromino
     }
 }
