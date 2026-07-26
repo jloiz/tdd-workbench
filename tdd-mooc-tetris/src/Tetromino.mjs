@@ -1,11 +1,11 @@
 import { RotatingShape } from "./RotatingShape.mjs"
 
 export class Tetromino {
-    
+
     tetromino;
     // make private
 
-    constructor(tetrominoString){
+    constructor(tetrominoString) {
         this.tetromino = tetrominoString
     }
 
@@ -16,27 +16,34 @@ export class Tetromino {
     static fromString(tetrominoString) {
         this.tetromino = tetrominoString;
         return new Tetromino(tetrominoString)
-    } 
+    }
 
     rotateRight() {
         let shape = new RotatingShape(this.tetromino)
         let rotatedShape = shape.rotateRight()
         let shapeString = rotatedShape.toString()
 
+        let shapeIsAtBottomOfBox = shapeString.substring(0, 3) === '...'
+        if (shapeIsAtBottomOfBox && shapeString.includes('O')) {
+            console.log(shapeString.split('\n').reverse())
+            shapeString = shapeString.split('\n').reverse().join('\n')
+            shapeString = `${shapeString.slice(1)}\n`
+        }
+
         return Tetromino.fromString(shapeString)
     }
 
-    rotateLeft(){
+    rotateLeft() {
         let shape = new RotatingShape(this.tetromino)
         let rotatedShape = shape.rotateLeft()
         let shapeString = rotatedShape.toString()
 
         let shapeIsAtBottomOfBox = shapeString.substring(0, 5) === '.....'
-         if (shapeIsAtBottomOfBox) {
-             shapeString = shapeString.split('').reverse().join('')
-             shapeString = `${shapeString.slice(1)}\n`
-         }
-        
+        if (shapeIsAtBottomOfBox) {
+            shapeString = shapeString.split('').reverse().join('')
+            shapeString = `${shapeString.slice(1)}\n`
+        }
+
         return Tetromino.fromString(shapeString)
     }
 
