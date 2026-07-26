@@ -3,7 +3,6 @@ import { RotatingShape } from "./RotatingShape.mjs"
 export class Tetromino {
 
     tetromino;
-    // make private
 
     constructor(tetrominoString) {
         this.tetromino = tetrominoString
@@ -12,6 +11,10 @@ export class Tetromino {
     static T_SHAPE = Tetromino.fromString('.T.\nTTT\n...\n')
     static I_SHAPE = Tetromino.fromString('.....\n.....\nIIII.\n.....\n.....\n')
     static O_SHAPE = Tetromino.fromString('.OO\n.OO\n...\n')
+    static J_SHAPE = Tetromino.fromString('J..\nJJJ\n...\n')
+    static L_SHAPE = Tetromino.fromString('..L\nLLL\n...\n')
+    static S_SHAPE = Tetromino.fromString('.SS\nSS.\...\n')
+    static Z_SHAPE = Tetromino.fromString('ZZ.\n.ZZ\n...\n')
 
     static fromString(tetrominoString) {
         this.tetromino = tetrominoString;
