@@ -6,6 +6,7 @@ export class Tetromino {
 
     constructor(tetrominoString) {
         this.#tetromino = tetrominoString
+        Object.freeze(this)
     }
 
     static T_SHAPE = Tetromino.fromString('.T.\nTTT\n...\n')

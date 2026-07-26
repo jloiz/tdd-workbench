@@ -1,6 +1,8 @@
 export class Board {
   width;
   height;
+  row;
+  board
   board;
   currentShape;
   isFalling;
@@ -10,9 +12,10 @@ export class Board {
     this.height = height;
     this.currentShape = "NO_SHAPE"
     this.row1 = "..."
+    this.row = `${".".repeat(width)}\n`
     this.row2 = "..."
     this.row3 = "..."
-    this.board = `${this.row1}\n${this.row2}\n${this.row3}\n`
+    this.board = `${this.row.repeat(height)}`
   }
 
   drop(shape) {
