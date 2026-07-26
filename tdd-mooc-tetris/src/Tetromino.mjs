@@ -11,6 +11,7 @@ export class Tetromino {
 
     static T_SHAPE = Tetromino.fromString('.T.\nTTT\n...\n')
     static I_SHAPE = Tetromino.fromString('.....\n.....\nIIII.\n.....\n.....\n')
+    static O_SHAPE = Tetromino.fromString('.OO\n.OO\n...\n')
 
     static fromString(tetrominoString) {
         this.tetromino = tetrominoString;
@@ -36,7 +37,6 @@ export class Tetromino {
              shapeString = `${shapeString.slice(1)}\n`
          }
         
-        console.log(shapeString)
         return Tetromino.fromString(shapeString)
     }
 
