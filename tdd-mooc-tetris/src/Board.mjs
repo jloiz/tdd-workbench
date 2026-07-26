@@ -12,8 +12,8 @@ export class Board {
     this.width = width;
     this.height = height;
     this.currentShape = "NO_SHAPE"
-    this.rows = new Array(height).fill(`${".".repeat(width)}\n`)
-    this.board = `${this.rows.join('')}`
+    this.rows = new Array(height).fill(`${".".repeat(width)}`)
+    this.board = `${this.rows.join('\n')}\n`
     this.EMPTY_ROW = this.rows[0]
   }
 
@@ -26,7 +26,7 @@ export class Board {
       throw new Error("already falling")
     }
 
-    this.rows[0] = `.${this.currentShape}.\n`
+    this.rows[0] = `.${this.currentShape}.`
     this.drawBoard()
   }
 
@@ -59,7 +59,7 @@ export class Board {
   fallFromTo(startRow, endRow) {
     this.rows[startRow] = this.EMPTY_ROW
     //TODO: Make not width dependent
-    this.rows[endRow] = `.${this.currentShape}.\n`
+    this.rows[endRow] = `.${this.currentShape}.`
   }
 
   setIsFalling(isFalling) {
@@ -71,7 +71,7 @@ export class Board {
   }
 
   drawBoard() {
-    this.board = `${this.rows.join('')}`
+    this.board = `${this.rows.join('\n')}\n`
   }
 
   isRowEmpty(row) {
