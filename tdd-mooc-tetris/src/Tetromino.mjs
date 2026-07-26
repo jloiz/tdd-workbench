@@ -26,6 +26,14 @@ export class Tetromino {
         return Tetromino.fromString(shapeString)
     }
 
+    rotateLeft(){
+        let shape = new RotatingShape(this.tetromino)
+        let rotatedShape = shape.rotateLeft()
+        let shapeString = rotatedShape.toString()
+
+        return Tetromino.fromString(shapeString)
+    }
+
     toString() {
         return this.tetromino
     }
