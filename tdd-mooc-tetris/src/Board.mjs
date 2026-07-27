@@ -22,14 +22,17 @@ export class Board {
   drop(shape) {
 
     if ((shape.length === 1) && (typeof shape === "string")) {
-      console.log(JSON.stringify("IS a block"))
       let newshape = new Block(shape)
-    } else{
-      
     }
+
     if (this.currentShape === "NO_SHAPE") {
       this.setNewShape(shape)
     }
+
+    let midpoint = Math.ceil(this.EMPTY_ROW.length / 2)
+    let midpointIndex = midpoint - 1
+
+    console.log(`${this.EMPTY_ROW.slice(0, midpointIndex)}${this.currentShape}${this.EMPTY_ROW.slice(midpointIndex + 1)}`)
 
 
 
@@ -38,10 +41,9 @@ export class Board {
     if (shape !== this.currentShape) {
       throw new Error("already falling")
     }
-    let midpoint = Math.ceil(this.EMPTY_ROW.length/2)
-    let midpointIndex = midpoint - 1
 
-    this.rows[0] =  `${this.EMPTY_ROW.slice(0, midpointIndex)}${this.currentShape}${this.EMPTY_ROW.slice(midpointIndex + 1)}`
+
+    this.rows[0] = `${this.EMPTY_ROW.slice(0, midpointIndex)}${this.currentShape}${this.EMPTY_ROW.slice(midpointIndex + 1)}`
     this.drawBoard()
   }
 
@@ -74,7 +76,7 @@ export class Board {
   fallFromTo(startRow, endRow) {
     this.rows[startRow] = this.EMPTY_ROW
     //Find midpoint of row
-    let midpoint = Math.ceil(this.EMPTY_ROW.length/2)
+    let midpoint = Math.ceil(this.EMPTY_ROW.length / 2)
     let midpointIndex = midpoint - 1
     let newRow = `${this.EMPTY_ROW.slice(0, midpointIndex)}${this.currentShape}${this.EMPTY_ROW.slice(midpointIndex + 1)}`
     this.rows[endRow] = newRow
