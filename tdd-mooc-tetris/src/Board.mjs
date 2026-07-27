@@ -19,8 +19,11 @@ export class Board {
 
   drop(shape) {
 
-    if ((shape.length === 1) && typeof(shape) === String) {
-      console.log("IS a block")
+    if ((shape.length === 1) && (typeof shape === "string")) {
+      console.log(JSON.stringify("IS a block"))
+      //shape = new Block(shape)
+    } else{
+      
     }
     if (this.currentShape === "NO_SHAPE") {
       this.setNewShape(shape)
