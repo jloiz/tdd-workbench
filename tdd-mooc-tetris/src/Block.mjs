@@ -1,10 +1,10 @@
 import { RotatingShape } from "./RotatingShape.mjs";
 
-export class Board {
+export class Block {
     #block;
 
     constructor(blockString) {
-        this.#block = shapeString
+        this.#block = blockString
         Object.freeze(this)
     }
 
@@ -15,10 +15,10 @@ export class Board {
     }
 
     cleanShape(unformattedShape) {
-        return unformattedShape.substring(0, this.#shape.length - 1)
+        return unformattedShape.substring(0, this.#block.length - 1)
     }
 
     toString() {
-        return this.#shape
+        return this.#block
     }
 }

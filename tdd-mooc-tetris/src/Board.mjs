@@ -1,3 +1,5 @@
+import { Block } from "../src/Block.mjs"
+
 export class Board {
   width;
   height;
@@ -21,7 +23,7 @@ export class Board {
 
     if ((shape.length === 1) && (typeof shape === "string")) {
       console.log(JSON.stringify("IS a block"))
-      //shape = new Block(shape)
+      let newshape = new Block(shape)
     } else{
       
     }
