@@ -18,7 +18,7 @@ export class Board {
     this.rows = new Array(height).fill(`${".".repeat(width)}`)
     this.board = `${this.rows.join('\n')}\n`
     this.EMPTY_ROW = this.rows[0] 
-    this.midpoint = this.midpointIdx()
+    this.midpointIdx = this.calculateMidpointIdx()
     
   }
 
@@ -75,7 +75,7 @@ export class Board {
     //Find midpoint of row
     let midpoint = Math.ceil(this.EMPTY_ROW.length / 2)
     let midpointIndex = midpoint - 1
-    let newRow = `${this.EMPTY_ROW.slice(0, midpointIndex)}${this.currentShape}${this.EMPTY_ROW.slice(midpointIndex + 1)}`
+    let newRow = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${this.currentShape}${this.EMPTY_ROW.slice(midpointIndex + 1)}`
     this.rows[endRow] = newRow
   }
 
@@ -91,7 +91,7 @@ export class Board {
     this.board = `${this.rows.join('\n')}\n`
   }
 
-  midpointIdx() {
+  calculateMidpointIdx() {
     let midpoint = Math.ceil(this.EMPTY_ROW.length / 2)
     let midpointIndex = midpoint - 1
     return midpointIndex
