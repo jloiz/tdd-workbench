@@ -23,13 +23,15 @@ export class Board {
   }
 
   drop(shape) {
-    let newshape
+    
     if ((shape.length === 1) && (typeof shape === "string")) {
       shape = new Block(shape)
       this.rows[0] = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${shape.toString()}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
     } else {
-      console.log(shape.toString())
-
+      // clean shape
+      shape = shape.toString().substring(0, shape.length - 1)
+      console.log(shape)
+      console.log(shape.toString().split('\n'))
     }
 
     if (this.currentShape === "NO_SHAPE") {
