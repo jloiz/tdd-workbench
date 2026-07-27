@@ -7,6 +7,7 @@ export class Board {
   board;
   currentShape;
   isFalling;
+  midpoint;
 
   EMPTY_ROW;
 
@@ -16,13 +17,15 @@ export class Board {
     this.currentShape = "NO_SHAPE"
     this.rows = new Array(height).fill(`${".".repeat(width)}`)
     this.board = `${this.rows.join('\n')}\n`
-    this.EMPTY_ROW = this.rows[0]
+    this.EMPTY_ROW = this.rows[0] 
+    this.midpoint = this.midpointIdx()
+    
   }
 
   drop(shape) {
     let newshape
     if ((shape.length === 1) && (typeof shape === "string")) {
-      newshape = new Block(shape)
+      shape = new Block(shape)
     }
 
     if (this.currentShape === "NO_SHAPE") {
@@ -32,14 +35,12 @@ export class Board {
     let midpoint = Math.ceil(this.EMPTY_ROW.length / 2)
     let midpointIndex = midpoint - 1
 
-    console.log(`${this.EMPTY_ROW.slice(0, midpointIndex)}${newshape.toString()}${this.EMPTY_ROW.slice(midpointIndex + 1)}`)
-
     if (shape !== this.currentShape) {
       throw new Error("already falling")
     }
 
 
-    this.rows[0] = `${this.EMPTY_ROW.slice(0, midpointIndex)}${newshape.toString()}${this.EMPTY_ROW.slice(midpointIndex + 1)}`
+    this.rows[0] = `${this.EMPTY_ROW.slice(0, midpointIndex)}${shape.toString()}${this.EMPTY_ROW.slice(midpointIndex + 1)}`
     this.drawBoard()
   }
 
@@ -88,6 +89,12 @@ export class Board {
 
   drawBoard() {
     this.board = `${this.rows.join('\n')}\n`
+  }
+
+  midpointIdx() {
+    let midpoint = Math.ceil(this.EMPTY_ROW.length / 2)
+    let midpointIndex = midpoint - 1
+    return midpointIndex
   }
 
   isRowEmpty(row) {
