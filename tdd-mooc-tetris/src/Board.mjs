@@ -29,9 +29,10 @@ export class Board {
       this.rows[0] = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${shape.toString()}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
     } else {
       // clean shape
-      shape = shape.toString().substring(0, shape.length - 1)
-      console.log(shape)
-      console.log(shape.toString().split('\n'))
+      let newshape = shape.toString().substring(0, shape.toString().length - 1)
+      console.log(newshape)
+      console.log(newshape.split('\n'))
+     let shapeRows = newshape.split('\n')
     }
 
     if (this.currentShape === "NO_SHAPE") {
