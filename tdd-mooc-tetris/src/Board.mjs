@@ -58,8 +58,11 @@ export class Board {
 
   fallFromTo(startRow, endRow) {
     this.rows[startRow] = this.EMPTY_ROW
-    //TODO: Make not width dependent
-    this.rows[endRow] = `.${this.currentShape}.`
+    //Find midpoint of row
+    let midpoint = Math.ceil(this.EMPTY_ROW.length/2)
+    let midpointIndex = midpoint - 1
+    let newRow = `${this.EMPTY_ROW.slice(0, midpointIndex)}${this.currentShape}${this.EMPTY_ROW.slice(midpointIndex + 1)}`
+    this.rows[endRow] = newRow
   }
 
   setIsFalling(isFalling) {
