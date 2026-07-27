@@ -18,15 +18,25 @@ export class Board {
   }
 
   drop(shape) {
+
+    if ((shape.length === 1) && typeof(shape) === String) {
+      console.log("IS a block")
+    }
     if (this.currentShape === "NO_SHAPE") {
       this.setNewShape(shape)
     }
 
+
+
+    console.log(JSON.stringify(shape.toString()))
+
     if (shape !== this.currentShape) {
       throw new Error("already falling")
     }
+    let midpoint = Math.ceil(this.EMPTY_ROW.length/2)
+    let midpointIndex = midpoint - 1
 
-    this.rows[0] = `.${this.currentShape}.`
+    this.rows[0] =  `${this.EMPTY_ROW.slice(0, midpointIndex)}${this.currentShape}${this.EMPTY_ROW.slice(midpointIndex + 1)}`
     this.drawBoard()
   }
 

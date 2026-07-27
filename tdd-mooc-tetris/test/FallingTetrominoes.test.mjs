@@ -28,6 +28,19 @@ describe("Falling tetrominoes", () => {
     );
   });
 
+    test.skip("falls one row upon tick", () => {
+    board.tick();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ....T.....
+       ...TTT....
+       ..........
+       ..........
+       ..........`
+    );
+  });
+
   test.skip("stop when they hit the bottom", () => {
     board.drop(Tetromino.T_SHAPE);
     fallToBottom(board);
