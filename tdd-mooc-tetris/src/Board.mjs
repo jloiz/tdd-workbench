@@ -17,27 +17,30 @@ export class Board {
     this.currentShape = "NO_SHAPE"
     this.rows = new Array(height).fill(`${".".repeat(width)}`)
     this.board = `${this.rows.join('\n')}\n`
-    this.EMPTY_ROW = this.rows[0] 
+    this.EMPTY_ROW = this.rows[0]
     this.midpointIdx = this.calculateMidpointIdx()
-    
+
   }
 
   drop(shape) {
     let newshape
     if ((shape.length === 1) && (typeof shape === "string")) {
       shape = new Block(shape)
+      this.rows[0] = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${shape.toString()}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
+    } else {
+      console.log(shape.toString())
+
     }
 
     if (this.currentShape === "NO_SHAPE") {
       this.setNewShape(shape)
     }
-    
+
     if (shape !== this.currentShape) {
       throw new Error("already falling")
     }
 
 
-    this.rows[0] = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${shape.toString()}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
     this.drawBoard()
   }
 
@@ -45,7 +48,7 @@ export class Board {
     if (!this.isRowEmpty(this.rows[0])) {
 
       this.fallFromTo(0, 1)
-      console.log(this.rows)
+      // console.log(this.rows)
       this.drawBoard()
     } else if (!this.isRowEmpty(this.rows[1]) && this.isRowEmpty(this.rows[2])) {
       this.fallFromTo(1, 2)
