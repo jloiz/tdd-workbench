@@ -31,16 +31,13 @@ export class Board {
     if (this.currentShape === "NO_SHAPE") {
       this.setNewShape(shape)
     }
-
-    let midpoint = Math.ceil(this.EMPTY_ROW.length / 2)
-    let midpointIndex = midpoint - 1
-
+    
     if (shape !== this.currentShape) {
       throw new Error("already falling")
     }
 
 
-    this.rows[0] = `${this.EMPTY_ROW.slice(0, midpointIndex)}${shape.toString()}${this.EMPTY_ROW.slice(midpointIndex + 1)}`
+    this.rows[0] = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${shape.toString()}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
     this.drawBoard()
   }
 
@@ -72,10 +69,7 @@ export class Board {
 
   fallFromTo(startRow, endRow) {
     this.rows[startRow] = this.EMPTY_ROW
-    //Find midpoint of row
-    let midpoint = Math.ceil(this.EMPTY_ROW.length / 2)
-    let midpointIndex = midpoint - 1
-    let newRow = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${this.currentShape}${this.EMPTY_ROW.slice(midpointIndex + 1)}`
+    let newRow = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${this.currentShape}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
     this.rows[endRow] = newRow
   }
 
