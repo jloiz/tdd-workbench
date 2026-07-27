@@ -20,9 +20,9 @@ export class Board {
   }
 
   drop(shape) {
-
+    let newshape
     if ((shape.length === 1) && (typeof shape === "string")) {
-      let newshape = new Block(shape)
+      newshape = new Block(shape)
     }
 
     if (this.currentShape === "NO_SHAPE") {
@@ -32,18 +32,14 @@ export class Board {
     let midpoint = Math.ceil(this.EMPTY_ROW.length / 2)
     let midpointIndex = midpoint - 1
 
-    console.log(`${this.EMPTY_ROW.slice(0, midpointIndex)}${this.currentShape}${this.EMPTY_ROW.slice(midpointIndex + 1)}`)
-
-
-
-    console.log(JSON.stringify(shape.toString()))
+    console.log(`${this.EMPTY_ROW.slice(0, midpointIndex)}${newshape.toString()}${this.EMPTY_ROW.slice(midpointIndex + 1)}`)
 
     if (shape !== this.currentShape) {
       throw new Error("already falling")
     }
 
 
-    this.rows[0] = `${this.EMPTY_ROW.slice(0, midpointIndex)}${this.currentShape}${this.EMPTY_ROW.slice(midpointIndex + 1)}`
+    this.rows[0] = `${this.EMPTY_ROW.slice(0, midpointIndex)}${newshape.toString()}${this.EMPTY_ROW.slice(midpointIndex + 1)}`
     this.drawBoard()
   }
 
