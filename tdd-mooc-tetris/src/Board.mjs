@@ -40,8 +40,16 @@ export class Board {
       console.log(shapeObj)
       let newRows = this.rows.map((row, index) => {
         console.log(index)
-        return row
+        console.log(shapeObj[index])
+        if (shapeObj[index] === undefined){
+          return this.rows[index]
+        }else {
+          return shapeObj[index]
+        }
+
+        //return row
       })
+        console.log("newRows:\n", newRows)
     }
 
     if (this.currentShape === "NO_SHAPE") {
