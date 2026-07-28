@@ -39,16 +39,11 @@ export class Board {
         if (shapeObj[index] === undefined){
           return this.rows[index]
         }else {
-          console.log(index)
-            console.log(this.rows[index])
             console.log(shapeObj)
-
             console.log("merge")
-            console.log(this.rows[index].substring(0, this.midpointIdx))
-            console.log(shapeObj[index])
             let newRow = `${this.rows[index].substring(0, this.midpointIdx)}${shapeObj[index]}${this.rows[index].substring(this.midpointIdx, this.width)}`
             console.log(newRow)
-            return shapeObj[index]
+            return newRow
         }
       })
         console.log("newRows:\n", newRows)
