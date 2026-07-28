@@ -35,19 +35,21 @@ export class Board {
 
       let shapeRows = newshape.split('\n')
       let shapeObj = Object.assign({}, shapeRows)
-      console.log(this.rows)
-      console.log(shapeRows)
-      console.log(shapeObj)
       let newRows = this.rows.map((row, index) => {
-        console.log(index)
-        console.log(shapeObj[index])
         if (shapeObj[index] === undefined){
           return this.rows[index]
         }else {
-          return shapeObj[index]
-        }
+          console.log(index)
+            console.log(this.rows[index])
+            console.log(shapeObj)
 
-        //return row
+            console.log("merge")
+            console.log(this.rows[index].substring(0, this.midpointIdx))
+            console.log(shapeObj[index])
+            let newRow = `${this.rows[index].substring(0, this.midpointIdx)}${shapeObj[index]}${this.rows[index].substring(this.midpointIdx, this.width)}`
+            console.log(newRow)
+            return shapeObj[index]
+        }
       })
         console.log("newRows:\n", newRows)
     }
