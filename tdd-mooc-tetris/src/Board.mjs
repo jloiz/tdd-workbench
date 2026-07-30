@@ -61,6 +61,7 @@ export class Board {
   }
 
   tick() {
+    console.log(this.currentShape)
     if (!this.isRowEmpty(this.rows[0])) {
 
       this.fallFromTo(0, 1)
