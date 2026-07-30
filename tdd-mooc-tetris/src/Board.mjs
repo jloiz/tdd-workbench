@@ -41,12 +41,14 @@ export class Board {
         }else {
             console.log(shapeObj)
             console.log("merge")
-            let newRow = `${this.rows[index].substring(0, this.midpointIdx)}${shapeObj[index]}${this.rows[index].substring(this.midpointIdx, this.width)}`
-            console.log(newRow)
+            let newRow = `${this.rows[index].substring(0, this.midpointIdx - 1)}${shapeObj[index]}${this.rows[index].substring(this.midpointIdx, this.width)}`
+            console.log(newRow.substring(0, this.EMPTY_ROW.length))
+            newRow = newRow.substring(0, this.EMPTY_ROW.length)
             return newRow
         }
       })
         console.log("newRows:\n", newRows)
+        this.rows = newRows
     }
 
     if (this.currentShape === "NO_SHAPE") {
