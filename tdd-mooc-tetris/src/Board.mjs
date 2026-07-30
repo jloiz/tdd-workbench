@@ -61,7 +61,6 @@ export class Board {
   }
 
   tick() {
-    console.log(this.currentShape)
     if (!this.isRowEmpty(this.rows[0])) {
 
       this.fallFromTo(0, 1)
@@ -88,9 +87,17 @@ export class Board {
   }
 
   fallFromTo(startRow, endRow) {
-    this.rows[startRow] = this.EMPTY_ROW
-    let newRow = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${this.currentShape}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
-    this.rows[endRow] = newRow
+    let bottomRow = this.rows.slice(this.height - 1)
+    if (bottomRow[0] === this.EMPTY_ROW) {
+      let otherRows = this.rows.slice(0, this.height - 1)
+      let newRows = bottomRow.concat(otherRows)
+      console.log(JSON.stringify(newRows))
+      this.rows = newRows
+    } else {
+      this.rows[startRow] = this.EMPTY_ROW
+      let newRow = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${this.currentShape}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
+      this.rows[endRow] = newRow
+    }
   }
 
   setIsFalling(isFalling) {
