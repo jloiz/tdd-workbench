@@ -1,4 +1,5 @@
 import { Block } from "../src/Block.mjs"
+import { Tetromino } from "./Tetromino.mjs";
 
 export class Board {
   width;
@@ -62,7 +63,7 @@ export class Board {
 
   tick() {
     if (!this.isRowEmpty(this.rows[0])) {
-
+      console.log(this.shape instanceof Tetromino)
       this.fallFromTo(0, 1)
       // console.log(this.rows)
       this.drawBoard()
@@ -86,18 +87,23 @@ export class Board {
     this.setIsFalling(true)
   }
 
-  fallFromTo(startRow, endRow) {
+  fall() {
     let bottomRow = this.rows.slice(this.height - 1)
     if (bottomRow[0] === this.EMPTY_ROW) {
       let otherRows = this.rows.slice(0, this.height - 1)
       let newRows = bottomRow.concat(otherRows)
       console.log(JSON.stringify(newRows))
       this.rows = newRows
-    } else {
+    }
+  }
+
+  fallFromTo(startRow, endRow) {
+
+      // change to above implementation
       this.rows[startRow] = this.EMPTY_ROW
       let newRow = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${this.currentShape}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
       this.rows[endRow] = newRow
-    }
+    
   }
 
   setIsFalling(isFalling) {
