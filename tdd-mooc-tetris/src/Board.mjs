@@ -29,26 +29,23 @@ export class Board {
       this.rows[0] = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${shape.toString()}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
     } else {
 
-
       // clean shape
       let newshape = shape.toString().substring(0, shape.toString().length - 1)
 
       let shapeRows = newshape.split('\n')
       let shapeObj = Object.assign({}, shapeRows)
       let newRows = this.rows.map((row, index) => {
-        if (shapeObj[index] === undefined){
+        if (shapeObj[index] === undefined) {
           return this.rows[index]
-        }else {
-            console.log(shapeObj)
-            console.log("merge")
-            let newRow = `${this.rows[index].substring(0, this.midpointIdx - 1)}${shapeObj[index]}${this.rows[index].substring(this.midpointIdx, this.width)}`
-            console.log(newRow.substring(0, this.EMPTY_ROW.length))
-            newRow = newRow.substring(0, this.EMPTY_ROW.length)
-            return newRow
+        } else {
+          // insert shape row to board row
+          let newRow = `${this.rows[index].substring(0, this.midpointIdx - 1)}${shapeObj[index]}${this.rows[index].substring(this.midpointIdx, this.width)}`
+          // truncate row at board width
+          newRow = newRow.substring(0, this.EMPTY_ROW.length)
+          return newRow
         }
       })
-        console.log("newRows:\n", newRows)
-        this.rows = newRows
+      this.rows = newRows
     }
 
     if (this.currentShape === "NO_SHAPE") {
