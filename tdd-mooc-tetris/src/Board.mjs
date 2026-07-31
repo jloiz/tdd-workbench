@@ -25,6 +25,7 @@ export class Board {
 
   drop(shape) {
 
+    // check if block dropped
     if ((shape.length === 1) && (typeof shape === "string")) {
       shape = new Block(shape)
       this.rows[0] = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${shape.toString()}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
@@ -57,7 +58,6 @@ export class Board {
       throw new Error("already falling")
     }
 
-
     this.drawBoard()
   }
 
@@ -86,11 +86,10 @@ export class Board {
   }
 
   fall() {
-    let bottomRow = this.rows.slice(this.height - 1)
     let rowNumNotEmptyFromBottom
     let rows = structuredClone(this.rows)
     rows = rows.reverse()
-    console.log("reversed: ", rows)
+
     if (rows[0] === this.EMPTY_ROW) {
       rowNumNotEmptyFromBottom = - 1
     } else {
@@ -103,11 +102,6 @@ export class Board {
         }
       }
     }
-
-
-    console.log(JSON.stringify(this.rows))
-
-    console.log(JSON.stringify(rowNumNotEmptyFromBottom))
 
     // Shift all rows down, except the ones that are non emppty from the bottom
       let newRows = this.rows
