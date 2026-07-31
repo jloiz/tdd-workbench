@@ -87,13 +87,13 @@ export class Board {
 
   fall() {
     let rowNumNotEmptyFromBottom
+    let hasHitBottomFlag
     let rows = structuredClone(this.rows)
     rows = rows.reverse()
 
     if (rows[0] === this.EMPTY_ROW) {
       rowNumNotEmptyFromBottom = - 1
     } else {
-      console.log("bottom row not empty")
       for (let rowNum = 0; rowNum < rows.length; rowNum++) {
 
         if (rows[rowNum] !== this.EMPTY_ROW) {
@@ -103,13 +103,24 @@ export class Board {
       }
     }
 
-    // Shift all rows down, except the ones that are non emppty from the bottom
-      let newRows = this.rows
+    // Shift all rows down, except the ones that are non empty from the bottom
+    let oldRows = structuredClone(this.rows)  
+    let newRows = this.rows
       for (let i = newRows.length - 2 - rowNumNotEmptyFromBottom; i > 0; i--) {
         newRows[i] = newRows[i - 1]
       }
       newRows[0] = this.EMPTY_ROW
+
+      console.log("old rows: ", oldRows)
+      console.log("new rows:", newRows)
+
+      if (oldRows[this.height - 1] !== newRows[this.height - 1]) {
+        console.log("Has hit bottom")
+        hasHitBottomFlag = true
+      }
       this.rows = newRows
+
+      return hasHitBottomFlag
     
   }
 
