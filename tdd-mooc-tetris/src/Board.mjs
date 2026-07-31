@@ -63,9 +63,8 @@ export class Board {
 
   tick() {
     if (!this.isRowEmpty(this.rows[0])) {
-      console.log(this.shape instanceof Tetromino)
-      this.fallFromTo(0, 1)
-      // console.log(this.rows)
+      console.log(this.currentShape instanceof Tetromino)
+      this.fall()
       this.drawBoard()
     } else if (!this.isRowEmpty(this.rows[1]) && this.isRowEmpty(this.rows[2])) {
       this.fallFromTo(1, 2)
@@ -89,9 +88,18 @@ export class Board {
 
   fall() {
     let bottomRow = this.rows.slice(this.height - 1)
+    
     if (bottomRow[0] === this.EMPTY_ROW) {
       let otherRows = this.rows.slice(0, this.height - 1)
       let newRows = bottomRow.concat(otherRows)
+      let test = otherRows.unshift(this.EMPTY_ROW)
+      this.rows = newRows
+    } else {
+      let newRows = this.rows
+      for (let i = newRows.length - 2; i > 0; i--) {
+        newRows[i] = newRows[i - 1]
+      }
+      newRows[0] = this.EMPTY_ROW
       console.log(JSON.stringify(newRows))
       this.rows = newRows
     }
@@ -99,11 +107,11 @@ export class Board {
 
   fallFromTo(startRow, endRow) {
 
-      // change to above implementation
-      this.rows[startRow] = this.EMPTY_ROW
-      let newRow = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${this.currentShape}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
-      this.rows[endRow] = newRow
-    
+    // change to above implementation
+    this.rows[startRow] = this.EMPTY_ROW
+    let newRow = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${this.currentShape}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
+    this.rows[endRow] = newRow
+
   }
 
   setIsFalling(isFalling) {
