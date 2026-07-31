@@ -9,6 +9,7 @@ export class Board {
   currentShape;
   isFalling;
   midpoint;
+  hasHitBottom
 
   EMPTY_ROW;
 
@@ -20,6 +21,7 @@ export class Board {
     this.board = `${this.rows.join('\n')}\n`
     this.EMPTY_ROW = this.rows[0]
     this.midpointIdx = this.calculateMidpointIdx()
+    this.hasHitBottom = false
 
   }
 
@@ -62,14 +64,19 @@ export class Board {
   }
 
   tick() {
+    if (this.hasHitBottom) {
+      this.setIsFalling(false)
+      this.clearCurrentShape()
+      this.hasHitBottom = false
+      
+    } else {
+      
+      this.fall()
+    }
 
-      let hasHitBottom = this.fall()
-      console.log("hasHitBottom:", hasHitBottom)
-      if (hasHitBottom) {
-        this.setIsFalling(false)
-        this.clearCurrentShape()
-      }
+
       this.drawBoard()
+
   }
 
 
@@ -110,10 +117,13 @@ export class Board {
       if (oldRows[this.height - 1] !== newRows[this.height - 1]) {
         console.log("Has hit bottom")
         hasHitBottomFlag = true
+              this.hasHitBottom = true
+
       }
       this.rows = newRows
 
       return hasHitBottomFlag
+
     
   }
 
