@@ -66,7 +66,7 @@ export class Board {
       this.fall()
       this.drawBoard()
     } else if (!this.isRowEmpty(this.rows[1]) && this.isRowEmpty(this.rows[2])) {
-      this.fallFromTo(1, 2)
+      this.fall()
       this.drawBoard()
     } else if (!this.isRowEmpty(this.rows[2])) {
       this.setIsFalling(false)
@@ -109,7 +109,7 @@ export class Board {
 
     console.log(JSON.stringify(rowNumNotEmptyFromBottom))
 
-
+    // Shift all rows down, except the ones that are non emppty from the bottom
       let newRows = this.rows
       for (let i = newRows.length - 2 - rowNumNotEmptyFromBottom; i > 0; i--) {
         newRows[i] = newRows[i - 1]
@@ -117,15 +117,6 @@ export class Board {
       newRows[0] = this.EMPTY_ROW
       this.rows = newRows
     
-  }
-
-  fallFromTo(startRow, endRow) {
-
-    // change to above implementation
-    this.rows[startRow] = this.EMPTY_ROW
-    let newRow = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${this.currentShape}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
-    this.rows[endRow] = newRow
-
   }
 
   setIsFalling(isFalling) {
