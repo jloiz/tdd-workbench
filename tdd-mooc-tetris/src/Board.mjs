@@ -25,6 +25,7 @@ export class Board {
 
   }
 
+
   drop(shape) {
 
     // check if block dropped
@@ -68,14 +69,14 @@ export class Board {
       this.setIsFalling(false)
       this.clearCurrentShape()
       this.hasHitBottom = false
-      
+
     } else {
-      
+
       this.fall()
     }
 
 
-      this.drawBoard()
+    this.drawBoard()
 
   }
 
@@ -104,27 +105,27 @@ export class Board {
     }
 
     // Shift all rows down, except the ones that are non empty from the bottom
-    let oldRows = structuredClone(this.rows)  
+    let oldRows = structuredClone(this.rows)
     let newRows = this.rows
-      for (let i = newRows.length - 2 - rowNumNotEmptyFromBottom; i > 0; i--) {
-        newRows[i] = newRows[i - 1]
-      }
-      newRows[0] = this.EMPTY_ROW
+    for (let i = newRows.length - 2 - rowNumNotEmptyFromBottom; i > 0; i--) {
+      newRows[i] = newRows[i - 1]
+    }
+    newRows[0] = this.EMPTY_ROW
 
-      console.log("old rows: ", oldRows)
-      console.log("new rows:", newRows)
+    console.log("old rows: ", oldRows)
+    console.log("new rows:", newRows)
 
-      if (oldRows[this.height - 1] !== newRows[this.height - 1]) {
-        console.log("Has hit bottom")
-        hasHitBottomFlag = true
-              this.hasHitBottom = true
+    if (oldRows[this.height - 1] !== newRows[this.height - 1]) {
+      console.log("Has hit bottom")
+      hasHitBottomFlag = true
+      this.hasHitBottom = true
 
-      }
-      this.rows = newRows
+    }
+    this.rows = newRows
 
-      return hasHitBottomFlag
+    return hasHitBottomFlag
 
-    
+
   }
 
   setIsFalling(isFalling) {
