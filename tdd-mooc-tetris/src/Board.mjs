@@ -109,19 +109,14 @@ export class Board {
 
     console.log(JSON.stringify(rowNumNotEmptyFromBottom))
 
-    if (bottomRow[0] === this.EMPTY_ROW) {
-      let otherRows = this.rows.slice(0, this.height - 1)
-      let newRows = bottomRow.concat(otherRows)
-      let test = otherRows.unshift(this.EMPTY_ROW)
-      this.rows = newRows
-    } else {
+
       let newRows = this.rows
       for (let i = newRows.length - 2 - rowNumNotEmptyFromBottom; i > 0; i--) {
         newRows[i] = newRows[i - 1]
       }
       newRows[0] = this.EMPTY_ROW
       this.rows = newRows
-    }
+    
   }
 
   fallFromTo(startRow, endRow) {
