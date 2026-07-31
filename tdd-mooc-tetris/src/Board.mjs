@@ -9,7 +9,8 @@ export class Board {
   currentShape;
   isFalling;
   midpoint;
-  hasHitBottom
+  hasHitBottom;
+  hasHitShape;
 
   EMPTY_ROW;
 
@@ -22,6 +23,7 @@ export class Board {
     this.EMPTY_ROW = this.rows[0]
     this.midpointIdx = this.calculateMidpointIdx()
     this.hasHitBottom = false
+    this.hasHitShape = false
 
   }
 
@@ -65,6 +67,13 @@ export class Board {
   }
 
   tick() {
+
+    if(this.hasHitShape){
+      console.log("hit shape")
+      this.setIsFalling(false)
+      this.hasHitShape = false
+    } else
+
     if (this.hasHitBottom) {
       this.setIsFalling(false)
       this.clearCurrentShape()
@@ -121,6 +130,16 @@ export class Board {
       this.hasHitBottom = true
 
     }
+
+
+    let reversedNewRows = structuredClone(newRows)
+    reversedNewRows.reverse()
+    console.log(rowNumNotEmptyFromBottom)
+    if (!hasHitBottomFlag && (reversedNewRows[rowNumNotEmptyFromBottom + 1] !== this.EMPTY_ROW)) {
+      console.log('hit another shape')
+      this.hasHitShape = true
+    }
+
     this.rows = newRows
 
     return hasHitBottomFlag
