@@ -63,7 +63,6 @@ export class Board {
 
   tick() {
     if (!this.isRowEmpty(this.rows[0])) {
-      console.log(this.currentShape instanceof Tetromino)
       this.fall()
       this.drawBoard()
     } else if (!this.isRowEmpty(this.rows[1]) && this.isRowEmpty(this.rows[2])) {
@@ -88,7 +87,28 @@ export class Board {
 
   fall() {
     let bottomRow = this.rows.slice(this.height - 1)
-    
+    let rowNumNotEmptyFromBottom
+    let rows = structuredClone(this.rows)
+    rows = rows.reverse()
+    console.log("reversed: ", rows)
+    if (rows[0] === this.EMPTY_ROW) {
+      rowNumNotEmptyFromBottom = -1
+    } else {
+      console.log("bottom row not empty")
+      for (let rowNum = 0; rowNum < rows.length; rowNum++) {
+
+        if (rows[rowNum] !== this.EMPTY_ROW) {
+          rowNumNotEmptyFromBottom = rowNum
+          break;
+        }
+      }
+    }
+
+
+    console.log(JSON.stringify(this.rows))
+
+    console.log(JSON.stringify(rowNumNotEmptyFromBottom))
+
     if (bottomRow[0] === this.EMPTY_ROW) {
       let otherRows = this.rows.slice(0, this.height - 1)
       let newRows = bottomRow.concat(otherRows)
@@ -100,7 +120,6 @@ export class Board {
         newRows[i] = newRows[i - 1]
       }
       newRows[0] = this.EMPTY_ROW
-      console.log(JSON.stringify(newRows))
       this.rows = newRows
     }
   }
