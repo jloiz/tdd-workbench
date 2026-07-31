@@ -62,21 +62,14 @@ export class Board {
   }
 
   tick() {
-    if (!this.isRowEmpty(this.rows[0])) {
-      this.fall()
+
+      let hasHitBottom = this.fall()
+      console.log("hasHitBottom:", hasHitBottom)
+      if (hasHitBottom) {
+        this.setIsFalling(false)
+        this.clearCurrentShape()
+      }
       this.drawBoard()
-    } else if (!this.isRowEmpty(this.rows[1]) && this.isRowEmpty(this.rows[2])) {
-      this.fall()
-      this.drawBoard()
-    } else if (!this.isRowEmpty(this.rows[2])) {
-      this.setIsFalling(false)
-      this.clearCurrentShape()
-      this.drawBoard()
-    } else if (!this.isRowEmpty(this.rows[1]) && !this.isRowEmpty(this.rows[2])) {
-      this.setIsFalling(false)
-      this.clearCurrentShape()
-      this.drawBoard()
-    }
   }
 
 
