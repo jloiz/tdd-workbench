@@ -92,7 +92,7 @@ export class Board {
     rows = rows.reverse()
     console.log("reversed: ", rows)
     if (rows[0] === this.EMPTY_ROW) {
-      rowNumNotEmptyFromBottom = -1
+      rowNumNotEmptyFromBottom = - 1
     } else {
       console.log("bottom row not empty")
       for (let rowNum = 0; rowNum < rows.length; rowNum++) {
@@ -116,7 +116,7 @@ export class Board {
       this.rows = newRows
     } else {
       let newRows = this.rows
-      for (let i = newRows.length - 2; i > 0; i--) {
+      for (let i = newRows.length - 2 - rowNumNotEmptyFromBottom; i > 0; i--) {
         newRows[i] = newRows[i - 1]
       }
       newRows[0] = this.EMPTY_ROW
