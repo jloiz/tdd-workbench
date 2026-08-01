@@ -113,11 +113,14 @@ export class Board {
       }
     }
 
+    console.log(rowNumNotEmptyFromBottom)
+    console.log(firstShapeRowFromBottom)
+
     // NEW METHOD
     // Shift all rows down, except the ones that are non empty from the bottom
     let oldRows = structuredClone(this.rows)
     let newRows = this.rows
-    for (let i = newRows.length - 2 - rowNumNotEmptyFromBottom; i > 0; i--) {
+    for (let i = newRows.length - 2 - firstShapeRowFromBottom; i > 0; i--) {
       newRows[i] = newRows[i - 1]
     }
     newRows[0] = this.EMPTY_ROW
@@ -153,13 +156,13 @@ export class Board {
       firstShapeRow = - 1
     } else {
       for (let rowNum = 0; rowNum < rows.length; rowNum++) {
-
         if (rows[rowNum] !== this.EMPTY_ROW) {
           firstShapeRow = rowNum
           break;
         }
       }
     }
+    return firstShapeRow
   }
 
   setIsFalling(isFalling) {
