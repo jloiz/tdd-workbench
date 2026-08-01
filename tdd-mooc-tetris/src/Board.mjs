@@ -11,6 +11,7 @@ export class Board {
   midpoint;
   hasHitBottom;
   hasHitShape;
+  currentShapeHeight;
 
   EMPTY_ROW;
 
@@ -24,6 +25,7 @@ export class Board {
     this.midpointIdx = this.calculateMidpointIdx()
     this.hasHitBottom = false
     this.hasHitShape = false
+    this.currentShapeHeight = 0 
 
   }
 
@@ -38,6 +40,8 @@ export class Board {
 
       // clean shape
       let newshape = shape.toString().substring(0, shape.toString().length - 1)
+
+      this.currentShapeHeight = shape.height()
 
       let shapeRows = newshape.split('\n')
       let shapeObj = Object.assign({}, shapeRows)

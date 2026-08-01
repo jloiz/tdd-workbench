@@ -65,6 +65,15 @@ export class Tetromino {
         return (tetrominoString.substring(0, 5) === '.....') || tetrominoString.substring(0, 3) === '...'
     }
 
+    height() {
+        let shapeHeight;
+        let tetromino = structuredClone(this.#tetromino)
+        let tetroParts = tetromino.split('\n').filter(part => { return part !== '...' })
+        tetroParts = tetroParts.filter(part => { return part !== '' })
+        return tetroParts.length
+    }
+
+
 
     toString() {
         return this.#tetromino
