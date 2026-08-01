@@ -68,6 +68,10 @@ export class Board {
 
   tick() {
 
+    if(this.currentShape === "NO_SHAPE") {
+      console.log("shape cleared")
+    }
+
     if (this.hasHitShape) {
       this.setIsFalling(false)
       this.setHasHitShape(false)
@@ -78,7 +82,7 @@ export class Board {
         this.clearCurrentShape()
         this.setHasHitBottom(false)
 
-      } else {
+      } else if (!(this.currentShape === "NO_SHAPE")){
 
         this.fall()
       }
