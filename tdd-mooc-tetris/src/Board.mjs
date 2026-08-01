@@ -76,7 +76,7 @@ export class Board {
     if (this.hasHitBottom) {
       this.setIsFalling(false)
       this.clearCurrentShape()
-      this.hasHitBottom = false
+      this.setHasHitBottom(false)
 
     } else {
 
@@ -96,7 +96,6 @@ export class Board {
 
   fall() {
     let rowNumNotEmptyFromBottom
-    let hasHitBottomFlag
     let rows = structuredClone(this.rows)
     rows = rows.reverse()
 
@@ -128,8 +127,7 @@ export class Board {
     // NEW METHOD in conditional or whole thing (checkBoardBottom)
     if (oldRows[this.height - 1] !== newRows[this.height - 1]) {
       console.log("Has hit bottom")
-      hasHitBottomFlag = true
-      this.hasHitBottom = true
+      this.setHasHitBottom(true)
 
     }
 
@@ -137,8 +135,7 @@ export class Board {
     let reversedNewRows = structuredClone(newRows)
     reversedNewRows.reverse()
     console.log(rowNumNotEmptyFromBottom)
-    if (!hasHitBottomFlag && (reversedNewRows[rowNumNotEmptyFromBottom + 1] !== this.EMPTY_ROW)) {
-      console.log('hit another shape')
+    if (!this.hasHitBottom && (reversedNewRows[rowNumNotEmptyFromBottom + 1] !== this.EMPTY_ROW)) {
       this.setHasHitShape(true)
     }
 
@@ -152,6 +149,10 @@ export class Board {
 
   setHasHitShape(hasHitShape){
     this.hasHitShape = hasHitShape
+  }
+
+    setHasHitBottom(hasHitBottom){
+    this.hasHitBottom = hasHitBottom
   }
 
   clearCurrentShape() {
