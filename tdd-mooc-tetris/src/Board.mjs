@@ -68,25 +68,17 @@ export class Board {
 
   tick() {
 
-    if(this.currentShape === "NO_SHAPE") {
-      console.log("shape cleared")
-    }
-
     if (this.hasHitShape) {
       this.setIsFalling(false)
       this.setHasHitShape(false)
-    } else
+    } else if (this.hasHitBottom) {
+      this.setIsFalling(false)
+      this.clearCurrentShape()
+      this.setHasHitBottom(false)
 
-      if (this.hasHitBottom) {
-        this.setIsFalling(false)
-        this.clearCurrentShape()
-        this.setHasHitBottom(false)
-
-      } else if (!(this.currentShape === "NO_SHAPE")){
-
-        this.fall()
-      }
-
+    } else if (!(this.currentShape === "NO_SHAPE")) {
+      this.fall()
+    }
 
     this.drawBoard()
 
