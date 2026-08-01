@@ -36,6 +36,7 @@ export class Board {
     if ((shape.length === 1) && (typeof shape === "string")) {
       shape = new Block(shape)
       this.rows[0] = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${shape.toString()}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
+      this.currentShapeHeight = 1
     } else {
 
       // clean shape
