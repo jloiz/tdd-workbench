@@ -95,14 +95,8 @@ export class Board {
   }
 
   fall() {
-    let rows = structuredClone(this.rows)
-    rows = rows.reverse()
-
-    // NEW METHOD
+    
     let firstShapeRowFromBottom = this.getFirstShapeRowFromBottom()
-
-
-    console.log(firstShapeRowFromBottom)
 
     // NEW METHOD
     // Shift all rows down, except the ones that are non empty from the bottom
@@ -131,7 +125,6 @@ export class Board {
     }
 
     this.rows = newRows
-
   }
 
   getFirstShapeRowFromBottom() {
