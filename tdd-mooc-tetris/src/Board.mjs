@@ -78,8 +78,9 @@ export class Board {
   tick() {
 
     if (this.hasHitShape) {
+      console.log("HIT SHAPE")
       this.setIsFalling(false)
-      this.clearCurrentShape()
+      //this.clearCurrentShape()
       this.setHasHitShape(false)
     } else if (this.hasHitBottom) {
       this.setIsFalling(false)
@@ -91,7 +92,6 @@ export class Board {
     }
 
     this.drawBoard()
-
   }
 
 
@@ -107,9 +107,6 @@ export class Board {
     let oldRows = structuredClone(this.rows)
     let newRows = this.rows
     let offset = this.height - this.lastShapeRowFromBottom - 1
-    console.log("offset logging")
-    console.log(this.lastShapeRowFromBottom)
-    console.log(offset)
 
     for (let i = newRows.length - 2 - firstShapeRowFromBottom - offset; i > 0; i--) {
       newRows[i] = newRows[i - 1]
@@ -166,9 +163,17 @@ export class Board {
   handleTouchingOtherShapes(newRows, firstShapeRowFromBottom) {
     let reversedNewRows = structuredClone(newRows)
     reversedNewRows.reverse()
-    if (!this.hasHitBottom && (reversedNewRows[firstShapeRowFromBottom + 1] !== this.EMPTY_ROW)) {
+    //if (this.currentShape instanceof )
+    console.log()
+    if (this.currentShape instanceof Block) {
+          if (!this.hasHitBottom && (reversedNewRows[firstShapeRowFromBottom + 1] !== this.EMPTY_ROW)) {
       this.setHasHitShape(true)
     }
+    }
+
+    console.log("other shape debug")
+    console.log(this.lastShapeRowFromBottom)
+    console.log(newRows[this.lastShapeRowFromBottom - 1])
   }
 
   setIsFalling(isFalling) {
