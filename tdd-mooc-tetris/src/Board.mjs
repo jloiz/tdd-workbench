@@ -110,16 +110,8 @@ export class Board {
     console.log("old rows: ", oldRows)
     console.log("new rows:", newRows)
 
-    // NEW METHOD in conditional or whole thing (checkBoardBottom)
     this.handleBottomBoundary(oldRows, newRows)
-
-    // NEW METHOD (check hasHitShape)
-    let reversedNewRows = structuredClone(newRows)
-    reversedNewRows.reverse()
-    if (!this.hasHitBottom && (reversedNewRows[firstShapeRowFromBottom + 1] !== this.EMPTY_ROW)) {
-      this.setHasHitShape(true)
-    }
-
+    this.handleTouchingOtherShapes(newRows, firstShapeRowFromBottom)
     this.rows = newRows
   }
 
@@ -144,6 +136,14 @@ export class Board {
   handleBottomBoundary(oldRows, newRows) {
     if (oldRows[this.height - 1] !== newRows[this.height - 1]) {
       this.setHasHitBottom(true)
+    }
+  }
+
+  handleTouchingOtherShapes(newRows, firstShapeRowFromBottom) {
+    let reversedNewRows = structuredClone(newRows)
+    reversedNewRows.reverse()
+    if (!this.hasHitBottom && (reversedNewRows[firstShapeRowFromBottom + 1] !== this.EMPTY_ROW)) {
+      this.setHasHitShape(true)
     }
   }
 
