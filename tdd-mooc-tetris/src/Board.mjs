@@ -95,25 +95,13 @@ export class Board {
   }
 
   fall() {
-    let rowNumNotEmptyFromBottom
     let rows = structuredClone(this.rows)
     rows = rows.reverse()
 
     // NEW METHOD
     let firstShapeRowFromBottom = this.getFirstShapeRowFromBottom()
-    if (rows[0] === this.EMPTY_ROW) {
-      rowNumNotEmptyFromBottom = - 1
-    } else {
-      for (let rowNum = 0; rowNum < rows.length; rowNum++) {
 
-        if (rows[rowNum] !== this.EMPTY_ROW) {
-          rowNumNotEmptyFromBottom = rowNum
-          break;
-        }
-      }
-    }
 
-    console.log(rowNumNotEmptyFromBottom)
     console.log(firstShapeRowFromBottom)
 
     // NEW METHOD
@@ -138,8 +126,7 @@ export class Board {
     // NEW METHOD (check hasHitShape)
     let reversedNewRows = structuredClone(newRows)
     reversedNewRows.reverse()
-    console.log(rowNumNotEmptyFromBottom)
-    if (!this.hasHitBottom && (reversedNewRows[rowNumNotEmptyFromBottom + 1] !== this.EMPTY_ROW)) {
+    if (!this.hasHitBottom && (reversedNewRows[firstShapeRowFromBottom + 1] !== this.EMPTY_ROW)) {
       this.setHasHitShape(true)
     }
 
