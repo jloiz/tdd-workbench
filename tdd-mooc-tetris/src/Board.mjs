@@ -13,6 +13,7 @@ export class Board {
   hasHitShape;
   currentShapeHeight;
   shapeAtBottom;
+  lastShapeRowFromBottom
 
   EMPTY_ROW;
 
@@ -28,6 +29,7 @@ export class Board {
     this.hasHitShape = false
     this.currentShapeHeight = 0
     this.shapeAtBottom = false
+    this.lastShapeRowFromBottom = this.height - 1
 
   }
 
@@ -104,9 +106,12 @@ export class Board {
 
     let oldRows = structuredClone(this.rows)
     let newRows = this.rows
-    let offset = firstShapeRowFromBottom
+    let offset = this.height - this.lastShapeRowFromBottom - 1
+    console.log("offset logging")
+    console.log(this.lastShapeRowFromBottom)
+    console.log(offset)
 
-    for (let i = newRows.length - 2 - firstShapeRowFromBottom; i > 0; i--) {
+    for (let i = newRows.length - 2 - firstShapeRowFromBottom - offset; i > 0; i--) {
       newRows[i] = newRows[i - 1]
     }
     newRows[0] = this.EMPTY_ROW
@@ -141,25 +146,29 @@ export class Board {
   handleBottomBoundary(oldRows, newRows) {
     if (oldRows[this.height - 1] !== newRows[this.height - 1]) {
       this.setHasHitBottom(true)
+
+    // toDo: Put in own function and call elsewhere
+
+      console.log("HIT BOTTOM")
+      let lastShapeRowFromBottom;
+      for (let i = 0; i < newRows.length; i++) {
+        if (newRows[i] !== this.EMPTY_ROW) {
+          lastShapeRowFromBottom = i
+          break;
+        }
+      }
+      this.lastShapeRowFromBottom = lastShapeRowFromBottom
+
     }
+
   }
 
   handleTouchingOtherShapes(newRows, firstShapeRowFromBottom) {
     let reversedNewRows = structuredClone(newRows)
-    let lastShapeRowFromBottom;
     reversedNewRows.reverse()
     if (!this.hasHitBottom && (reversedNewRows[firstShapeRowFromBottom + 1] !== this.EMPTY_ROW)) {
       this.setHasHitShape(true)
     }
-    // toDo: Put in own function and call elsewhere
-    console.log(newRows)
-    for (let i=0; i < newRows.length; i++){
-      if (newRows[i] !== this.EMPTY_ROW){
-        lastShapeRowFromBottom = i
-        break;
-      }
-    }
-    console.log(lastShapeRowFromBottom)
   }
 
   setIsFalling(isFalling) {
