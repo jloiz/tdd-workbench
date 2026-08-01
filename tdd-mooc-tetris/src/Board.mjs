@@ -8,7 +8,6 @@ export class Board {
   board;
   currentShape;
   isFalling;
-  midpoint;
   hasHitBottom;
   hasHitShape;
   currentShapeHeight;
@@ -80,7 +79,7 @@ export class Board {
     if (this.hasHitShape) {
       console.log("HIT SHAPE")
       this.setIsFalling(false)
-      //this.clearCurrentShape()
+      this.clearCurrentShape()
       this.setHasHitShape(false)
     } else if (this.hasHitBottom) {
       this.setIsFalling(false)
@@ -106,9 +105,10 @@ export class Board {
 
     let oldRows = structuredClone(this.rows)
     let newRows = this.rows
-    let offset = this.height - this.lastShapeRowFromBottom - 1
+    // ToDo: Better name
+    let topOfShapeOffset = this.height - this.lastShapeRowFromBottom - 1
 
-    for (let i = newRows.length - 2 - firstShapeRowFromBottom - offset; i > 0; i--) {
+    for (let i = newRows.length - 2 - firstShapeRowFromBottom - topOfShapeOffset; i > 0; i--) {
       newRows[i] = newRows[i - 1]
     }
     newRows[0] = this.EMPTY_ROW
@@ -126,7 +126,6 @@ export class Board {
     let firstShapeRow;
     let rows = structuredClone(this.rows)
     rows = rows.reverse()
-    let contenders = [];
     if (rows[0] === this.EMPTY_ROW) {
       firstShapeRow = -1
     } else {
@@ -144,7 +143,7 @@ export class Board {
     if (oldRows[this.height - 1] !== newRows[this.height - 1]) {
       this.setHasHitBottom(true)
 
-    // toDo: Put in own function and call elsewhere
+      // toDo: Put in own function and call elsewhere
 
       console.log("HIT BOTTOM")
       let lastShapeRowFromBottom;
@@ -163,17 +162,20 @@ export class Board {
   handleTouchingOtherShapes(newRows, firstShapeRowFromBottom) {
     let reversedNewRows = structuredClone(newRows)
     reversedNewRows.reverse()
-    //if (this.currentShape instanceof )
-    console.log()
+    // ToDo: Generalise the below to use the else block logic
     if (this.currentShape instanceof Block) {
-          if (!this.hasHitBottom && (reversedNewRows[firstShapeRowFromBottom + 1] !== this.EMPTY_ROW)) {
+      if (!this.hasHitBottom && (reversedNewRows[firstShapeRowFromBottom + 1] !== this.EMPTY_ROW)) {
+        this.setHasHitShape(true)
+      }
+    } else if ((newRows[this.height - 1] !== this.EMPTY_ROW)&&(newRows[this.lastShapeRowFromBottom - 1] !== this.EMPTY_ROW)){
+      console.log('TOUCh')
       this.setHasHitShape(true)
-    }
     }
 
     console.log("other shape debug")
     console.log(this.lastShapeRowFromBottom)
     console.log(newRows[this.lastShapeRowFromBottom - 1])
+
   }
 
   setIsFalling(isFalling) {
