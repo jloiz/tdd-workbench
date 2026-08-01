@@ -95,7 +95,7 @@ export class Board {
   }
 
   fall() {
-    
+
     let firstShapeRowFromBottom = this.getFirstShapeRowFromBottom()
 
     // NEW METHOD
@@ -111,11 +111,7 @@ export class Board {
     console.log("new rows:", newRows)
 
     // NEW METHOD in conditional or whole thing (checkBoardBottom)
-    if (oldRows[this.height - 1] !== newRows[this.height - 1]) {
-      console.log("Has hit bottom")
-      this.setHasHitBottom(true)
-
-    }
+    this.handleBottomBoundary(oldRows, newRows)
 
     // NEW METHOD (check hasHitShape)
     let reversedNewRows = structuredClone(newRows)
@@ -143,6 +139,12 @@ export class Board {
       }
     }
     return firstShapeRow
+  }
+
+  handleBottomBoundary(oldRows, newRows) {
+    if (oldRows[this.height - 1] !== newRows[this.height - 1]) {
+      this.setHasHitBottom(true)
+    }
   }
 
   setIsFalling(isFalling) {
