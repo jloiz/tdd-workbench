@@ -68,20 +68,20 @@ export class Board {
 
   tick() {
 
-    if(this.hasHitShape){
+    if (this.hasHitShape) {
       this.setIsFalling(false)
       this.setHasHitShape(false)
     } else
 
-    if (this.hasHitBottom) {
-      this.setIsFalling(false)
-      this.clearCurrentShape()
-      this.setHasHitBottom(false)
+      if (this.hasHitBottom) {
+        this.setIsFalling(false)
+        this.clearCurrentShape()
+        this.setHasHitBottom(false)
 
-    } else {
+      } else {
 
-      this.fall()
-    }
+        this.fall()
+      }
 
 
     this.drawBoard()
@@ -100,6 +100,7 @@ export class Board {
     rows = rows.reverse()
 
     // NEW METHOD
+    let firstShapeRowFromBottom = this.getFirstShapeRowFromBottom()
     if (rows[0] === this.EMPTY_ROW) {
       rowNumNotEmptyFromBottom = - 1
     } else {
@@ -143,15 +144,33 @@ export class Board {
 
   }
 
+  getFirstShapeRowFromBottom() {
+    // Offset this value by -1
+    let firstShapeRow;
+    let rows = structuredClone(this.rows)
+    rows = rows.reverse()
+    if (rows[0] === this.EMPTY_ROW) {
+      firstShapeRow = - 1
+    } else {
+      for (let rowNum = 0; rowNum < rows.length; rowNum++) {
+
+        if (rows[rowNum] !== this.EMPTY_ROW) {
+          firstShapeRow = rowNum
+          break;
+        }
+      }
+    }
+  }
+
   setIsFalling(isFalling) {
     this.isFalling = isFalling
   }
 
-  setHasHitShape(hasHitShape){
+  setHasHitShape(hasHitShape) {
     this.hasHitShape = hasHitShape
   }
 
-    setHasHitBottom(hasHitBottom){
+  setHasHitBottom(hasHitBottom) {
     this.hasHitBottom = hasHitBottom
   }
 
