@@ -12,6 +12,7 @@ export class Board {
   hasHitBottom;
   hasHitShape;
   currentShapeHeight;
+  shapeAtBottom;
 
   EMPTY_ROW;
 
@@ -25,7 +26,8 @@ export class Board {
     this.midpointIdx = this.calculateMidpointIdx()
     this.hasHitBottom = false
     this.hasHitShape = false
-    this.currentShapeHeight = 0 
+    this.currentShapeHeight = 0
+    this.shapeAtBottom = false
 
   }
 
@@ -75,6 +77,7 @@ export class Board {
 
     if (this.hasHitShape) {
       this.setIsFalling(false)
+      this.clearCurrentShape()
       this.setHasHitShape(false)
     } else if (this.hasHitBottom) {
       this.setIsFalling(false)
@@ -99,10 +102,10 @@ export class Board {
 
     let firstShapeRowFromBottom = this.getFirstShapeRowFromBottom()
 
-    // NEW METHOD
-    // Shift all rows down, except the ones that are non empty from the bottom
     let oldRows = structuredClone(this.rows)
     let newRows = this.rows
+    let offset = firstShapeRowFromBottom
+
     for (let i = newRows.length - 2 - firstShapeRowFromBottom; i > 0; i--) {
       newRows[i] = newRows[i - 1]
     }
@@ -121,8 +124,9 @@ export class Board {
     let firstShapeRow;
     let rows = structuredClone(this.rows)
     rows = rows.reverse()
+    let contenders = [];
     if (rows[0] === this.EMPTY_ROW) {
-      firstShapeRow = - 1
+      firstShapeRow = -1
     } else {
       for (let rowNum = 0; rowNum < rows.length; rowNum++) {
         if (rows[rowNum] !== this.EMPTY_ROW) {
@@ -142,10 +146,20 @@ export class Board {
 
   handleTouchingOtherShapes(newRows, firstShapeRowFromBottom) {
     let reversedNewRows = structuredClone(newRows)
+    let lastShapeRowFromBottom;
     reversedNewRows.reverse()
     if (!this.hasHitBottom && (reversedNewRows[firstShapeRowFromBottom + 1] !== this.EMPTY_ROW)) {
       this.setHasHitShape(true)
     }
+    // toDo: Put in own function and call elsewhere
+    console.log(newRows)
+    for (let i=0; i < newRows.length; i++){
+      if (newRows[i] !== this.EMPTY_ROW){
+        lastShapeRowFromBottom = i
+        break;
+      }
+    }
+    console.log(lastShapeRowFromBottom)
   }
 
   setIsFalling(isFalling) {
