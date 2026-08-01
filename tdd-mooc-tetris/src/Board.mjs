@@ -138,16 +138,8 @@ export class Board {
   handleBottomBoundary(oldRows, newRows) {
     if (oldRows[this.height - 1] !== newRows[this.height - 1]) {
       this.setHasHitBottom(true)
-
-      // toDo: Put in own function and call elsewhere
-      let lastShapeRowFromBottom;
-      for (let i = 0; i < newRows.length; i++) {
-        if (newRows[i] !== this.EMPTY_ROW) {
-          lastShapeRowFromBottom = i
-          break;
-        }
-      }
-      this.lastShapeRowFromBottom = lastShapeRowFromBottom
+      
+      this.lastShapeRowFromBottom = this.caclulateLastShapeRowFromBottom(newRows)
     }
   }
 
@@ -159,9 +151,21 @@ export class Board {
       if (!this.hasHitBottom && (reversedNewRows[firstShapeRowFromBottom + 1] !== this.EMPTY_ROW)) {
         this.setHasHitShape(true)
       }
-    } else if ((newRows[this.height - 1] !== this.EMPTY_ROW)&&(newRows[this.lastShapeRowFromBottom - 1] !== this.EMPTY_ROW)){
+    } else if ((newRows[this.height - 1] !== this.EMPTY_ROW) && (newRows[this.lastShapeRowFromBottom - 1] !== this.EMPTY_ROW)) {
       this.setHasHitShape(true)
     }
+  }
+
+  caclulateLastShapeRowFromBottom(newRows) {
+    let lastShapeRowFromBottom;
+    for (let i = 0; i < newRows.length; i++) {
+      if (newRows[i] !== this.EMPTY_ROW) {
+        lastShapeRowFromBottom = i
+        break;
+      }
+    }
+
+    return lastShapeRowFromBottom
   }
 
   setIsFalling(isFalling) {
