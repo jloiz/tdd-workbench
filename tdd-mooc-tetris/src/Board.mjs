@@ -34,14 +34,12 @@ export class Board {
 
 
   drop(shape) {
-
     // check if block dropped
     if ((shape.length === 1) && (typeof shape === "string")) {
       shape = new Block(shape)
       this.rows[0] = `${this.EMPTY_ROW.slice(0, this.midpointIdx)}${shape.toString()}${this.EMPTY_ROW.slice(this.midpointIdx + 1)}`
       this.currentShapeHeight = 1
     } else {
-
       // clean shape
       let newshape = shape.toString().substring(0, shape.toString().length - 1)
 
@@ -97,12 +95,11 @@ export class Board {
   }
 
   fall() {
-
     let firstShapeRowFromBottom = this.getFirstShapeRowFromBottom()
 
     let oldRows = structuredClone(this.rows)
     let newRows = this.rows
-
+    // Add an offset for the top of a shape below the currently falling shape
     let topOfShapeOffset = this.height - this.lastShapeRowFromBottom - 1
     for (let i = newRows.length - 2 - firstShapeRowFromBottom - topOfShapeOffset; i > 0; i--) {
       newRows[i] = newRows[i - 1]
@@ -113,7 +110,7 @@ export class Board {
     console.log("new rows:", newRows)
 
     this.handleBottomBoundary(oldRows, newRows)
-    this.handleTouchingOtherShapes(newRows, firstShapeRowFromBottom)
+    this.handleTouchingOtherShapes(newRows)
     this.rows = newRows
   }
 
@@ -138,20 +135,13 @@ export class Board {
   handleBottomBoundary(oldRows, newRows) {
     if (oldRows[this.height - 1] !== newRows[this.height - 1]) {
       this.setHasHitBottom(true)
-      
+
       this.lastShapeRowFromBottom = this.caclulateLastShapeRowFromBottom(newRows)
     }
   }
 
-  handleTouchingOtherShapes(newRows, firstShapeRowFromBottom) {
-    let reversedNewRows = structuredClone(newRows)
-    reversedNewRows.reverse()
-    // ToDo: Generalise the below to use the else block logic
-    if (this.currentShape instanceof Block) {
-      if (!this.hasHitBottom && (reversedNewRows[firstShapeRowFromBottom + 1] !== this.EMPTY_ROW)) {
-        this.setHasHitShape(true)
-      }
-    } else if ((newRows[this.height - 1] !== this.EMPTY_ROW) && (newRows[this.lastShapeRowFromBottom - 1] !== this.EMPTY_ROW)) {
+  handleTouchingOtherShapes(newRows) {
+    if ((newRows[this.height - 1] !== this.EMPTY_ROW) && (newRows[this.lastShapeRowFromBottom - 1] !== this.EMPTY_ROW)) {
       this.setHasHitShape(true)
     }
   }
