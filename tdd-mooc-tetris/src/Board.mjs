@@ -13,6 +13,8 @@ export class Board {
   currentShapeHeight;
   shapeAtBottom;
   lastShapeRowFromBottom
+  leftBoundaryHit
+  rightBoundaryHit
 
   EMPTY_ROW;
 
@@ -195,11 +197,30 @@ export class Board {
   }
 
   moveRight() {
-    for (let i = 0; i < this.height; i++) {
-      if (this.isFalling && this.rows[i] !== this.EMPTY_ROW) {
-        this.rows[i] = `.${this.rows[i].substring(0, this.width - 1)}`
+
+    if (!this.rightBoundaryHit) {
+      for (let i = 0; i < this.height; i++) {
+        if (this.isFalling && this.rows[i] !== this.EMPTY_ROW) {
+          this.rows[i] = `.${this.rows[i].substring(0, this.width - 1)}`
+        }
       }
     }
+    
+    // ToDo: new method?
+    let rightEdgeValues = []
+    let flatBoard = this.rows.join('')
+    let x = 9;
+    console.log(flatBoard.length)
+    while (x < flatBoard.length) {
+      rightEdgeValues.push(flatBoard[x])
+      x += this.width
+    }
+
+    const allRightColEmpty = rightEdgeValues.every(point => point === '.')
+    if (!allRightColEmpty) {
+      this.rightBoundaryHit = true
+    }
+
     this.drawBoard()
     if (!this.isFalling) {
       throw new Error("Cannot move shape that is not falling")
