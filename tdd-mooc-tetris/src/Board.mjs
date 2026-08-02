@@ -207,7 +207,7 @@ export class Board {
       throw new Error("Cannot move shape past board boundary")
     }
 
-    this.checkBoundaries()
+    this.checkBoundaries("right")
     this.drawBoard()
 
     if (!this.isFalling) {
@@ -215,11 +215,14 @@ export class Board {
     }
   }
 
-  checkBoundaries() {
+  checkBoundaries(boundary) {
     let edgeValues = []
+    let offset = 0;
     let flatBoard = this.rows.join('')
-
-    let x = 9;
+    if (boundary === "right") {
+      offset = 9
+    }
+    let x = 0 + offset;
     console.log(flatBoard.length)
     while (x < flatBoard.length) {
       edgeValues.push(flatBoard[x])
