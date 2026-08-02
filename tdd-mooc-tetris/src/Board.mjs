@@ -163,10 +163,8 @@ export class Board {
   }
 
   moveLeft() {
-    console.log("call")
     if (!this.leftBoundaryHit) {
       for (let i = 0; i < this.height; i++) {
-        console.log(this.rows.join(''))
         if (this.isFalling && this.rows[i] !== this.EMPTY_ROW) {
           this.rows[i] = `${this.rows[i].substring(1)}.`
         }
@@ -212,7 +210,6 @@ export class Board {
       offset = 9
     }
     let x = 0 + offset;
-    console.log(flatBoard.length)
     while (x < flatBoard.length) {
       edgeValues.push(flatBoard[x])
       x += this.width
