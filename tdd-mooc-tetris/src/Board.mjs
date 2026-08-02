@@ -171,24 +171,12 @@ export class Board {
           this.rows[i] = `${this.rows[i].substring(1)}.`
         }
       }
+      // this.rightBoundaryHit? this.rightBoundaryHit = !this.rightBoundaryHit : this.rightBoundaryHit
     } else {
       throw new Error("Cannot move shape past board boundary")
     }
 
-    // ToDo: new method?
-    let leftEdgeValues = []
-    let flatBoard = this.rows.join('')
-    let x = 0;
-    console.log(flatBoard.length)
-    while (x < flatBoard.length) {
-      leftEdgeValues.push(flatBoard[x])
-      x += this.width
-    }
-    const allLeftColEmpty = leftEdgeValues.every(point => point === '.')
-    if (!allLeftColEmpty) {
-      this.leftBoundaryHit = true
-    }
-
+    this.checkBoundaries("left")
     this.drawBoard()
 
     if (!this.isFalling) {
@@ -203,6 +191,7 @@ export class Board {
           this.rows[i] = `.${this.rows[i].substring(0, this.width - 1)}`
         }
       }
+      // this.leftBoundaryHit ? this.leftBoundaryHit = !this.leftBoundaryHit : this.leftBoundaryHit
     } else {
       throw new Error("Cannot move shape past board boundary")
     }
@@ -231,7 +220,7 @@ export class Board {
 
     const boundaryColEmpty = edgeValues.every(point => point === '.')
     if (!boundaryColEmpty) {
-      this.rightBoundaryHit = true
+      boundary === "right" ? this.rightBoundaryHit = true : this.leftBoundaryHit = true
     }
   }
 
