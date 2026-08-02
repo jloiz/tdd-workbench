@@ -83,8 +83,7 @@ describe("Moving tetrominos", () => {
         board.tick()
         board.tick()
         board.tick()
-        board.moveLeft()
-
+        expect(() => board.moveLeft()).to.throw("Cannot move shape that is not falling");
         expect(board.toString()).to.equalShape(
       `..........
        ..........
