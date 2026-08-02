@@ -100,9 +100,7 @@ describe("Moving tetrominos", () => {
         board.moveLeft()
         board.moveLeft()
         board.moveLeft()
-        board.moveLeft()
-        board.moveLeft()
-        //expect(() => board.moveLeft()).to.throw("Cannot move shape that is not falling");
+        expect(() => board.moveLeft()).to.throw("Cannot move shape past board boundary");
         expect(board.toString()).to.equalShape(
       `.T........
        TTT.......
@@ -112,6 +110,24 @@ describe("Moving tetrominos", () => {
        ..........`
         )
     })
+
+    test("shape cannot be moved beyond right board edge", () => {
+        board.drop(Tetromino.T_SHAPE)
+        board.moveRight()
+        board.moveRight()
+        board.moveRight()
+        //expect(() => board.moveRight()).to.throw("Cannot move shape past board boundary");
+        expect(board.toString()).to.equalShape(
+      `........T.
+       .......TTT
+       ..........
+       ..........
+       ..........
+       ..........`
+        )
+    })
+
+    
 
 
 })
