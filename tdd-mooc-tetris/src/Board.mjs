@@ -160,27 +160,27 @@ export class Board {
     return lastShapeRowFromBottom
   }
 
-  moveLeft(){
-    for (let i=0; i < this.height; i++){
-      if (this.isFalling && this.rows[i] !== this.EMPTY_ROW){
+  moveLeft() {
+    for (let i = 0; i < this.height; i++) {
+      if (this.isFalling && this.rows[i] !== this.EMPTY_ROW) {
         this.rows[i] = `${this.rows[i].substring(1)}.`
       }
     }
     this.drawBoard()
-    if (!this.isFalling){
-      throw new Error("Cannot move shape that is not falling") 
+    if (!this.isFalling) {
+      throw new Error("Cannot move shape that is not falling")
     }
   }
 
-    moveRight(){
-    for (let i=0; i < this.height; i++){
-      if (this.isFalling && this.rows[i] !== this.EMPTY_ROW){
+  moveRight() {
+    for (let i = 0; i < this.height; i++) {
+      if (this.isFalling && this.rows[i] !== this.EMPTY_ROW) {
         this.rows[i] = `.${this.rows[i].substring(0, this.width - 1)}`
       }
     }
     this.drawBoard()
-        if (!this.isFalling){
-      throw new Error("Cannot move shape that is not falling") 
+    if (!this.isFalling) {
+      throw new Error("Cannot move shape that is not falling")
     }
   }
 
