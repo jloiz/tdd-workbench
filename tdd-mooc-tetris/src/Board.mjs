@@ -89,10 +89,7 @@ export class Board {
     this.drawBoard()
   }
 
-  setNewShape(newShape) {
-    this.currentShape = newShape
-    this.setIsFalling(true)
-  }
+
 
   fall() {
     let firstShapeRowFromBottom = this.getFirstShapeRowFromBottom()
@@ -132,6 +129,11 @@ export class Board {
     return firstShapeRow
   }
 
+  setNewShape(newShape) {
+    this.currentShape = newShape
+    this.setIsFalling(true)
+  }
+
   handleBottomBoundary(oldRows, newRows) {
     if (oldRows[this.height - 1] !== newRows[this.height - 1]) {
       this.setHasHitBottom(true)
@@ -156,6 +158,19 @@ export class Board {
     }
 
     return lastShapeRowFromBottom
+  }
+
+  moveLeft(){
+    console.log("HERE")
+    console.log(this.rows)
+    for (let i=0; i < this.height; i++){
+      if (this.rows[i] !== this.EMPTY_ROW){
+        console.log("HIT")
+        this.rows[i] = `${this.rows[i].substring(1)}.`
+      }
+    }
+    console.log(this.rows)
+    this.drawBoard()
   }
 
   setIsFalling(isFalling) {
