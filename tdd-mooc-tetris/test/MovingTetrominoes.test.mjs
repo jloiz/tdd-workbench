@@ -10,13 +10,13 @@ describe("Moving tetrominos", () => {
     });
 
 
-    test("move to the left", () => {
+    test("moves to the left", () => {
         board.drop(Tetromino.T_SHAPE)
         board.tick()
         board.moveLeft()
 
         expect(board.toString()).to.equalShape(
-        `..........
+      `..........
        ...T......
        ..TTT.....
        ..........
@@ -25,7 +25,7 @@ describe("Moving tetrominos", () => {
         )
     })
 
-        test("move to the right", () => {
+    test("moves to the right", () => {
         board.drop(Tetromino.T_SHAPE)
         board.tick()
         board.moveRight()
@@ -39,5 +39,21 @@ describe("Moving tetrominos", () => {
        ..........`
         )
     })
+
+
+    test("moves down", () => {
+        board.drop(Tetromino.T_SHAPE)
+        board.tick()
+
+        expect(board.toString()).to.equalShape(
+      `..........
+       ....T.....
+       ...TTT....
+       ..........
+       ..........
+       ..........`
+        )
+    })
+
 
 })
