@@ -179,6 +179,9 @@ export class Board {
       }
     }
     this.drawBoard()
+        if (!this.isFalling){
+      throw new Error("Cannot move shape that is not falling") 
+    }
   }
 
   setIsFalling(isFalling) {
