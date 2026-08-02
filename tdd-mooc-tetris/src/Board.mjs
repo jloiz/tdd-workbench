@@ -161,15 +161,11 @@ export class Board {
   }
 
   moveLeft(){
-    console.log("HERE")
-    console.log(this.rows)
     for (let i=0; i < this.height; i++){
       if (this.rows[i] !== this.EMPTY_ROW){
-        console.log("HIT")
         this.rows[i] = `${this.rows[i].substring(1)}.`
       }
     }
-    console.log(this.rows)
     this.drawBoard()
   }
 
