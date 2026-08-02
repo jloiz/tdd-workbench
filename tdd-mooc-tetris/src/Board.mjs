@@ -197,7 +197,6 @@ export class Board {
   }
 
   moveRight() {
-
     if (!this.rightBoundaryHit) {
       for (let i = 0; i < this.height; i++) {
         if (this.isFalling && this.rows[i] !== this.EMPTY_ROW) {
@@ -207,25 +206,29 @@ export class Board {
     } else {
       throw new Error("Cannot move shape past board boundary")
     }
-    
-    // ToDo: new method?
-    let rightEdgeValues = []
+
+    this.checkBoundaries()
+    this.drawBoard()
+
+    if (!this.isFalling) {
+      throw new Error("Cannot move shape that is not falling")
+    }
+  }
+
+  checkBoundaries() {
+    let edgeValues = []
     let flatBoard = this.rows.join('')
+
     let x = 9;
     console.log(flatBoard.length)
     while (x < flatBoard.length) {
-      rightEdgeValues.push(flatBoard[x])
+      edgeValues.push(flatBoard[x])
       x += this.width
     }
 
-    const allRightColEmpty = rightEdgeValues.every(point => point === '.')
-    if (!allRightColEmpty) {
+    const boundaryColEmpty = edgeValues.every(point => point === '.')
+    if (!boundaryColEmpty) {
       this.rightBoundaryHit = true
-    }
-
-    this.drawBoard()
-    if (!this.isFalling) {
-      throw new Error("Cannot move shape that is not falling")
     }
   }
 
