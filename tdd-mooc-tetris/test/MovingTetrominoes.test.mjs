@@ -9,6 +9,8 @@ describe("Moving tetrominos", () => {
         board = new Board(10, 6)
     });
 
+    // ToDo add 'call a lot' helper
+
 
     test("moves to the left", () => {
         board.drop(Tetromino.T_SHAPE)
@@ -75,7 +77,7 @@ describe("Moving tetrominos", () => {
         )
     })
 
-        test("a non falling shape cannot be moved left", () => {
+    test("a non falling shape cannot be moved left", () => {
         board.drop(Tetromino.T_SHAPE)
         board.tick()
         board.tick()
@@ -92,4 +94,24 @@ describe("Moving tetrominos", () => {
        ...TTT....`
         )
     })
+
+    test("shape cannot be moved beyond left board edge", () => {
+        board.drop(Tetromino.T_SHAPE)
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        //expect(() => board.moveLeft()).to.throw("Cannot move shape that is not falling");
+        expect(board.toString()).to.equalShape(
+      `.T........
+       TTT.......
+       ..........
+       ..........
+       ..........
+       ..........`
+        )
+    })
+
+
 })
