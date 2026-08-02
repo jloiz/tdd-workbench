@@ -128,6 +128,25 @@ describe("Moving tetrominos", () => {
         )
     })
 
+    test("shape cannot be dropped beyond bottom of board", () => {
+        board.drop(Tetromino.T_SHAPE)
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ....T.....
+       ...TTT....`
+        )
+    })
+
     
 
 
