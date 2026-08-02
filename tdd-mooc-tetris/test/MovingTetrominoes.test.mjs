@@ -117,7 +117,7 @@ describe("Moving tetrominos", () => {
         board.moveRight()
         board.moveRight()
         board.moveRight()
-        //expect(() => board.moveRight()).to.throw("Cannot move shape past board boundary");
+        expect(() => board.moveRight()).to.throw("Cannot move shape past board boundary");
         expect(board.toString()).to.equalShape(
       `........T.
        .......TTT

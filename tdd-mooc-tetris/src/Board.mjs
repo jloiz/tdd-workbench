@@ -204,6 +204,8 @@ export class Board {
           this.rows[i] = `.${this.rows[i].substring(0, this.width - 1)}`
         }
       }
+    } else {
+      throw new Error("Cannot move shape past board boundary")
     }
     
     // ToDo: new method?
