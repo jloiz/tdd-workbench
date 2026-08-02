@@ -162,7 +162,7 @@ export class Board {
 
   moveLeft(){
     for (let i=0; i < this.height; i++){
-      if (this.rows[i] !== this.EMPTY_ROW){
+      if (this.isFalling && this.rows[i] !== this.EMPTY_ROW){
         this.rows[i] = `${this.rows[i].substring(1)}.`
       }
     }
@@ -171,7 +171,7 @@ export class Board {
 
     moveRight(){
     for (let i=0; i < this.height; i++){
-      if (this.rows[i] !== this.EMPTY_ROW){
+      if (this.isFalling && this.rows[i] !== this.EMPTY_ROW){
         this.rows[i] = `.${this.rows[i].substring(0, this.width - 1)}`
       }
     }
