@@ -55,5 +55,25 @@ describe("Moving tetrominos", () => {
         )
     })
 
+    
+    test("a non falling shape cannot be moevd", () => {
+        board.drop(Tetromino.T_SHAPE)
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.moveRight()
+
+        expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ....T.....
+       ...TTT....`
+        )
+    })
+
 
 })

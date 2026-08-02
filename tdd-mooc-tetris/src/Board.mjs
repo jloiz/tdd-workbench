@@ -170,7 +170,6 @@ export class Board {
   }
 
     moveRight(){
-      console.log(this.width)
     for (let i=0; i < this.height; i++){
       if (this.rows[i] !== this.EMPTY_ROW){
         this.rows[i] = `.${this.rows[i].substring(0, this.width - 1)}`
