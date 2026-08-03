@@ -160,8 +160,12 @@ describe("Moving tetrominos", () => {
         board.tick()
         // broken test from here
         board.moveRight()
+        board.moveRight()
         board.tick()
         board.tick()
+        board.tick()
+        board.tick()
+        
         
         board.moveLeft()
 

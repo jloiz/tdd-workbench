@@ -15,7 +15,7 @@ export class Board {
   lastShapeRowFromBottom
   leftBoundaryHit
   rightBoundaryHit
-
+  populatedCells
   EMPTY_ROW;
 
   constructor(width, height) {
@@ -80,15 +80,21 @@ export class Board {
       this.setIsFalling(false)
       this.clearCurrentShape()
       this.setHasHitShape(false)
+      console.log("call 2")
     } else if (this.hasHitBottom) {
       this.setIsFalling(false)
+      this.setPopulatedCells()
       this.clearCurrentShape()
       this.setHasHitBottom(false)
+      console.log("call one")
     } else if (!(this.currentShape === "NO_SHAPE")) {
       this.fall()
-    }
+    } else (
+      console.log("NO OP")
+    )
 
     this.drawBoard()
+
   }
 
 
@@ -104,12 +110,15 @@ export class Board {
       newRows[i] = newRows[i - 1]
     }
     newRows[0] = this.EMPTY_ROW
+    if ((oldRows === newRows) && (this.isFalling)){
+      console.log("SHOULD TICK")
+    }
 
     console.log("old rows: ", oldRows)
     console.log("new rows:", newRows)
 
     this.handleBottomBoundary(oldRows, newRows)
-    this.handleTouchingOtherShapes(newRows)
+    this.handleTouchingOtherShapes(oldRows, newRows)
     this.rows = newRows
   }
 
@@ -144,10 +153,12 @@ export class Board {
     }
   }
 
-  handleTouchingOtherShapes(newRows) {
+  handleTouchingOtherShapes(oldBoard, newRows) {
     if ((newRows[this.height - 1] !== this.EMPTY_ROW) && (newRows[this.lastShapeRowFromBottom - 1] !== this.EMPTY_ROW)) {
       this.setHasHitShape(true)
     }
+    let flatBoard = newRows.join('')
+    console.log(flatBoard)
   }
 
   caclulateLastShapeRowFromBottom(newRows) {
@@ -226,6 +237,18 @@ export class Board {
     if (!boundaryColEmpty) {
       boundary === "right" ? this.rightBoundaryHit = true : this.leftBoundaryHit = true
     }
+  }
+
+  setPopulatedCells() {
+    let flatBoard = this.rows.join('').split('')
+    let populatedCells = []
+    flatBoard.forEach((char, index) => {
+      if (char !== '.') {
+        populatedCells.push(index)
+      }
+    })
+    console.log(populatedCells)
+    this.populatedCells = populatedCells
   }
 
   setIsFalling(isFalling) {
