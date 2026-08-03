@@ -147,7 +147,7 @@ describe("Moving tetrominos", () => {
         )
     })
 
-    test.skip("shape cannot move left through another shape", () => {
+    test("shape cannot move left through another shape", () => {
         board.drop(Tetromino.O_SHAPE)
         board.tick()
         board.tick()

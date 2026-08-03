@@ -163,6 +163,7 @@ export class Board {
   }
 
   moveLeft() {
+
     if (!this.leftBoundaryHit) {
       for (let i = 0; i < this.height; i++) {
         if (this.isFalling && this.rows[i] !== this.EMPTY_ROW) {
@@ -183,9 +184,15 @@ export class Board {
   }
 
   moveRight() {
+
+    console.log("debug")
+    console.log(this.currentShapeHeight)
+    console.log(this.height - this.currentShapeHeight)
+    let settledShapeRow = this.height - this.currentShapeHeight
+
     if (!this.rightBoundaryHit) {
       for (let i = 0; i < this.height; i++) {
-        if (this.isFalling && this.rows[i] !== this.EMPTY_ROW) {
+        if (this.isFalling && (i < settledShapeRow) && this.rows[i] !== this.EMPTY_ROW) {
           this.rows[i] = `.${this.rows[i].substring(0, this.width - 1)}`
         }
       }
