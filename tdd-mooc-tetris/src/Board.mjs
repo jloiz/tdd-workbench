@@ -15,7 +15,7 @@ export class Board {
   lastShapeRowFromBottom
   leftBoundaryHit
   rightBoundaryHit
-  populatedCells
+  occupiedCells
   EMPTY_ROW;
 
   constructor(width, height) {
@@ -31,6 +31,7 @@ export class Board {
     this.currentShapeHeight = 0
     this.shapeAtBottom = false
     this.lastShapeRowFromBottom = this.height - 1
+    this.occupiedCells = []
 
   }
 
@@ -83,7 +84,7 @@ export class Board {
       console.log("call 2")
     } else if (this.hasHitBottom) {
       this.setIsFalling(false)
-      this.setPopulatedCells()
+      this.occupiedCells = this.calculatePopulatedCells()
       this.clearCurrentShape()
       this.setHasHitBottom(false)
       console.log("call one")
@@ -110,16 +111,15 @@ export class Board {
       newRows[i] = newRows[i - 1]
     }
     newRows[0] = this.EMPTY_ROW
-    if ((oldRows === newRows) && (this.isFalling)){
-      console.log("SHOULD TICK")
-    }
 
     console.log("old rows: ", oldRows)
     console.log("new rows:", newRows)
+    
+    this.rows = newRows
 
     this.handleBottomBoundary(oldRows, newRows)
     this.handleTouchingOtherShapes(oldRows, newRows)
-    this.rows = newRows
+    
   }
 
   getFirstShapeRowFromBottom() {
@@ -154,11 +154,19 @@ export class Board {
   }
 
   handleTouchingOtherShapes(oldBoard, newRows) {
-    if ((newRows[this.height - 1] !== this.EMPTY_ROW) && (newRows[this.lastShapeRowFromBottom - 1] !== this.EMPTY_ROW)) {
-      this.setHasHitShape(true)
-    }
     let flatBoard = newRows.join('')
     console.log(flatBoard)
+    let populatedCells = this.calculatePopulatedCells()
+    console.log("HERE", populatedCells)
+    console.log(this.occupiedCells)
+    let populatedCellsWithoutNonMovingCells = populatedCells.filter(item => !this.occupiedCells.includes(item))
+    console.log(populatedCellsWithoutNonMovingCells)
+    for (let i = 0; i < populatedCellsWithoutNonMovingCells.length; i++) {
+      if (this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] + this.width)) {
+        console.log("TOUCH")
+        this.setHasHitShape(true)
+      }
+    }
   }
 
   caclulateLastShapeRowFromBottom(newRows) {
@@ -196,9 +204,7 @@ export class Board {
 
   moveRight() {
 
-    console.log("debug")
-    console.log(this.currentShapeHeight)
-    console.log(this.height - this.currentShapeHeight)
+
     let settledShapeRow = this.height - this.currentShapeHeight
 
     if (!this.rightBoundaryHit) {
@@ -239,7 +245,7 @@ export class Board {
     }
   }
 
-  setPopulatedCells() {
+  calculatePopulatedCells() {
     let flatBoard = this.rows.join('').split('')
     let populatedCells = []
     flatBoard.forEach((char, index) => {
@@ -247,8 +253,7 @@ export class Board {
         populatedCells.push(index)
       }
     })
-    console.log(populatedCells)
-    this.populatedCells = populatedCells
+    return populatedCells
   }
 
   setIsFalling(isFalling) {
