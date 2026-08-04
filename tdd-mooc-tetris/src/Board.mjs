@@ -81,18 +81,17 @@ export class Board {
       this.setIsFalling(false)
       this.clearCurrentShape()
       this.setHasHitShape(false)
-      console.log("call 2")
     } else if (this.hasHitBottom) {
       this.setIsFalling(false)
       this.occupiedCells = this.calculatePopulatedCells()
       this.clearCurrentShape()
       this.setHasHitBottom(false)
-      console.log("call one")
     } else if (!(this.currentShape === "NO_SHAPE")) {
       this.fall()
-    } else (
-      console.log("NO OP")
-    )
+    } 
+    //else (
+     // console.log("NO OP")
+    //)
 
     this.drawBoard()
 
@@ -105,6 +104,20 @@ export class Board {
 
     let oldRows = structuredClone(this.rows)
     let newRows = this.rows
+
+    // ToDoNext: as we have generalised the hasHitShape, now to a similar generalisation
+    // to the bulk of the fall() mehotd so that a shape can fall next to another stationary shape
+    //console.log(this.occupiedCells)
+    let flatBoardOld = oldRows.join('') 
+    let flatBoardNew;
+
+   // console.log(flatBoardOld)
+    for (let i = 0; i < flatBoardOld.length; i++){
+      if (!this.occupiedCells.includes(i)) {
+      //  console.log(i)
+      }
+    }
+
     // Add an offset for the top of a shape below the currently falling shape
     let topOfShapeOffset = this.height - this.lastShapeRowFromBottom - 1
     for (let i = newRows.length - 2 - firstShapeRowFromBottom - topOfShapeOffset; i > 0; i--) {
@@ -112,8 +125,8 @@ export class Board {
     }
     newRows[0] = this.EMPTY_ROW
 
-    console.log("old rows: ", oldRows)
-    console.log("new rows:", newRows)
+    // console.log("old rows: ", oldRows)
+    // console.log("new rows:", newRows)
     
     this.rows = newRows
 
@@ -155,15 +168,10 @@ export class Board {
 
   handleTouchingOtherShapes(oldBoard, newRows) {
     let flatBoard = newRows.join('')
-    console.log(flatBoard)
     let populatedCells = this.calculatePopulatedCells()
-    console.log("HERE", populatedCells)
-    console.log(this.occupiedCells)
     let populatedCellsWithoutNonMovingCells = populatedCells.filter(item => !this.occupiedCells.includes(item))
-    console.log(populatedCellsWithoutNonMovingCells)
     for (let i = 0; i < populatedCellsWithoutNonMovingCells.length; i++) {
       if (this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] + this.width)) {
-        console.log("TOUCH")
         this.setHasHitShape(true)
       }
     }
