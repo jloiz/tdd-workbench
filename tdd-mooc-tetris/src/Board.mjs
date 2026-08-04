@@ -109,17 +109,17 @@ export class Board {
     // to the bulk of the fall() mehotd so that a shape can fall next to another stationary shape
     console.log(this.occupiedCells)
     let flatBoardOld = oldRows.join('')
+    let flatBoardOldArr = flatBoardOld.split('')
     let flatBoardNew;
+    let flatBoardNewArr = Array(flatBoardOldArr.length + this.width).fill('.');
 
     console.log(flatBoardOld)
-    for (let i = 0; i < flatBoardOld.length; i++) {
+    for (let i = 0; i < flatBoardOldArr.length; i++) {
       if (!this.occupiedCells.includes(i)) {
-        flatBoardNew =
-          ".".repeat(this.width) +
-          flatBoardOld.slice(0, flatBoardOld.length - this.width);
+        flatBoardNewArr[i+this.width]  = flatBoardOldArr[i]
       }
     }
-    console.log(flatBoardNew)
+    console.log(flatBoardNewArr.join(''))
 
     // Add an offset for the top of a shape below the currently falling shape
     let topOfShapeOffset = this.height - this.lastShapeRowFromBottom - 1
