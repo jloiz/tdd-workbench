@@ -105,8 +105,6 @@ export class Board {
     let oldRows = structuredClone(this.rows)
     let newRows = this.rows
 
-    // ToDoNext: as we have generalised the hasHitShape, now to a similar generalisation
-    // to the bulk of the fall() mehotd so that a shape can fall next to another stationary shape
     console.log(this.occupiedCells)
     let flatBoardOld = oldRows.join('')
     let flatBoardOldArr = flatBoardOld.split('')
@@ -115,11 +113,16 @@ export class Board {
 
     console.log(flatBoardOld)
     for (let i = 0; i < flatBoardOldArr.length; i++) {
-      if (!this.occupiedCells.includes(i)) {
-        flatBoardNewArr[i+this.width]  = flatBoardOldArr[i]
+      if (this.occupiedCells.includes(i)) {
+        flatBoardNewArr[i] = flatBoardOldArr[i]
+      } else {
+        flatBoardNewArr[i + this.width] = flatBoardOldArr[i]
       }
     }
-    console.log(flatBoardNewArr.join(''))
+    flatBoardNew = flatBoardNewArr.join('').slice(0, flatBoardOld.length)
+    console.log(flatBoardNew)
+
+    // ToDo: split array into chunks back to the rows
 
     // Add an offset for the top of a shape below the currently falling shape
     let topOfShapeOffset = this.height - this.lastShapeRowFromBottom - 1
