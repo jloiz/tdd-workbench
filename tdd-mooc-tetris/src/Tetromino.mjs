@@ -33,8 +33,6 @@ export class Tetromino {
             tetrominoString = this.pushToRightOfBox(tetrominoString)
         }
 
-        console.log(tetrominoString)
-
         return Tetromino.fromString(tetrominoString)
     }
 
@@ -43,8 +41,6 @@ export class Tetromino {
         let shape = new RotatingShape(this.#tetromino)
         let rotatedShape = shape.rotateLeft()
         let tetrominoString = rotatedShape.toString()
-        console.log(tetrominoString)
-
 
         if (this.isAtBottomOfBox(tetrominoString)) {
             tetrominoString = this.pushToTopOfBox(tetrominoString)

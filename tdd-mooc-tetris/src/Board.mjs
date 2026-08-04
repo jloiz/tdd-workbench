@@ -88,9 +88,9 @@ export class Board {
       this.setHasHitBottom(false)
     } else if (!(this.currentShape === "NO_SHAPE")) {
       this.fall()
-    } 
+    }
     //else (
-     // console.log("NO OP")
+    // console.log("NO OP")
     //)
 
     this.drawBoard()
@@ -107,16 +107,19 @@ export class Board {
 
     // ToDoNext: as we have generalised the hasHitShape, now to a similar generalisation
     // to the bulk of the fall() mehotd so that a shape can fall next to another stationary shape
-    //console.log(this.occupiedCells)
-    let flatBoardOld = oldRows.join('') 
+    console.log(this.occupiedCells)
+    let flatBoardOld = oldRows.join('')
     let flatBoardNew;
 
-   // console.log(flatBoardOld)
-    for (let i = 0; i < flatBoardOld.length; i++){
+    console.log(flatBoardOld)
+    for (let i = 0; i < flatBoardOld.length; i++) {
       if (!this.occupiedCells.includes(i)) {
-      //  console.log(i)
+        flatBoardNew =
+          ".".repeat(this.width) +
+          flatBoardOld.slice(0, flatBoardOld.length - this.width);
       }
     }
+    console.log(flatBoardNew)
 
     // Add an offset for the top of a shape below the currently falling shape
     let topOfShapeOffset = this.height - this.lastShapeRowFromBottom - 1
@@ -125,14 +128,14 @@ export class Board {
     }
     newRows[0] = this.EMPTY_ROW
 
-    // console.log("old rows: ", oldRows)
-    // console.log("new rows:", newRows)
-    
+    console.log("old rows: ", oldRows)
+    console.log("new rows:", newRows)
+
     this.rows = newRows
 
     this.handleBottomBoundary(oldRows, newRows)
     this.handleTouchingOtherShapes(oldRows, newRows)
-    
+
   }
 
   getFirstShapeRowFromBottom() {
