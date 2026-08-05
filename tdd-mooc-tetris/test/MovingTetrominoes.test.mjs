@@ -196,6 +196,28 @@ describe("Moving tetrominos", () => {
        ....OO....`
         )
     })
+
+    test("shape cannot move down through another shape", () => {
+        board.drop(Tetromino.O_SHAPE)
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.drop(Tetromino.O_SHAPE);
+        board.tick()
+        board.tick()
+        board.tick()
+
+        expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ....OO....
+       ....OO....
+       ....OO....
+       ....OO....`
+        )
+    })
     
 
 
