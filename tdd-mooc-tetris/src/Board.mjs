@@ -133,21 +133,14 @@ export class Board {
 
     // ToDo: split array into chunks back to the rows
 
-    // Add an offset for the top of a shape below the currently falling shape
-    let topOfShapeOffset = this.height - this.lastShapeRowFromBottom - 1
-    for (let i = newRows.length - 2 - firstShapeRowFromBottom - topOfShapeOffset; i > 0; i--) {
-      newRows[i] = newRows[i - 1]
-    }
-    newRows[0] = this.EMPTY_ROW
-
     console.log("old rows: ", oldRows)
-    console.log("new rows:", newRows)
+    console.log("new rows:", newnewrows)
 
    // this.rows = newRows
    this.rows = newnewrows
 
-    this.handleBottomBoundary(oldRows, newRows)
-    this.handleTouchingOtherShapes(oldRows, newRows)
+    this.handleBottomBoundary(oldRows, newnewrows)
+    this.handleTouchingOtherShapes(oldRows, newnewrows)
 
   }
 
