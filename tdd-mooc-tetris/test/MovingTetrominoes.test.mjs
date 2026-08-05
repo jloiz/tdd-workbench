@@ -154,11 +154,8 @@ describe("Moving tetrominos", () => {
         board.tick()
         board.tick()
         board.tick()
-        // Test not working as expected as newShape resets isFalling, need more
-        // robust protection
         board.drop(Tetromino.O_SHAPE);
         board.tick()
-        // broken test from here
         board.moveRight()
         board.moveRight()
         board.tick()
@@ -182,16 +179,13 @@ describe("Moving tetrominos", () => {
         board.tick()
         board.tick()
         board.tick()
-        // Test not working as expected as newShape resets isFalling, need more
-        // robust protection
         board.drop(Tetromino.O_SHAPE);
         board.tick()
-        // broken test from here
         board.moveLeft()
         board.moveLeft()
         board.tick()
         board.tick()
-        //board.moveRight() 
+
         expect(() => board.moveRight()).to.throw("Cannot move shape through another shape");
         expect(board.toString()).to.equalShape(
       `..........

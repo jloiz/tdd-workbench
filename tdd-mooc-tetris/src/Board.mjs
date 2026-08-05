@@ -189,22 +189,7 @@ export class Board {
 
     let settledShapeRow = this.height - this.currentShapeHeight
 
-
-    let allPopulatedCells = this.calculatePopulatedCells()
-    let populatedCellsWithoutNonMovingCells = allPopulatedCells.filter(item => !this.occupiedCells.includes(item))
-    let isNeighbouringOccupiedCell;
-    console.log(populatedCellsWithoutNonMovingCells.length)
-    console.log(populatedCellsWithoutNonMovingCells)
-    for (let i = 0; i < populatedCellsWithoutNonMovingCells.length; i++) {
-      isNeighbouringOccupiedCell = this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] + 1) || this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] - 1)
-      console.log("neigh", isNeighbouringOccupiedCell)
-      if (isNeighbouringOccupiedCell) {
-        break;
-      }
-    }
-    console.log(allPopulatedCells)
-    console.log("occ", this.occupiedCells)
-
+    let isNeighbouringOccupiedCell = this.checkIfNeighbouringStationaryBlocks()
 
     if (!this.leftBoundaryHit && !isNeighbouringOccupiedCell) {
       for (let i = 0; i < this.height; i++) {
