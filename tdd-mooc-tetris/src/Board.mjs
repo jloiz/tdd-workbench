@@ -187,9 +187,12 @@ export class Board {
 
   moveLeft() {
 
+    let settledShapeRow = this.height - this.currentShapeHeight
+
+
     if (!this.leftBoundaryHit) {
       for (let i = 0; i < this.height; i++) {
-        if (this.isFalling && this.rows[i] !== this.EMPTY_ROW) {
+        if (this.isFalling  && (i < settledShapeRow) && this.rows[i] !== this.EMPTY_ROW) {
           this.rows[i] = `${this.rows[i].substring(1)}.`
         }
       }
