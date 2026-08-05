@@ -147,7 +147,7 @@ describe("Moving tetrominos", () => {
         )
     })
 
-    test.skip("shape cannot move left through another shape", () => {
+    test("shape cannot move left through another shape", () => {
         board.drop(Tetromino.O_SHAPE)
         board.tick()
         board.tick()
@@ -163,12 +163,8 @@ describe("Moving tetrominos", () => {
         board.moveRight()
         board.tick()
         board.tick()
-        board.tick()
-        board.tick()
-        
-        
-        board.moveLeft()
-
+         
+        expect(() => board.moveLeft()).to.throw("Cannot move shape through another shape");
         expect(board.toString()).to.equalShape(
       `..........
        ..........

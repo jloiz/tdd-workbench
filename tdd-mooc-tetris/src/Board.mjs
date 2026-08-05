@@ -116,8 +116,8 @@ export class Board {
 
     flatBoardNew = flatBoardNewArr.join('').slice(0, flatBoardOld.length)
     let newRows = []
-    for (let i = 0; i < this.height; i++){
-      let start = this.width*i
+    for (let i = 0; i < this.height; i++) {
+      let start = this.width * i
       let chunk = flatBoardNew.substring(start, start + this.width)
       newRows.push(chunk)
     }
@@ -190,15 +190,33 @@ export class Board {
     let settledShapeRow = this.height - this.currentShapeHeight
 
 
-    if (!this.leftBoundaryHit) {
+    let allPopulatedCells = this.calculatePopulatedCells()
+    let populatedCellsWithoutNonMovingCells = allPopulatedCells.filter(item => !this.occupiedCells.includes(item))
+    let isNeighbouringOccupiedCell;
+    console.log(populatedCellsWithoutNonMovingCells.length)
+    console.log(populatedCellsWithoutNonMovingCells)
+    for (let i = 0; i < populatedCellsWithoutNonMovingCells.length; i++) {
+      isNeighbouringOccupiedCell = this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] + 1) || this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] - 1)
+      console.log("neigh", isNeighbouringOccupiedCell)
+      if (isNeighbouringOccupiedCell) {
+        break;
+      }
+    }
+    console.log(allPopulatedCells)
+    console.log("occ", this.occupiedCells)
+
+
+    if (!this.leftBoundaryHit && !isNeighbouringOccupiedCell) {
       for (let i = 0; i < this.height; i++) {
-        if (this.isFalling  && (i < settledShapeRow) && this.rows[i] !== this.EMPTY_ROW) {
+        if (this.isFalling && (i < settledShapeRow) && this.rows[i] !== this.EMPTY_ROW) {
           this.rows[i] = `${this.rows[i].substring(1)}.`
         }
       }
       // this.rightBoundaryHit? this.rightBoundaryHit = !this.rightBoundaryHit : this.rightBoundaryHit
-    } else {
+    } else if (this.leftBoundaryHit) {
       throw new Error("Cannot move shape past board boundary")
+    } else if (isNeighbouringOccupiedCell) {
+      throw new Error("Cannot move shape through another shape")
     }
 
     this.checkBoundaries("left")
