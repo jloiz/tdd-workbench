@@ -229,18 +229,36 @@ export class Board {
 
   moveRight() {
 
+    
+    let allPopulatedCells = this.calculatePopulatedCells()
+    let populatedCellsWithoutNonMovingCells = allPopulatedCells.filter(item => !this.occupiedCells.includes(item))
+    let isNeighbouringOccupiedCell;
+    console.log(populatedCellsWithoutNonMovingCells.length)
+    console.log(populatedCellsWithoutNonMovingCells)
+    for (let i = 0; i < populatedCellsWithoutNonMovingCells.length; i++) {
+      isNeighbouringOccupiedCell = this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] + 1) || this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] - 1)
+      console.log("neigh", isNeighbouringOccupiedCell)
+      if (isNeighbouringOccupiedCell) {
+        break;
+      }
+    }
+    console.log(allPopulatedCells)
+    console.log("occ", this.occupiedCells)
+
 
     let settledShapeRow = this.height - this.currentShapeHeight
 
-    if (!this.rightBoundaryHit) {
+    if (!this.rightBoundaryHit && !isNeighbouringOccupiedCell) {
       for (let i = 0; i < this.height; i++) {
         if (this.isFalling && (i < settledShapeRow) && this.rows[i] !== this.EMPTY_ROW) {
           this.rows[i] = `.${this.rows[i].substring(0, this.width - 1)}`
         }
       }
       // this.leftBoundaryHit ? this.leftBoundaryHit = !this.leftBoundaryHit : this.leftBoundaryHit
-    } else {
+    } else if (this.rightBoundaryHit) {
       throw new Error("Cannot move shape past board boundary")
+    } else if (isNeighbouringOccupiedCell) {
+      throw new Error("Cannot move shape through another shape")
     }
 
     this.checkBoundaries("right")
