@@ -121,6 +121,15 @@ export class Board {
     }
     flatBoardNew = flatBoardNewArr.join('').slice(0, flatBoardOld.length)
     console.log(flatBoardNew)
+    let newnewrows = []
+    for (let i = 0; i < this.height; i++){
+      let start = this.width*i
+      let chunk = flatBoardNew.substring(start, start + this.width)
+      newnewrows.push(chunk)
+      console.log(i)
+      console.log(chunk)
+    }
+    console.log("enwnew", newnewrows)
 
     // ToDo: split array into chunks back to the rows
 
@@ -134,7 +143,8 @@ export class Board {
     console.log("old rows: ", oldRows)
     console.log("new rows:", newRows)
 
-    this.rows = newRows
+   // this.rows = newRows
+   this.rows = newnewrows
 
     this.handleBottomBoundary(oldRows, newRows)
     this.handleTouchingOtherShapes(oldRows, newRows)
