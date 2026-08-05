@@ -229,22 +229,7 @@ export class Board {
 
   moveRight() {
 
-    
-    let allPopulatedCells = this.calculatePopulatedCells()
-    let populatedCellsWithoutNonMovingCells = allPopulatedCells.filter(item => !this.occupiedCells.includes(item))
-    let isNeighbouringOccupiedCell;
-    console.log(populatedCellsWithoutNonMovingCells.length)
-    console.log(populatedCellsWithoutNonMovingCells)
-    for (let i = 0; i < populatedCellsWithoutNonMovingCells.length; i++) {
-      isNeighbouringOccupiedCell = this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] + 1) || this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] - 1)
-      console.log("neigh", isNeighbouringOccupiedCell)
-      if (isNeighbouringOccupiedCell) {
-        break;
-      }
-    }
-    console.log(allPopulatedCells)
-    console.log("occ", this.occupiedCells)
-
+    let isNeighbouringOccupiedCell = this.checkIfNeighbouringStationaryBlocks()
 
     let settledShapeRow = this.height - this.currentShapeHeight
 
@@ -267,6 +252,21 @@ export class Board {
     if (!this.isFalling) {
       throw new Error("Cannot move shape that is not falling")
     }
+  }
+
+  checkIfNeighbouringStationaryBlocks() {
+    let allPopulatedCells = this.calculatePopulatedCells()
+    let populatedCellsWithoutNonMovingCells = allPopulatedCells.filter(item => !this.occupiedCells.includes(item))
+    let isNeighbouringOccupiedCell;
+
+    for (let i = 0; i < populatedCellsWithoutNonMovingCells.length; i++) {
+      isNeighbouringOccupiedCell = this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] + 1) || this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] - 1)
+      if (isNeighbouringOccupiedCell) {
+        break;
+      }
+    }
+
+    return isNeighbouringOccupiedCell
   }
 
   checkBoundaries(boundary) {
