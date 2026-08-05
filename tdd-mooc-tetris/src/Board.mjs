@@ -100,18 +100,12 @@ export class Board {
 
 
   fall() {
-    let firstShapeRowFromBottom = this.getFirstShapeRowFromBottom()
-
     let oldRows = structuredClone(this.rows)
-    let newRows = this.rows
-
-    console.log(this.occupiedCells)
     let flatBoardOld = oldRows.join('')
     let flatBoardOldArr = flatBoardOld.split('')
     let flatBoardNew;
     let flatBoardNewArr = Array(flatBoardOldArr.length + this.width).fill('.');
 
-    console.log(flatBoardOld)
     for (let i = 0; i < flatBoardOldArr.length; i++) {
       if (this.occupiedCells.includes(i)) {
         flatBoardNewArr[i] = flatBoardOldArr[i]
@@ -119,29 +113,22 @@ export class Board {
         flatBoardNewArr[i + this.width] = flatBoardOldArr[i]
       }
     }
+
     flatBoardNew = flatBoardNewArr.join('').slice(0, flatBoardOld.length)
-    console.log(flatBoardNew)
-    let newnewrows = []
+    let newRows = []
     for (let i = 0; i < this.height; i++){
       let start = this.width*i
       let chunk = flatBoardNew.substring(start, start + this.width)
-      newnewrows.push(chunk)
-      console.log(i)
-      console.log(chunk)
+      newRows.push(chunk)
     }
-    console.log("enwnew", newnewrows)
-
-    // ToDo: split array into chunks back to the rows
 
     console.log("old rows: ", oldRows)
-    console.log("new rows:", newnewrows)
+    console.log("new rows:", newRows)
 
-   // this.rows = newRows
-   this.rows = newnewrows
+    this.rows = newRows
 
-    this.handleBottomBoundary(oldRows, newnewrows)
-    this.handleTouchingOtherShapes(oldRows, newnewrows)
-
+    this.handleBottomBoundary(oldRows, newRows)
+    this.handleTouchingOtherShapes(oldRows, newRows)
   }
 
   getFirstShapeRowFromBottom() {
