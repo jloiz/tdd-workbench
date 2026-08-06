@@ -89,12 +89,8 @@ export class Board {
     } else if (!(this.currentShape === "NO_SHAPE")) {
       this.fall()
     }
-    //else (
-    // console.log("NO OP")
-    //)
 
     this.drawBoard()
-
   }
 
 
@@ -212,7 +208,6 @@ export class Board {
   }
 
   moveRight() {
-
     let isNeighbouringOccupiedCell = this.checkIfNeighbouringStationaryBlocks()
 
     let settledShapeRow = this.height - this.currentShapeHeight
@@ -236,6 +231,30 @@ export class Board {
     if (!this.isFalling) {
       throw new Error("Cannot move shape that is not falling")
     }
+  }
+
+  rotateRight() {
+    //rename this method
+    this.setNewShape(this.currentShape.rotateRight())
+
+    console.log("ROT")
+    console.log(this.currentShape.toString())
+    console.log(this.lastShapeRowFromBottom)
+
+    let shape = this.currentShape.toString().substring(0, this.currentShape.toString().length - 1)
+
+    let currentRow = this.height - this.lastShapeRowFromBottom
+
+
+
+    let shapeRows = shape.toString().split('\n')
+    console.group(shapeRows)
+    let shapeObj = Object.assign({}, shapeRows)
+
+
+
+    console.log(shapeObj)
+    console.log("ROT")
   }
 
   checkIfNeighbouringStationaryBlocks() {
