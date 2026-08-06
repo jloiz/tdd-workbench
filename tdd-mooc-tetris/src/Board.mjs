@@ -111,6 +111,7 @@ export class Board {
 
     flatBoardNew = flatBoardNewArr.join('').slice(0, flatBoardOld.length)
     let newRows = []
+    // ToDo: other construction logic here
     for (let i = 0; i < this.height; i++) {
       let start = this.width * i
       let chunk = flatBoardNew.substring(start, start + this.width)
@@ -256,39 +257,22 @@ export class Board {
       Object.entries(shapeObj).map(([key, value]) => [Number(key) + 1, value])
     );
 
-    console.log(shapeObjShifted);
-
-    let populatedCells = this.calculatePopulatedCells()
-    // ToDo (later): remove stationary blocks from this array
-
-    console.log(populatedCells)
-
-
     // ToDo: Dont use midpoint, use current column
+    // ToDo (later): Dont use empty row on stationary shape rows
     let newRows = this.rows.map((row, index) => {
       if (shapeObjShifted[index] === undefined) {
         return this.rows[index]
       } else {
         // insert shape row to board row
-        let newRow = `${this.rows[index].substring(0, this.midpointIdx - 1)}${shapeObjShifted[index]}${this.rows[index].substring(this.midpointIdx, this.width)}`
+        let newRow = `${this.EMPTY_ROW.substring(0, this.midpointIdx - 1)}${shapeObjShifted[index]}${this.EMPTY_ROW.substring(this.midpointIdx, this.width)}`
         // truncate row at board width
         newRow = newRow.substring(0, this.EMPTY_ROW.length)
         return newRow
       }
     })
 
-    let newRowsFlat = newRows.join('').split('')
-    console.log(populatedCells)
-    for (let i = 0; i < newRowsFlat.length; i++) {
-      if (populatedCells.includes(i)) {
-        newRowsFlat[i] = '.'
-      }
-    }
-
-    // ToDo: Refactor this board construction logic into own function
-
-    console.log(newRowsFlat)
-    console.log(newRows)
+     this.rows = newRows
+     this.drawBoard()
 
   }
 
