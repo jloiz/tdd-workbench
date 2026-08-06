@@ -9,9 +9,6 @@ describe("Moving tetrominos", () => {
         board = new Board(10, 6)
     });
 
-    // ToDo add 'call a lot' helper
-
-
     test("moves to the left", () => {
         board.drop(Tetromino.T_SHAPE)
         board.tick()

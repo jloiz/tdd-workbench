@@ -98,7 +98,6 @@ export class Board {
   }
 
 
-
   fall() {
     let oldRows = structuredClone(this.rows)
     let flatBoardOld = oldRows.join('')
