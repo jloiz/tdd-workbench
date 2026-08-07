@@ -265,12 +265,9 @@ export class Board {
       this.rows = newRows
       this.drawBoard()
     } else {
-      console.log('cant')
       this.drawBoard()
       throw new Error("Cannot rotate a shape through another shape")
-  }
-
-
+    }
   }
 
   rotateLeft() {

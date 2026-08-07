@@ -155,5 +155,47 @@ describe("Rotating falling tetrominoes", () => {
     })
 
 
+        test("it cannot rotate left through a wall when there is no space", () => {
+        board.drop(Tetromino.O_SHAPE)
+        board.tick()
+        // board.rotateLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.drop(Tetromino.T_SHAPE)
+        board.tick()
+        board.tick()
+        board.rotateRight()
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.tick()
+        board.tick()
+        
+        board.rotateLeft()
+
+
+        expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       T.........
+       TT........
+       TOO.......
+       .OO.......`
+        )
+    })
+
+    
+
+
 
 })
