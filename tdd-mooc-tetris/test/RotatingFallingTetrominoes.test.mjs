@@ -27,4 +27,19 @@ describe("Rotating falling tetrominoes", () => {
         )
     })
 
+    test("it rotates to the left", () => {
+        board.drop(Tetromino.T_SHAPE)
+        board.tick()
+        board.rotateLeft()
+
+        expect(board.toString()).to.equalShape(
+      `..........
+       ....T.....
+       ...TT....
+       ....T.....
+       ..........
+       ..........`
+        )
+    })
+
 })

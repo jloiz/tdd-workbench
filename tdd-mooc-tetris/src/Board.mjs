@@ -111,7 +111,7 @@ export class Board {
 
     flatBoardNew = flatBoardNewArr.join('').slice(0, flatBoardOld.length)
     let newRows = []
-    // ToDo: other construction logic here
+
     for (let i = 0; i < this.height; i++) {
       let start = this.width * i
       let chunk = flatBoardNew.substring(start, start + this.width)
@@ -234,23 +234,16 @@ export class Board {
     }
   }
 
+  
+
   rotateRight() {
     //rename this method
     this.setNewShape(this.currentShape.rotateRight())
 
-    console.log("ROT")
-    console.log(this.currentShape.toString())
-    console.log(this.lastShapeRowFromBottom)
-
     let shape = this.currentShape.toString().substring(0, this.currentShape.toString().length - 1)
-
     let currentRow = this.height - this.lastShapeRowFromBottom
-
     let shapeRows = shape.toString().split('\n')
-    console.group(shapeRows)
     let shapeObj = Object.assign({}, shapeRows)
-
-    console.log(shapeObj)
 
     const shapeObjShifted = Object.fromEntries(
       Object.entries(shapeObj).map(([key, value]) => [Number(key) + currentRow, value])
@@ -258,7 +251,6 @@ export class Board {
 
     let currentMidpoint = this.calculatePopulatedCells()[0]%this.width
 
-    // ToDo: Dont use midpoint, use current column
     // ToDo (later): Dont use empty row on stationary shape rows
     let newRows = this.rows.map((row, index) => {
       if (shapeObjShifted[index] === undefined) {
@@ -274,7 +266,6 @@ export class Board {
 
      this.rows = newRows
      this.drawBoard()
-
 
   }
 
