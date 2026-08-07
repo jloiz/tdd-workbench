@@ -158,7 +158,6 @@ describe("Rotating falling tetrominoes", () => {
     test("it cannot rotate left through a wall when there is no space", () => {
         board.drop(Tetromino.O_SHAPE)
         board.tick()
-        // board.rotateLeft()
         board.moveLeft()
         board.moveLeft()
         board.moveLeft()
@@ -196,7 +195,6 @@ describe("Rotating falling tetrominoes", () => {
     test("it cannot rotate right through a wall when there is no space", () => {
         board.drop(Tetromino.O_SHAPE)
         board.tick()
-        // board.rotateLeft()
         board.moveLeft()
         board.moveLeft()
         board.moveLeft()
@@ -228,6 +226,30 @@ describe("Rotating falling tetrominoes", () => {
        TT........
        TOO.......
        .OO.......`
+        )
+    })
+
+    test("it can wall kick and rotate left off a wall if there is space", () => {
+        board.drop(Tetromino.T_SHAPE)
+        board.tick()
+        board.rotateRight()
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.rotateLeft()
+
+        // Double check position is right for a wall kick
+        // First make the can rotate an and condition to only prohibit rotation for both
+        expect(board.toString()).to.equalShape(
+      `..........
+       .T........
+       TTT.......
+       ..........
+       ..........
+       ..........
+       ..........
+       ..........`
         )
     })
 
