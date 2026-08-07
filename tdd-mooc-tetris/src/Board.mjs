@@ -254,7 +254,7 @@ export class Board {
 
     const shapeObjShifted = Object.fromEntries(
       // ToDo: Make not specific to the +1 row
-      Object.entries(shapeObj).map(([key, value]) => [Number(key) + 1, value])
+      Object.entries(shapeObj).map(([key, value]) => [Number(key) + currentRow, value])
     );
 
     // ToDo: Dont use midpoint, use current column
@@ -273,6 +273,7 @@ export class Board {
 
      this.rows = newRows
      this.drawBoard()
+
 
   }
 
