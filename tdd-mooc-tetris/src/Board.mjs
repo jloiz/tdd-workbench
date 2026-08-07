@@ -234,8 +234,7 @@ export class Board {
     }
   }
 
-    rotateLeft() {
-    //rename this method
+  rotate(direction) {
     this.setNewShape(this.currentShape.rotateLeft())
 
     let shape = this.currentShape.toString().substring(0, this.currentShape.toString().length - 1)
@@ -247,7 +246,7 @@ export class Board {
       Object.entries(shapeObj).map(([key, value]) => [Number(key) + currentRow, value])
     );
 
-    let currentMidpoint = this.calculatePopulatedCells()[0]%this.width
+    let currentMidpoint = this.calculatePopulatedCells()[0] % this.width
 
     // ToDo (later): Dont use empty row on stationary shape rows
     let newRows = this.rows.map((row, index) => {
@@ -262,8 +261,13 @@ export class Board {
       }
     })
 
-     this.rows = newRows
-     this.drawBoard()
+    this.rows = newRows
+    this.drawBoard()
+  }
+
+  rotateLeft() {
+    //rename this method
+    this.rotate("left")
 
   }
 
@@ -280,7 +284,7 @@ export class Board {
       Object.entries(shapeObj).map(([key, value]) => [Number(key) + currentRow, value])
     );
 
-    let currentMidpoint = this.calculatePopulatedCells()[0]%this.width
+    let currentMidpoint = this.calculatePopulatedCells()[0] % this.width
 
     // ToDo (later): Dont use empty row on stationary shape rows
     let newRows = this.rows.map((row, index) => {
@@ -295,8 +299,8 @@ export class Board {
       }
     })
 
-     this.rows = newRows
-     this.drawBoard()
+    this.rows = newRows
+    this.drawBoard()
 
   }
 
