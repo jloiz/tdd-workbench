@@ -111,4 +111,49 @@ describe("Rotating falling tetrominoes", () => {
     })
 
 
+    test("it cannot rotate right through a shape when there is no space", () => {
+        board.drop(Tetromino.O_SHAPE)
+        board.tick()
+        // board.rotateLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.drop(Tetromino.O_SHAPE)
+        board.tick()
+        // board.rotateLeft()
+        board.moveRight()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.drop(Tetromino.T_SHAPE)
+        board.tick()
+        board.tick()
+        board.rotateLeft()
+        board.tick()
+        board.tick()
+
+        expect(() => board.rotateRight()).to.throw("Cannot rotate a shape through another shape");
+
+        expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ....T.....
+       ...TT.....
+       ..OOTOO...
+       ..OO.OO...`
+        )
+    })
+
+
+
 })
