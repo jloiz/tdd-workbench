@@ -234,8 +234,7 @@ export class Board {
     }
   }
 
-  rotate(direction) {
-    this.setNewShape(this.currentShape.rotateLeft())
+  rotate() {
 
     let shape = this.currentShape.toString().substring(0, this.currentShape.toString().length - 1)
     let currentRow = this.height - this.lastShapeRowFromBottom
@@ -266,42 +265,14 @@ export class Board {
   }
 
   rotateLeft() {
-    //rename this method
-    this.rotate("left")
-
+    this.setNewShape(this.currentShape.rotateLeft())
+    this.rotate()
   }
 
   rotateRight() {
     //rename this method
     this.setNewShape(this.currentShape.rotateRight())
-
-    let shape = this.currentShape.toString().substring(0, this.currentShape.toString().length - 1)
-    let currentRow = this.height - this.lastShapeRowFromBottom
-    let shapeRows = shape.toString().split('\n')
-    let shapeObj = Object.assign({}, shapeRows)
-
-    const shapeObjShifted = Object.fromEntries(
-      Object.entries(shapeObj).map(([key, value]) => [Number(key) + currentRow, value])
-    );
-
-    let currentMidpoint = this.calculatePopulatedCells()[0] % this.width
-
-    // ToDo (later): Dont use empty row on stationary shape rows
-    let newRows = this.rows.map((row, index) => {
-      if (shapeObjShifted[index] === undefined) {
-        return this.rows[index]
-      } else {
-        // insert shape row to board row
-        let newRow = `${this.EMPTY_ROW.substring(0, currentMidpoint - 1)}${shapeObjShifted[index]}${this.EMPTY_ROW.substring(currentMidpoint, this.width)}`
-        // truncate row at board width
-        newRow = newRow.substring(0, this.EMPTY_ROW.length)
-        return newRow
-      }
-    })
-
-    this.rows = newRows
-    this.drawBoard()
-
+    this.rotate()
   }
 
   checkIfNeighbouringStationaryBlocks() {
