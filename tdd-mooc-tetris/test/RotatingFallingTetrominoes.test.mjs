@@ -8,7 +8,7 @@ describe("Rotating falling tetrominoes", () => {
     let board;
 
     beforeEach(() => {
-        board = new Board(10, 6)
+        board = new Board(10, 8)
     })
 
 
@@ -22,6 +22,8 @@ describe("Rotating falling tetrominoes", () => {
        ....T.....
        ....TT....
        ....T.....
+       ..........
+       ..........
        ..........
        ..........`
         )
@@ -38,6 +40,8 @@ describe("Rotating falling tetrominoes", () => {
        ...TT.....
        ....T.....
        ..........
+       ..........
+       ..........
        ..........`
         )
     })
@@ -49,16 +53,60 @@ describe("Rotating falling tetrominoes", () => {
         board.rotateLeft()
         board.rotateLeft()
         board.rotateLeft()
-       
+
         expect(board.toString()).to.equalShape(
       `..........
        ....T.....
        ...TTT....
        ..........
        ..........
+       ..........
+       ..........
        ..........`
         )
     })
-    
+
+
+    test("it cannot rotate left through a shape when there is no space", () => {
+        board.drop(Tetromino.O_SHAPE)
+        board.tick()
+        // board.rotateLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.drop(Tetromino.O_SHAPE)
+        board.tick()
+        // board.rotateLeft()
+        board.moveRight()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.drop(Tetromino.T_SHAPE)
+        board.tick()
+        board.tick()
+        board.rotateLeft()
+        board.tick()
+        board.tick()
+
+        board.rotateLeft()
+
+        expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ....T.....
+       ....TT....
+       ..OOTOO...
+       ..OO.OO...`
+        )
+    })
+
 
 })

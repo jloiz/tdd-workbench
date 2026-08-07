@@ -118,8 +118,8 @@ export class Board {
       newRows.push(chunk)
     }
 
-    console.log("old rows: ", oldRows)
-    console.log("new rows:", newRows)
+    // console.log("old rows: ", oldRows)
+    // console.log("new rows:", newRows)
 
     this.rows = newRows
 
@@ -337,6 +337,7 @@ export class Board {
   }
 
   drawBoard() {
+    console.log(this.rows)
     this.board = `${this.rows.join('\n')}\n`
   }
 
