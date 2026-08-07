@@ -253,9 +253,10 @@ export class Board {
     console.log(shapeObj)
 
     const shapeObjShifted = Object.fromEntries(
-      // ToDo: Make not specific to the +1 row
       Object.entries(shapeObj).map(([key, value]) => [Number(key) + currentRow, value])
     );
+
+    let currentMidpoint = this.calculatePopulatedCells()[0]%this.width
 
     // ToDo: Dont use midpoint, use current column
     // ToDo (later): Dont use empty row on stationary shape rows
@@ -264,7 +265,7 @@ export class Board {
         return this.rows[index]
       } else {
         // insert shape row to board row
-        let newRow = `${this.EMPTY_ROW.substring(0, this.midpointIdx - 1)}${shapeObjShifted[index]}${this.EMPTY_ROW.substring(this.midpointIdx, this.width)}`
+        let newRow = `${this.EMPTY_ROW.substring(0, currentMidpoint - 1)}${shapeObjShifted[index]}${this.EMPTY_ROW.substring(currentMidpoint, this.width)}`
         // truncate row at board width
         newRow = newRow.substring(0, this.EMPTY_ROW.length)
         return newRow
