@@ -96,7 +96,7 @@ describe("Rotating falling tetrominoes", () => {
         board.tick()
         board.tick()
 
-        expect(() => board.rotateLeft()).to.throw("Cannot rotate a shape through another shape");
+        expect(() => board.rotateLeft()).to.throw("Cannot rotate a shape through another shape or walls");
 
         expect(board.toString()).to.equalShape(
       `..........
@@ -140,7 +140,7 @@ describe("Rotating falling tetrominoes", () => {
         board.tick()
         board.tick()
 
-        expect(() => board.rotateRight()).to.throw("Cannot rotate a shape through another shape");
+        expect(() => board.rotateRight()).to.throw("Cannot rotate a shape through another shape or walls");
 
         expect(board.toString()).to.equalShape(
       `..........
@@ -178,9 +178,8 @@ describe("Rotating falling tetrominoes", () => {
         board.moveLeft()
         board.tick()
         board.tick()
-        
-        board.rotateLeft()
 
+        expect(() => board.rotateLeft()).to.throw("Cannot rotate a shape through another shape or walls");
 
         expect(board.toString()).to.equalShape(
       `..........

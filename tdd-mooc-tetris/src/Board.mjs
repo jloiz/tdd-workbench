@@ -32,6 +32,8 @@ export class Board {
     this.shapeAtBottom = false
     this.lastShapeRowFromBottom = this.height - 1
     this.occupiedCells = []
+    this.rightBoundaryHit = false
+    this.leftBoundaryHit = false
 
   }
 
@@ -235,7 +237,6 @@ export class Board {
   }
 
   rotate() {
-
     let canRotate = this.checkIfCanRotate()
     if (canRotate) {
       let shape = this.currentShape.toString().substring(0, this.currentShape.toString().length - 1)
@@ -266,7 +267,7 @@ export class Board {
       this.drawBoard()
     } else {
       this.drawBoard()
-      throw new Error("Cannot rotate a shape through another shape")
+      throw new Error("Cannot rotate a shape through another shape or walls")
     }
   }
 
@@ -282,9 +283,12 @@ export class Board {
   }
 
   checkIfCanRotate() {
-    console.log("here")
-    console.log(this.checkIfNeighbouringStationaryBlocks())
-    return !this.checkIfNeighbouringStationaryBlocks()
+    this.checkBoundaries("left")
+    this.checkBoundaries("right")
+    let boundaryHit = this.leftBoundaryHit || this.rightBoundaryHit
+    let hasNeighbours = this.checkIfNeighbouringStationaryBlocks()
+    let canRotate = !(hasNeighbours || boundaryHit)
+    return canRotate
   }
 
   checkIfNeighbouringStationaryBlocks() {
