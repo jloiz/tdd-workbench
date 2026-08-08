@@ -120,9 +120,6 @@ export class Board {
       newRows.push(chunk)
     }
 
-    // console.log("old rows: ", oldRows)
-    // console.log("new rows:", newRows)
-
     this.rows = newRows
 
     this.handleBottomBoundary(oldRows, newRows)
@@ -275,10 +272,8 @@ export class Board {
         if (shapeObjShifted[index] === undefined) {
           return this.rows[index]
         } else {
-          console.log(this.lastShapeRowFromBottom)
           let newRow = `${this.rows[index].substring(0, currentMidpoint - 1 - offset)}${shapeObjShifted[index]}${this.EMPTY_ROW.substring(currentMidpoint, this.width)}`
           // truncate row at board width
-          console.log(`${this.EMPTY_ROW.substring(0, currentMidpoint - 1 - offset)}${shapeObjShifted[index]}${this.EMPTY_ROW.substring(currentMidpoint, this.width)}`)
           newRow = newRow.substring(0, this.EMPTY_ROW.length)
           return newRow
         }
