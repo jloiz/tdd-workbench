@@ -237,8 +237,8 @@ export class Board {
   }
 
   rotate() {
-    let cannotRotate = this.checkIfCannotRotate()
-    if (!cannotRotate) {
+    let canRotate = this.checkIfCanRotate()
+    if (canRotate) {
       let shape = this.currentShape.toString().substring(0, this.currentShape.toString().length - 1)
       let currentRow = this.height - this.lastShapeRowFromBottom
       let shapeRows = shape.toString().split('\n')
@@ -282,13 +282,15 @@ export class Board {
     this.rotate()
   }
 
-  checkIfCannotRotate() {
+  checkIfCanRotate() {
     this.checkBoundaries("left")
     this.checkBoundaries("right")
+    console.log("left", this.leftBoundaryHit)
     let boundaryHit = this.leftBoundaryHit || this.rightBoundaryHit
     let hasNeighbours = this.checkIfNeighbouringStationaryBlocks()
-    let cannotRotate = (hasNeighbours || boundaryHit)
-    return cannotRotate
+    
+    let canRotate = !(hasNeighbours && boundaryHit)
+    return canRotate
   }
 
   checkIfNeighbouringStationaryBlocks() {
