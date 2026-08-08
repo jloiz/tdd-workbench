@@ -70,7 +70,6 @@ describe("Rotating falling tetrominoes", () => {
     test("it cannot rotate left through a shape when there is no space", () => {
         board.drop(Tetromino.O_SHAPE)
         board.tick()
-        // board.rotateLeft()
         board.moveLeft()
         board.moveLeft()
         board.tick()
@@ -81,7 +80,6 @@ describe("Rotating falling tetrominoes", () => {
         board.tick()
         board.drop(Tetromino.O_SHAPE)
         board.tick()
-        // board.rotateLeft()
         board.moveRight()
         board.tick()
         board.tick()
@@ -114,7 +112,6 @@ describe("Rotating falling tetrominoes", () => {
     test("it cannot rotate right through a shape when there is no space", () => {
         board.drop(Tetromino.O_SHAPE)
         board.tick()
-        // board.rotateLeft()
         board.moveLeft()
         board.moveLeft()
         board.tick()
@@ -239,8 +236,6 @@ describe("Rotating falling tetrominoes", () => {
         board.moveLeft()
         board.rotateLeft()
 
-        // Double check position is right for a wall kick
-        // First make the can rotate an and condition to only prohibit rotation for both
         expect(board.toString()).to.equalShape(
       `..........
        .T........
@@ -253,7 +248,7 @@ describe("Rotating falling tetrominoes", () => {
         )
     })
 
-    test("it can wall kick and rotate left off a wall if there is space", () => {
+    test("it can wall kick and rotate right off a wall if there is space", () => {
         board.drop(Tetromino.T_SHAPE)
         board.tick()
         board.rotateLeft()
@@ -264,8 +259,6 @@ describe("Rotating falling tetrominoes", () => {
         board.moveRight()
         board.rotateRight()
 
-        // Double check position is right for a wall kick
-        // First make the can rotate an and condition to only prohibit rotation for both
         expect(board.toString()).to.equalShape(
       `..........
        ........T.
@@ -275,6 +268,39 @@ describe("Rotating falling tetrominoes", () => {
        ..........
        ..........
        ..........`
+        )
+    })
+
+    test("it can wall kick and rotate right off a wall if there is space", () => {
+        console.log("HERE")
+        board.drop(Tetromino.O_SHAPE)
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.drop(Tetromino.T_SHAPE)
+        board.tick()
+        board.tick()
+        board.rotateLeft()
+        board.moveRight()
+        board.moveRight()
+        board.tick()
+        board.tick()
+        board.rotateLeft()
+
+        expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ..........
+       .......T..
+       ....OOTTT.
+       ....OO....`
         )
     })
 

@@ -239,6 +239,10 @@ export class Board {
   rotate() {
     let canRotate = this.checkIfCanRotate()
     let pennedIn = this.pennedIn()
+    let offset = 0;
+    if (this.rightBoundaryHit){
+      offset = 1
+    }
     if (canRotate && !pennedIn) {
       let shape = this.currentShape.toString().substring(0, this.currentShape.toString().length - 1)
       let currentRow = this.height - this.lastShapeRowFromBottom
@@ -257,7 +261,7 @@ export class Board {
           return this.rows[index]
         } else {
           // insert shape row to board row
-          let newRow = `${this.EMPTY_ROW.substring(0, currentMidpoint - 1)}${shapeObjShifted[index]}${this.EMPTY_ROW.substring(currentMidpoint, this.width)}`
+          let newRow = `${this.EMPTY_ROW.substring(0, currentMidpoint - 1 - offset)}${shapeObjShifted[index]}${this.EMPTY_ROW.substring(currentMidpoint, this.width)}`
           // truncate row at board width
           newRow = newRow.substring(0, this.EMPTY_ROW.length)
           return newRow
@@ -286,7 +290,6 @@ export class Board {
   checkIfCanRotate() {
     this.checkBoundaries("left")
     this.checkBoundaries("right")
-    console.log("left", this.leftBoundaryHit)
     let boundaryHit = this.leftBoundaryHit || this.rightBoundaryHit
     let hasNeighbours = this.checkIfNeighbouringStationaryBlocks()
 
@@ -295,12 +298,8 @@ export class Board {
   }
 
   pennedIn() {
-    console.log("here")
-    console.log(this.occupiedCells)
     let populatedCells = this.calculatePopulatedCells()
     let populatedCellsWithoutNonMovingCells = populatedCells.filter(item => !this.occupiedCells.includes(item))
-    console.log(populatedCellsWithoutNonMovingCells)
-    console.log(populatedCells)
     let pennedIn;
     for (let i = 0; i < this.occupiedCells.length - 1; i++) {
       const low = this.occupiedCells[i];
