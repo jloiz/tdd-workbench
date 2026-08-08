@@ -303,6 +303,40 @@ describe("Rotating falling tetrominoes", () => {
        ....OO....`
         )
     })
+
+
+        test("it can wall kick and rotate left off a shape if there is space", () => {
+        console.log("HERE")
+        board.drop(Tetromino.O_SHAPE)
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.tick()
+        board.drop(Tetromino.T_SHAPE)
+        board.tick()
+        board.tick()
+        board.rotateRight()
+        board.moveLeft()
+        board.tick()
+        board.tick()
+        board.rotateLeft()
+
+        expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ..........
+       ..T.......
+       .TTTOO....
+       ....OO....`
+        )
+    })
+    
     
 
 
