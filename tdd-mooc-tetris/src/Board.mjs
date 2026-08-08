@@ -251,10 +251,11 @@ export class Board {
       let topOfMovingShapeRow = this.calculateTopOfMovingShapeRow()
 
       // check if we need a wall kick and if so do the algorithm for it
-      let neighbouring = this.checkIfNeighbouringStationaryBlocks()
-      if (neighbouring){
+      let neighbouringLeft = this.checkIfNeighbouringStationaryBlocks("left")
+      if (neighbouringLeft){
         console.log("DO A KICK")
         this.moveRight()
+        this.tick()
       }
 
       const shapeObjShifted = Object.fromEntries(
@@ -269,7 +270,7 @@ export class Board {
           return this.rows[index]
         } else {
           // insert shape row to board row
-          let newRow = `${this.EMPTY_ROW.substring(0, currentMidpoint - 1 - offset)}${shapeObjShifted[index]}${this.EMPTY_ROW.substring(currentMidpoint, this.width)}`
+          let newRow = `${this.rows[index].substring(0, currentMidpoint - 1 - offset)}${shapeObjShifted[index]}${this.EMPTY_ROW.substring(currentMidpoint, this.width)}`
           // truncate row at board width
           newRow = newRow.substring(0, this.EMPTY_ROW.length)
           return newRow
