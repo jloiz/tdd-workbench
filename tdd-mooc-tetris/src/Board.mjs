@@ -239,7 +239,6 @@ export class Board {
   rotate() {
     let canRotate = this.checkIfCanRotate()
     let pennedIn = this.pennedIn()
-    console.log("penn", pennedIn)
     if (canRotate && !pennedIn) {
       let shape = this.currentShape.toString().substring(0, this.currentShape.toString().length - 1)
       let currentRow = this.height - this.lastShapeRowFromBottom
