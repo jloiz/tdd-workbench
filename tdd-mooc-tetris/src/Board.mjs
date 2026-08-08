@@ -187,7 +187,7 @@ export class Board {
 
     let settledShapeRow = this.height - this.currentShapeHeight
 
-    let isNeighbouringOccupiedCell = this.checkIfNeighbouringStationaryBlocks()
+    let isNeighbouringOccupiedCell = this.checkIfNeighbouringStationaryBlocks("left")
 
     if (!this.leftBoundaryHit && !isNeighbouringOccupiedCell) {
       for (let i = 0; i < this.height; i++) {
@@ -211,7 +211,7 @@ export class Board {
   }
 
   moveRight() {
-    let isNeighbouringOccupiedCell = this.checkIfNeighbouringStationaryBlocks()
+    let isNeighbouringOccupiedCell = this.checkIfNeighbouringStationaryBlocks("right")
 
     let settledShapeRow = this.height - this.currentShapeHeight
 
@@ -240,19 +240,25 @@ export class Board {
     let canRotate = this.checkIfCanRotate()
     let pennedIn = this.pennedIn()
     let offset = 0;
-    console.log("penn", pennedIn)
-    console.log("canrot", canRotate)
     if (this.rightBoundaryHit) {
       offset = 1
     }
     if (canRotate && !pennedIn) {
       let shape = this.currentShape.toString().substring(0, this.currentShape.toString().length - 1)
-      let currentRow = this.height - this.lastShapeRowFromBottom
       let shapeRows = shape.toString().split('\n')
       let shapeObj = Object.assign({}, shapeRows)
 
+      let topOfMovingShapeRow = this.calculateTopOfMovingShapeRow()
+
+      // check if we need a wall kick and if so do the algorithm for it
+      let neighbouring = this.checkIfNeighbouringStationaryBlocks()
+      if (neighbouring){
+        console.log("DO A KICK")
+        this.moveRight()
+      }
+
       const shapeObjShifted = Object.fromEntries(
-        Object.entries(shapeObj).map(([key, value]) => [Number(key) + currentRow, value])
+        Object.entries(shapeObj).map(([key, value]) => [Number(key) + topOfMovingShapeRow, value])
       );
 
       let currentMidpoint = this.calculatePopulatedCells()[0] % this.width
@@ -324,21 +330,36 @@ export class Board {
 
   }
 
-
-  checkIfNeighbouringStationaryBlocks() {
-    let allPopulatedCells = this.calculatePopulatedCells()
-    let populatedCellsWithoutNonMovingCells = allPopulatedCells.filter(item => !this.occupiedCells.includes(item))
-    let isNeighbouringOccupiedCell;
-
-    for (let i = 0; i < populatedCellsWithoutNonMovingCells.length; i++) {
-      isNeighbouringOccupiedCell = this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] + 1) || this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] - 1)
-      if (isNeighbouringOccupiedCell) {
-        break;
+  calculateTopOfMovingShapeRow() {
+    let rowNum = 0
+    for (let i = 0; i < this.rows.length; i++){
+      if(this.rows[i] !== this.EMPTY_ROW){
+        rowNum = i
+        break
       }
     }
-
-    return isNeighbouringOccupiedCell
+    return rowNum
   }
+
+  checkIfNeighbouringStationaryBlocks(direction) {
+  const allPopulatedCells = this.calculatePopulatedCells();
+
+  const populatedCellsWithoutNonMovingCells =
+    allPopulatedCells.filter(item => !this.occupiedCells.includes(item));
+
+  const offset = direction === "left" ? -1 : 1;
+
+  for (let i = 0; i < populatedCellsWithoutNonMovingCells.length; i++) {
+    const cell = populatedCellsWithoutNonMovingCells[i];
+
+    if (this.occupiedCells.includes(cell + offset)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 
   checkBoundaries(boundary) {
     let edgeValues = []
