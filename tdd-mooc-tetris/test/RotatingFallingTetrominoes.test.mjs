@@ -290,7 +290,7 @@ describe("Rotating falling tetrominoes", () => {
         board.moveRight()
         board.tick()
         board.tick()
-        board.rotateLeft()
+        board.rotateRight()
 
         expect(board.toString()).to.equalShape(
       `..........
@@ -303,6 +303,7 @@ describe("Rotating falling tetrominoes", () => {
        ....OO....`
         )
     })
+    
 
 
 
