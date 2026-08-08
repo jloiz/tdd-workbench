@@ -3,6 +3,8 @@ import { RotatingShape } from "./RotatingShape.mjs"
 export class Tetromino {
 
     #tetromino;
+    #regularInversionState = ['...\nTTT\n.T.\n', '...\nJJJ\n..J\n', '...\nLLL\nL..\n']
+    #akiraInversionStates = ['TTT\n.T.\n...\n', 'JJJ\n..J\n...\n', 'LLL\nL..\n...\n']
 
     constructor(tetrominoString) {
         this.#tetromino = tetrominoString
@@ -22,7 +24,16 @@ export class Tetromino {
     }
 
     rotateRight() {
-        let shape = new RotatingShape(this.#tetromino)
+        console.log("tetrox\n", this.#tetromino)
+        console.log(this.#akiraInversionStates[0])
+        let shapeStr = this.#tetromino
+        if (this.#akiraInversionStates.includes(this.#tetromino)){
+            const index = this.#akiraInversionStates.indexOf(this.#tetromino);
+            console.log("HIT")
+            console.log(index)
+            shapeStr = this.#regularInversionState[index]
+        }
+        let shape = new RotatingShape(shapeStr)
         let rotatedShape = shape.rotateRight()
         let tetrominoString = rotatedShape.toString()
         // Make a special case for O
@@ -37,6 +48,9 @@ export class Tetromino {
             tetrominoString = this.shuffle(tetrominoString)
         }
 
+        console.log(tetrominoString)
+
+
         return Tetromino.fromString(tetrominoString)
     }
 
@@ -45,7 +59,6 @@ export class Tetromino {
         let shape = new RotatingShape(this.#tetromino)
         let rotatedShape = shape.rotateLeft()
         let tetrominoString = rotatedShape.toString()
-        console.log(tetrominoString)
 
         if (this.isAtBottomOfBox(tetrominoString)) {
             tetrominoString = this.pushToTopOfBox(tetrominoString)
@@ -55,7 +68,9 @@ export class Tetromino {
             tetrominoString = this.pushToRightOfBox(tetrominoString)
         }
 
-        console.log(tetrominoString)
+        if (this.isAtBottomOfBox(tetrominoString) && tetrominoString.includes('T')){
+            tetrominoString = this.shuffle(tetrominoString)
+        }
 
         return Tetromino.fromString(tetrominoString)
     }
@@ -71,14 +86,12 @@ export class Tetromino {
     }
 
     shuffle(tetrominoString) {
-
-        console.log(tetrominoString)
         let tetrominoArr = tetrominoString.split('\n')
+
         tetrominoArr.pop()
         tetrominoArr.push(tetrominoArr.splice(0, 1)[0])
-        console.log(tetrominoArr)
-        return `${tetrominoArr.join('\n')}\n`
 
+        return `${tetrominoArr.join('\n')}\n`
     }
 
     isAtBottomOfBox(tetrominoString) {
