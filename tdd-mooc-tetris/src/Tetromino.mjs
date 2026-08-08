@@ -24,13 +24,9 @@ export class Tetromino {
     }
 
     rotateRight() {
-        console.log("tetrox\n", this.#tetromino)
-        console.log(this.#akiraInversionStates[0])
         let shapeStr = this.#tetromino
         if (this.#akiraInversionStates.includes(this.#tetromino)){
             const index = this.#akiraInversionStates.indexOf(this.#tetromino);
-            console.log("HIT")
-            console.log(index)
             shapeStr = this.#regularInversionState[index]
         }
         let shape = new RotatingShape(shapeStr)
@@ -48,15 +44,17 @@ export class Tetromino {
             tetrominoString = this.shuffle(tetrominoString)
         }
 
-        console.log(tetrominoString)
-
-
         return Tetromino.fromString(tetrominoString)
     }
 
 
     rotateLeft() {
-        let shape = new RotatingShape(this.#tetromino)
+        let shapeStr = this.#tetromino
+        if (this.#akiraInversionStates.includes(this.#tetromino)){
+            const index = this.#akiraInversionStates.indexOf(this.#tetromino);
+            shapeStr = this.#regularInversionState[index]
+        }
+        let shape = new RotatingShape(shapeStr)
         let rotatedShape = shape.rotateLeft()
         let tetrominoString = rotatedShape.toString()
 

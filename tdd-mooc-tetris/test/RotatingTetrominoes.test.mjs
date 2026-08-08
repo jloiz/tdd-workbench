@@ -43,7 +43,6 @@ describe("The T shape", () => {
   });
 
     test("it obeys akira rotation", () => {
-      console.log('HERE2')
     let onceRotatedShape = shape.rotateRight()
     expect(onceRotatedShape.rotateRight().toString()).to.equalShape(
       `TTT
