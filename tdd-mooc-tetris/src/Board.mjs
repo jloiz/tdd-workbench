@@ -252,16 +252,18 @@ export class Board {
 
       // check if we need a wall kick and if so do the algorithm for it
       let neighbouringLeft = this.checkIfNeighbouringStationaryBlocks("left")
+      let verticalOffset = 0;
       if (neighbouringLeft){
         console.log("DO A KICK")
         this.moveRight()
-        this.tick()
+        verticalOffset = 1
       }
 
       const shapeObjShifted = Object.fromEntries(
-        Object.entries(shapeObj).map(([key, value]) => [Number(key) + topOfMovingShapeRow, value])
+        Object.entries(shapeObj).map(([key, value]) => [Number(key) + topOfMovingShapeRow + verticalOffset, value])
       );
 
+  
       let currentMidpoint = this.calculatePopulatedCells()[0] % this.width
 
       // ToDo (later): Dont use empty row on stationary shape rows
@@ -276,6 +278,10 @@ export class Board {
           return newRow
         }
       })
+
+      if (neighbouringLeft){
+        newRows[topOfMovingShapeRow] = this.EMPTY_ROW
+      }
 
       this.rows = newRows
       this.drawBoard()
