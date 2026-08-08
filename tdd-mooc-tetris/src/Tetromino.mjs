@@ -26,11 +26,15 @@ export class Tetromino {
         let rotatedShape = shape.rotateRight()
         let tetrominoString = rotatedShape.toString()
         // Make a special case for O
-        if (this.isAtBottomOfBox(tetrominoString) && tetrominoString.includes('O')) {
+        if (this.isAtBottomOfBox(tetrominoString) && (tetrominoString.includes('O') )) {
             tetrominoString = this.pushToTopOfBox(tetrominoString)
         }
         if (tetrominoString.includes('I')){
             tetrominoString = this.pushToRightOfBox(tetrominoString)
+        }
+        // special case for the new akira rotation system
+        if (this.isAtBottomOfBox(tetrominoString) && tetrominoString.includes('T')){
+            tetrominoString = this.shuffle(tetrominoString)
         }
 
         return Tetromino.fromString(tetrominoString)
@@ -41,6 +45,7 @@ export class Tetromino {
         let shape = new RotatingShape(this.#tetromino)
         let rotatedShape = shape.rotateLeft()
         let tetrominoString = rotatedShape.toString()
+        console.log(tetrominoString)
 
         if (this.isAtBottomOfBox(tetrominoString)) {
             tetrominoString = this.pushToTopOfBox(tetrominoString)
@@ -49,6 +54,8 @@ export class Tetromino {
         if (tetrominoString.includes('O')) {
             tetrominoString = this.pushToRightOfBox(tetrominoString)
         }
+
+        console.log(tetrominoString)
 
         return Tetromino.fromString(tetrominoString)
     }
@@ -63,6 +70,17 @@ export class Tetromino {
         return tetrominoString.split('\n').map(row => { return row.split('').reverse().join('') }).join('\n')
     }
 
+    shuffle(tetrominoString) {
+
+        console.log(tetrominoString)
+        let tetrominoArr = tetrominoString.split('\n')
+        tetrominoArr.pop()
+        tetrominoArr.push(tetrominoArr.splice(0, 1)[0])
+        console.log(tetrominoArr)
+        return `${tetrominoArr.join('\n')}\n`
+
+    }
+
     isAtBottomOfBox(tetrominoString) {
         return (tetrominoString.substring(0, 5) === '.....') || tetrominoString.substring(0, 3) === '...'
     }
@@ -74,8 +92,6 @@ export class Tetromino {
         tetroParts = tetroParts.filter(part => { return part !== '' })
         return tetroParts.length
     }
-
-
 
     toString() {
         return this.#tetromino
