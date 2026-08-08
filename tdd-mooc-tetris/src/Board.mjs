@@ -240,7 +240,9 @@ export class Board {
     let canRotate = this.checkIfCanRotate()
     let pennedIn = this.pennedIn()
     let offset = 0;
-    if (this.rightBoundaryHit){
+    console.log("penn", pennedIn)
+    console.log("canrot", canRotate)
+    if (this.rightBoundaryHit) {
       offset = 1
     }
     if (canRotate && !pennedIn) {
@@ -301,15 +303,24 @@ export class Board {
     let populatedCells = this.calculatePopulatedCells()
     let populatedCellsWithoutNonMovingCells = populatedCells.filter(item => !this.occupiedCells.includes(item))
     let pennedIn;
-    for (let i = 0; i < this.occupiedCells.length - 1; i++) {
-      const low = this.occupiedCells[i];
-      const high = this.occupiedCells[i + 1];
 
-      if (populatedCellsWithoutNonMovingCells.some(value => value > low && value < high)) {
-        return true;
+    const firstSet = new Set(populatedCellsWithoutNonMovingCells);
+
+    for (let i = 0; i < this.occupiedCells.length - 1; i++) {
+      const a = this.occupiedCells[i];
+      const b = this.occupiedCells[i + 1];
+
+      // Exactly one integer between the two values
+      if (Math.abs(a - b) === 2) {
+        const between = Math.min(a, b) + 1;
+
+        if (firstSet.has(between)) {
+          return true;
+        }
       }
     }
-    return false
+
+    return false;
 
   }
 
