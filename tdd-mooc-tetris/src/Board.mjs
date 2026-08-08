@@ -259,10 +259,10 @@ export class Board {
         this.moveRight()
         verticalOffset = 1
       }
-      // if (neighbouringRight){
-      //   this.moveLeft()
-      //   verticalOffset = 1
-      // }
+      if (neighbouringRight){
+        this.moveLeft()
+        verticalOffset = 1
+      }
 
       const shapeObjShifted = Object.fromEntries(
         Object.entries(shapeObj).map(([key, value]) => [Number(key) + topOfMovingShapeRow + verticalOffset, value])
@@ -271,20 +271,26 @@ export class Board {
   
       let currentMidpoint = this.calculatePopulatedCells()[0] % this.width
 
-      // ToDo (later): Dont use empty row on stationary shape rows
       let newRows = this.rows.map((row, index) => {
         if (shapeObjShifted[index] === undefined) {
           return this.rows[index]
         } else {
-          // insert shape row to board row 
+          console.log(this.lastShapeRowFromBottom)
           let newRow = `${this.rows[index].substring(0, currentMidpoint - 1 - offset)}${shapeObjShifted[index]}${this.EMPTY_ROW.substring(currentMidpoint, this.width)}`
           // truncate row at board width
+          console.log(`${this.EMPTY_ROW.substring(0, currentMidpoint - 1 - offset)}${shapeObjShifted[index]}${this.EMPTY_ROW.substring(currentMidpoint, this.width)}`)
           newRow = newRow.substring(0, this.EMPTY_ROW.length)
           return newRow
         }
       })
 
-      if (neighbouringLeft){
+      if (neighbouringRight) {
+        newRows[this.lastShapeRowFromBottom + 1] = this.rows[this.lastShapeRowFromBottom + 1]
+        newRows[this.lastShapeRowFromBottom] = [...newRows[this.lastShapeRowFromBottom]].map((c, i) => c !== '.' ? c : this.rows[this.lastShapeRowFromBottom][i]).join('');
+
+      }
+
+      if (neighbouringLeft || neighbouringRight){
         newRows[topOfMovingShapeRow] = this.EMPTY_ROW
       }
 

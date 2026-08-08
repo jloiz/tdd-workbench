@@ -272,7 +272,6 @@ describe("Rotating falling tetrominoes", () => {
     })
 
     test("it can wall kick and rotate left off a shape if there is space", () => {
-        console.log("HERE")
         board.drop(Tetromino.O_SHAPE)
         board.tick()
         board.tick()
@@ -305,7 +304,7 @@ describe("Rotating falling tetrominoes", () => {
     })
 
 
-        test("it can wall kick and rotate left off a shape if there is space", () => {
+    test("it can wall kick and rotate left off a shape if there is space", () => {
         console.log("HERE")
         board.drop(Tetromino.O_SHAPE)
         board.tick()
