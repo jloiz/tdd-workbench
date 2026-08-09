@@ -20,7 +20,7 @@ export class ScoreBoard {
     }
 
     updateScore(rowsCleared) {
-        
+        this.score += this.scoreMappings[rowsCleared]
     }
 
     getScore(){

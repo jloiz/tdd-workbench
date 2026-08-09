@@ -95,4 +95,22 @@ describe("The scoreboard keeps score", () => {
         expect(scoreBoard.getScore()).to.equal(40)
     })
 
+        test("it gives a score of 100 on a double line clear", () => {
+        gameCoordinator.publish("numRowsCleared", 2)
+        scoreBoard.getScore()
+        expect(scoreBoard.getScore()).to.equal(100)
+    })
+
+        test("it gives a score of 300 on a triple line clear", () => {
+        gameCoordinator.publish("numRowsCleared", 3)
+        scoreBoard.getScore()
+        expect(scoreBoard.getScore()).to.equal(300)
+    })
+
+        test("it gives a score of 1200 on a tetris line clear", () => {
+        gameCoordinator.publish("numRowsCleared", 4)
+        scoreBoard.getScore()
+        expect(scoreBoard.getScore()).to.equal(1200)
+    })
+
 })
