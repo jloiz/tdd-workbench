@@ -9,8 +9,6 @@ export class Block {
     }
 
     static fromString(blockString) {
-        // const formattedShape = `${shapeString.replaceAll(' ', '')}\n`
-        //return new RotatingShape(formattedShape)
         return new RotatingShape(blockString)
     }
 

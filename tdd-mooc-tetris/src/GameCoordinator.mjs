@@ -13,7 +13,7 @@ export class GameCoordinator {
     }
 
     publish(eventName, data) {
-        const callbacks = this.subscribers[eventName] 
+        const callbacks = this.subscribers[eventName]
         callbacks.forEach(callback => callback(data))
     }
 
