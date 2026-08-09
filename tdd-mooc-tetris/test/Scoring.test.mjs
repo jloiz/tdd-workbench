@@ -3,6 +3,7 @@ import { expect } from "chai"
 import { Board } from "../src/Board.mjs"
 import { Tetromino } from "../src/Tetromino.mjs"
 import { GameCoordinator } from "../src/GameCoordinator.mjs"
+import { ScoreBoard } from "../src/ScoreBoard.mjs"
 
 
 
@@ -50,13 +51,13 @@ describe("Keeping score", () => {
     })
 
     test("the score board listens for the number of rows cleared via the game controller", () => {
-        let gameController = {
+        let gameCoordinator = {
             subscribe : vi.fn()
         }
 
         let scoreBoard = new ScoreBoard(gameCoordinator)
         // use any function as the purpose of this test is to just check the 
         // scoreboard is infact subscribing
-        expect(gameController.subscribe).toHaveBeenCalledWith("numRowsCleared", expect.any(Function))
+        expect(gameCoordinator.subscribe).toHaveBeenCalledWith("numRowsCleared", expect.any(Function))
     })
 })
