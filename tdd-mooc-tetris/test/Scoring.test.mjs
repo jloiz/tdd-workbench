@@ -8,7 +8,7 @@ import { ScoreBoard } from "../src/ScoreBoard.mjs"
 
 
 describe("Keeping scoreboard and board communicate", () => {
-    
+
     function fallToBottom(board) {
         for (let i = 0; i < 6; i++) {
             board.tick()
@@ -52,7 +52,7 @@ describe("Keeping scoreboard and board communicate", () => {
 
     test("the score board listens for the number of rows cleared via the game controller", () => {
         let gameCoordinator = {
-            subscribe : vi.fn()
+            subscribe: vi.fn()
         }
 
         let scoreBoard = new ScoreBoard(gameCoordinator)
@@ -74,16 +74,18 @@ describe("Keeping scoreboard and board communicate", () => {
     })
 })
 
-describe("The scoreboard keeps score", () =>{
+describe("The scoreboard keeps score", () => {
+
     let scoreBoard
+
     beforeEach(() => {
         let gameCoordinator = new GameCoordinator
         scoreBoard = new ScoreBoard(gameCoordinator)
     })
 
     test("it gives a score of zero initially", () => {
-    scoreBoard.getScore()
-    expect(scoreBoard.getScore()).to.equal(0)
+        scoreBoard.getScore()
+        expect(scoreBoard.getScore()).to.equal(0)
     })
-   
+
 })
