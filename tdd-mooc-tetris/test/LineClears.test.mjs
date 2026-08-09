@@ -47,4 +47,46 @@ describe("Line clears", () => {
                .T..T..T..T.`
         )
     })
+
+    test("it clears multiple lines", () => {
+        board.drop(Tetromino.O_SHAPE)
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        fallToBottom()
+        board.drop(Tetromino.O_SHAPE)
+        board.moveLeft()
+        fallToBottom()
+        board.drop(Tetromino.O_SHAPE)
+        board.moveRight()
+        fallToBottom()
+        board.drop(Tetromino.O_SHAPE)
+        board.moveRight()
+        board.moveRight()
+        board.moveRight()
+        fallToBottom()
+        board.drop(Tetromino.O_SHAPE)
+        board.moveRight()
+        board.moveRight()
+        board.moveRight()
+        board.moveRight()
+        board.moveRight()
+        fallToBottom()
+        board.drop(Tetromino.O_SHAPE)
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        fallToBottom()
+        expect(board.toString()).to.equalShape(
+              `............
+               ............
+               ............
+               ............
+               ............
+               ............`
+        )
+    })
+
 })
