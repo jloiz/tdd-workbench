@@ -39,6 +39,9 @@ export class Board {
 
 
   drop(shape) {
+    // reset boundaries
+    this.leftBoundaryHit = false
+    this.rightBoundaryHit = false
     // check if block dropped
     if ((shape.length === 1) && (typeof shape === "string")) {
       shape = new Block(shape)
@@ -79,6 +82,8 @@ export class Board {
 
   tick() {
 
+    this.doLineClears()
+
     if (this.hasHitShape) {
       this.setIsFalling(false)
       this.clearCurrentShape()
@@ -90,7 +95,7 @@ export class Board {
       this.setHasHitBottom(false)
     } else if (!(this.currentShape === "NO_SHAPE")) {
       this.fall()
-    }
+    } 
 
     this.drawBoard()
   }
@@ -126,59 +131,6 @@ export class Board {
     this.handleTouchingOtherShapes(oldRows, newRows)
   }
 
-  getFirstShapeRowFromBottom() {
-    // Offset this value by -1
-    let firstShapeRow;
-    let rows = structuredClone(this.rows)
-    rows = rows.reverse()
-    if (rows[0] === this.EMPTY_ROW) {
-      firstShapeRow = -1
-    } else {
-      for (let rowNum = 0; rowNum < rows.length; rowNum++) {
-        if (rows[rowNum] !== this.EMPTY_ROW) {
-          firstShapeRow = rowNum
-          break;
-        }
-      }
-    }
-    return firstShapeRow
-  }
-
-  setNewShape(newShape) {
-    this.currentShape = newShape
-    this.setIsFalling(true)
-  }
-
-  handleBottomBoundary(oldRows, newRows) {
-    if (oldRows[this.height - 1] !== newRows[this.height - 1]) {
-      this.setHasHitBottom(true)
-
-      this.lastShapeRowFromBottom = this.caclulateLastShapeRowFromBottom(newRows)
-    }
-  }
-
-  handleTouchingOtherShapes(oldBoard, newRows) {
-    let flatBoard = newRows.join('')
-    let populatedCells = this.calculatePopulatedCells()
-    let populatedCellsWithoutNonMovingCells = populatedCells.filter(item => !this.occupiedCells.includes(item))
-    for (let i = 0; i < populatedCellsWithoutNonMovingCells.length; i++) {
-      if (this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] + this.width)) {
-        this.setHasHitShape(true)
-      }
-    }
-  }
-
-  caclulateLastShapeRowFromBottom(newRows) {
-    let lastShapeRowFromBottom;
-    for (let i = 0; i < newRows.length; i++) {
-      if (newRows[i] !== this.EMPTY_ROW) {
-        lastShapeRowFromBottom = i
-        break;
-      }
-    }
-
-    return lastShapeRowFromBottom
-  }
 
   moveLeft() {
 
@@ -233,7 +185,18 @@ export class Board {
     }
   }
 
-  rotate() {
+  rotateLeft() {
+    this.setNewShape(this.currentShape.rotateLeft())
+    this.rotate()
+  }
+
+  rotateRight() {
+    //rename this method
+    this.setNewShape(this.currentShape.rotateRight())
+    this.rotate()
+  }
+
+    rotate() {
     let canRotate = this.checkIfCanRotate()
     let pennedIn = this.pennedIn()
     let offset = 0;
@@ -297,17 +260,6 @@ export class Board {
     }
   }
 
-  rotateLeft() {
-    this.setNewShape(this.currentShape.rotateLeft())
-    this.rotate()
-  }
-
-  rotateRight() {
-    //rename this method
-    this.setNewShape(this.currentShape.rotateRight())
-    this.rotate()
-  }
-
   checkIfCanRotate() {
     this.checkBoundaries("left")
     this.checkBoundaries("right")
@@ -317,6 +269,65 @@ export class Board {
     let canRotate = !(hasNeighbours && boundaryHit)
     return canRotate
   }
+
+    getFirstShapeRowFromBottom() {
+    // Offset this value by -1
+    let firstShapeRow;
+    let rows = structuredClone(this.rows)
+    rows = rows.reverse()
+    if (rows[0] === this.EMPTY_ROW) {
+      firstShapeRow = -1
+    } else {
+      for (let rowNum = 0; rowNum < rows.length; rowNum++) {
+        if (rows[rowNum] !== this.EMPTY_ROW) {
+          firstShapeRow = rowNum
+          break;
+        }
+      }
+    }
+    return firstShapeRow
+  }
+
+  setNewShape(newShape) {
+    this.currentShape = newShape
+    this.setIsFalling(true)
+  }
+
+  handleBottomBoundary(oldRows, newRows) {
+    if (oldRows[this.height - 1] !== newRows[this.height - 1]) {
+      this.setHasHitBottom(true)
+
+      this.lastShapeRowFromBottom = this.caclulateLastShapeRowFromBottom(newRows)
+    }
+  }
+
+  handleTouchingOtherShapes(oldBoard, newRows) {
+    let flatBoard = newRows.join('')
+    let populatedCells = this.calculatePopulatedCells()
+    let populatedCellsWithoutNonMovingCells = populatedCells.filter(item => !this.occupiedCells.includes(item))
+    for (let i = 0; i < populatedCellsWithoutNonMovingCells.length; i++) {
+      if (this.occupiedCells.includes(populatedCellsWithoutNonMovingCells[i] + this.width)) {
+        this.setHasHitShape(true)
+      }
+    }
+  }
+
+  caclulateLastShapeRowFromBottom(newRows) {
+    let lastShapeRowFromBottom;
+    for (let i = 0; i < newRows.length; i++) {
+      if (newRows[i] !== this.EMPTY_ROW) {
+        lastShapeRowFromBottom = i
+        break;
+      }
+    }
+
+    return lastShapeRowFromBottom
+  }
+
+  doLineClears() {
+    console.log("clear")
+  }
+
 
   pennedIn() {
     let populatedCells = this.calculatePopulatedCells()
@@ -379,7 +390,7 @@ export class Board {
     let offset = 0;
     let flatBoard = this.rows.join('')
     if (boundary === "right") {
-      offset = 9
+      offset = this.width - 1
     }
     let x = 0 + offset;
     while (x < flatBoard.length) {
