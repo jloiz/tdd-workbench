@@ -77,15 +77,22 @@ describe("Keeping scoreboard and board communicate", () => {
 describe("The scoreboard keeps score", () => {
 
     let scoreBoard
+    let gameCoordinator
 
     beforeEach(() => {
-        let gameCoordinator = new GameCoordinator
+        gameCoordinator = new GameCoordinator
         scoreBoard = new ScoreBoard(gameCoordinator)
     })
 
     test("it gives a score of zero initially", () => {
-        scoreBoard.getScore()
         expect(scoreBoard.getScore()).to.equal(0)
+    })
+
+    
+    test("it gives a score of 40 on a single line clear", () => {
+        gameCoordinator.publish("numRowsCleared", 1)
+        scoreBoard.getScore()
+        expect(scoreBoard.getScore()).to.equal(40)
     })
 
 })

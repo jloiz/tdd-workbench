@@ -333,7 +333,6 @@ export class Board {
         deletedRows += 1
       }
     }
-    console.log("delrows", deletedRows)
     if (this.rows.length !== this.height){
       this.rows.unshift(this.EMPTY_ROW)
       if(this.gameController){
