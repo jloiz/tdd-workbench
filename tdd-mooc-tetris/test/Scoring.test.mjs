@@ -7,7 +7,7 @@ import { ScoreBoard } from "../src/ScoreBoard.mjs"
 
 
 
-describe("Keeping score", () => {
+describe("Keeping scoreboard and board communicate", () => {
     
     function fallToBottom(board) {
         for (let i = 0; i < 6; i++) {
@@ -60,4 +60,30 @@ describe("Keeping score", () => {
         // scoreboard is infact subscribing
         expect(gameCoordinator.subscribe).toHaveBeenCalledWith("numRowsCleared", expect.any(Function))
     })
+
+
+    test("the scoreboard responds to a row clear", () => {
+        let gameCoordinator = new GameCoordinator()
+        let scoreBoard = new ScoreBoard(gameCoordinator)
+
+        let updateFunc = vi.spyOn(scoreBoard, "updateScore")
+
+        gameCoordinator.publish("numRowsCleared", 1)
+
+        expect(updateFunc).toHaveBeenCalledWith(1)
+    })
+})
+
+describe("The scoreboard keeps score", () =>{
+    let scoreBoard
+    beforeEach(() => {
+        let gameCoordinator = new GameCoordinator
+        scoreBoard = new ScoreBoard(gameCoordinator)
+    })
+
+    test("it gives a score of zero initially", () => {
+    scoreBoard.getScore()
+    expect(scoreBoard.getScore).to.equal(0)
+    })
+   
 })
