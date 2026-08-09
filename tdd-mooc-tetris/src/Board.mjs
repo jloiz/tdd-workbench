@@ -18,7 +18,7 @@ export class Board {
   occupiedCells
   EMPTY_ROW;
 
-  constructor(width, height) {
+  constructor(width, height, gameController = null) {
     this.width = width;
     this.height = height;
     this.currentShape = "NO_SHAPE"
@@ -34,6 +34,7 @@ export class Board {
     this.occupiedCells = []
     this.rightBoundaryHit = false
     this.leftBoundaryHit = false
+    this.gameController = gameController
 
   }
 
@@ -329,12 +330,16 @@ export class Board {
     for (let i = 0; i < this.rows.length; i++){
       if (this.rows[i].indexOf('.') === -1){
         this.rows.splice(i, 1)
+        deletedRows += 1
       }
     }
+    console.log("delrows", deletedRows)
     if (this.rows.length !== this.height){
       this.rows.unshift(this.EMPTY_ROW)
+      if(this.gameController){
+      this.gameController.publish("numRowsCleared", deletedRows)
+      }
     }
-
   }
 
 
