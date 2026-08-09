@@ -83,7 +83,7 @@ describe("The scoreboard keeps score", () =>{
 
     test("it gives a score of zero initially", () => {
     scoreBoard.getScore()
-    expect(scoreBoard.getScore).to.equal(0)
+    expect(scoreBoard.getScore()).to.equal(0)
     })
    
 })
