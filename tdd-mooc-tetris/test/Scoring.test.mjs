@@ -47,6 +47,16 @@ describe("Keeping score", () => {
         singleLineClear(board)
 
         expect(gameCoordinator.publish).toHaveBeenCalledWith("numRowsCleared", 1)
+    })
 
+    test("the score board listens for the number of rows cleared via the game controller", () => {
+        let gameController = {
+            subscribe : vi.fn()
+        }
+
+        let scoreBoard = new ScoreBoard(gameCoordinator)
+        // use any function as the purpose of this test is to just check the 
+        // scoreboard is infact subscribing
+        expect(gameController.subscribe).toHaveBeenCalledWith("numRowsCleared", expect.any(Function))
     })
 })
