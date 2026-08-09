@@ -325,7 +325,16 @@ export class Board {
   }
 
   doLineClears() {
-    console.log("clear")
+    let deletedRows = 0
+    for (let i = 0; i < this.rows.length; i++){
+      if (this.rows[i].indexOf('.') === -1){
+        this.rows.splice(i, 1)
+      }
+    }
+    if (this.rows.length !== this.height){
+      this.rows.unshift(this.EMPTY_ROW)
+    }
+
   }
 
 
