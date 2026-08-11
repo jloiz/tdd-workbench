@@ -4,8 +4,9 @@ import { ShuffleBag } from "../src/ShuffleBag.mjs"
 import { Tetromino } from "../src/Tetromino.mjs"
 
 describe("Shuffling the bag", () => {
+    let tetrominos
     beforeEach(() => {
-        let tetrominos = [
+        tetrominos = [
             Tetromino.T_SHAPE,
             Tetromino.I_SHAPE,
             Tetromino.J_SHAPE,
@@ -26,6 +27,6 @@ describe("Shuffling the bag", () => {
         let bag;
         bag = new ShuffleBag()
         bag.fill(tetrominos)
-        expect(bag.contents()).to.equal(tetrominos)
+        expect(bag.contents).to.equal(tetrominos)
     })
 })
