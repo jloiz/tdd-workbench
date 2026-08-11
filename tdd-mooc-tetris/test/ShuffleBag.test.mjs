@@ -29,4 +29,11 @@ describe("Shuffling the bag", () => {
         bag.fill(tetrominos)
         expect(bag.contents).to.equal(tetrominos)
     })
+
+    test("it gives an individual item, that is part of the contents", () => {
+        let bag;
+        bag = new ShuffleBag()
+        bag.fill(tetrominos)
+        expect(bag.pull()).to.be.oneOf(tetrominos)
+    })
 })
