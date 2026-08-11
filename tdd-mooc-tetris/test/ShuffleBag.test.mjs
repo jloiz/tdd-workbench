@@ -26,6 +26,6 @@ describe("Shuffling the bag", () => {
         let bag;
         bag = new ShuffleBag()
         bag.fill(tetrominos)
-        expect(bag.contents).to.equal(tetrominos)
-d    })
+        expect(bag.contents()).to.equal(tetrominos)
+    })
 })
