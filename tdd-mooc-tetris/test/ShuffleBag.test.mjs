@@ -27,8 +27,8 @@ describe("Shuffling the bag", () => {
     test("it pulls all items from the bag", ()=> {
         let pulledItems = []
         bag.fill(testItems)
-        for (let i=0; i< pulledItems.length; i++){
-            pulledItems.push(bag.pull)
+        for (let i=0; i< testItems.length; i++){
+            pulledItems.push(bag.pull())
         }
         expect(pulledItems).toEqual(expect.arrayContaining(testItems))
     })
