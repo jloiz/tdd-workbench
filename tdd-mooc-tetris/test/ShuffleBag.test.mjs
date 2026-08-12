@@ -32,4 +32,13 @@ describe("Shuffling the bag", () => {
         }
         expect(pulledItems).toEqual(expect.arrayContaining(testItems))
     })
+
+    test("it keeps pulling items after a full set is pulled", ()=> {
+        let pulledItems = []
+        bag.fill(testItems)
+        for (let i=0; i< testItems.length; i++){
+            pulledItems.push(bag.pull())
+        }
+        expect(bag.pull()).to.be.oneOf(testItems)
+    })
 })

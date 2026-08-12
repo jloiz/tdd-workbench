@@ -16,7 +16,6 @@ describe("Line clears", () => {
     }
 
     test("it clears a single line", () => {
-        console.log("HERE")
         board.drop(Tetromino.T_SHAPE)
         board.moveLeft()
         board.moveLeft()
