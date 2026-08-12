@@ -6,4 +6,8 @@ export class ShuffleBag{
         this.contents = items
     }
 
+    pull(){
+        return this.contents[0]
+    }
+
 }
