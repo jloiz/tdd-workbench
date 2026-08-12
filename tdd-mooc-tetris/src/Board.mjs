@@ -445,7 +445,7 @@ export class Board {
   }
 
   drawBoard() {
-    // console.log(this.rows)
+    console.log(this.rows)
     this.board = `${this.rows.join('\n')}\n`
   }
 
