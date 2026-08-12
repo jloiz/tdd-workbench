@@ -1,13 +1,17 @@
 export class ShuffleBag{
     
     contents;
+    currentPosition;
     
     fill(items){
         this.contents = items
+        this.currentPosition = items.length
     }
 
     pull(){
-        return this.contents[0]
+        let newItem = this.contents[this.currentPosition]
+        this.currentPosition--;
+        return this.contents[this.currentPosition]
     }
 
 }
