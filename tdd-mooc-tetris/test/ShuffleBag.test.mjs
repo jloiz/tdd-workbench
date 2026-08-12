@@ -24,21 +24,37 @@ describe("Shuffling the bag", () => {
         expect(bag.pull()).to.be.oneOf(testItems)
     })
 
-    test("it pulls all items from the bag", ()=> {
+    test("it pulls all items from the bag", () => {
         let pulledItems = []
         bag.fill(testItems)
-        for (let i=0; i< testItems.length; i++){
+        for (let i = 0; i < testItems.length; i++) {
             pulledItems.push(bag.pull())
         }
         expect(pulledItems).toEqual(expect.arrayContaining(testItems))
     })
 
-    test("it keeps pulling items after a full set is pulled", ()=> {
+    test("it keeps pulling items after a full set is pulled", () => {
         let pulledItems = []
         bag.fill(testItems)
-        for (let i=0; i< testItems.length; i++){
+        for (let i = 0; i < testItems.length; i++) {
             pulledItems.push(bag.pull())
         }
         expect(bag.pull()).to.be.oneOf(testItems)
+    })
+
+    test("it pulls full sets in different orders", () => {
+        let pulledItems1 = []
+        let pulledItems2 = []
+        bag.fill(testItems)
+        for (let i = 0; i < testItems.length; i++) {
+            pulledItems1.push(bag.pull())
+        }
+        for (let i = 0; i < testItems.length; i++) {
+            pulledItems2.push(bag.pull())
+        }
+        // check not the same array but have the same items and size
+        expect(pulledItems2).not.toEqual(pulledItems1)
+        expect(pulledItems2).toHaveLength(pulledItems1.length)
+        expect(pulledItems2).toEqual(expect.arrayContaining(pulledItems1))
     })
 })
