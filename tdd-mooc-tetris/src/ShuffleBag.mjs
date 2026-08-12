@@ -12,11 +12,19 @@ export class ShuffleBag{
         if (this.currentPosition < 0) {
             this.currentPosition = this.contents.length - 1
         }
-        console.log(this.currentPosition)
-        let newItem = this.contents[this.currentPosition]
-        console.log(newItem)
+
+        let randPosition = this.getRandomInt(this.currentPosition)
+
+        let currentItem = this.contents[randPosition]
+        this.contents[randPosition] = this.contents[this.currentPosition]
+        this.contents[this.currentPosition] = currentItem
         this.currentPosition--;
-        return newItem
+
+        return currentItem
+    }
+    
+    getRandomInt(max){
+        return Math.floor(Math.random() * max)
     }
 
 }
