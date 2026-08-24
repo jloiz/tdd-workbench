@@ -1,6 +1,6 @@
 const millisPerDay = 24 * 60 * 60 * 1000;
 
-export function daysUntilChristmas() {
+export function daysUntilChristmas2() {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const christmasDay = new Date(now.getFullYear(), 12 - 1, 25);
@@ -10,3 +10,12 @@ export function daysUntilChristmas() {
   const diffMillis = christmasDay.getTime() - today.getTime();
   return Math.floor(diffMillis / millisPerDay);
 }
+
+  /* What makes this code hard to test:
+  - Date instantiated inside the method
+  - Relies on the current date
+  */
+
+  export function daysUntilChristmas() {
+    return 1
+  }
