@@ -16,6 +16,6 @@ export function daysUntilChristmas2() {
   - Relies on the current date
   */
 
-  export function daysUntilChristmas() {
+  export function daysUntilChristmas(currentDate) {
     return 1
   }
