@@ -4,7 +4,6 @@ import { diceHandValue, diceRoll } from "../src/untestable2.mjs";
 
 describe("Untestable 2: a dice game", () => {
   test("it returns unmbers", () => {
-    // TODO: write proper tests
     expect(diceHandValue()).to.be.a("number");
   });
 

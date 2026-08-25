@@ -19,3 +19,22 @@ export async function parsePeopleCsv(filePath) {
     return person;
   });
 }
+
+export async function readCsv(filePath) {
+  const csvData = await readFile(filePath, {encoding: "utf-8"})
+  const records = parse(csvData, {
+    skipEmptyLines: true,
+    trim: true,
+  });
+  return records;
+}
+
+/*
+ Hard to test due to the file system access
+ Multiple responsibilities to be broken out (read, parse, business logic)
+
+ need to test read and parser
+ need to test missing age
+ need to test parsing a person
+
+*/
