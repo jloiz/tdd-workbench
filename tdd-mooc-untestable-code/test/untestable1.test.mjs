@@ -3,9 +3,9 @@ import { expect } from "chai";
 import { daysUntilChristmas } from "../src/untestable1.mjs";
 
 describe("Untestable 1: days until Christmas", () => {
-  let currentDate;
+  let testCurrentDate;
   beforeEach(() => {
-    currentDate = new Date("2026-08-24T03:24:00:000");
+    testCurrentDate = new Date("2026-08-24T03:24:00:000");
   });
 
   test("it accepts a current date", () => {
@@ -13,21 +13,24 @@ describe("Untestable 1: days until Christmas", () => {
   });
 
   test("it uses the current year", () => {
-    let spy = vi.spyOn(currentDate, "getFullYear");
-    daysUntilChristmas(currentDate);
+    let spy = vi.spyOn(testCurrentDate, "getFullYear");
+    daysUntilChristmas(testCurrentDate);
     expect(spy).toHaveBeenCalled();
   });
 
   test("it uses the current month", () => {
-    let spy = vi.spyOn(currentDate, "getMonth");
-    daysUntilChristmas(currentDate);
+    let spy = vi.spyOn(testCurrentDate, "getMonth");
+    daysUntilChristmas(testCurrentDate);
     expect(spy).toHaveBeenCalled();
   });
 
   test("it uses the current day", () => {
-    let currentDate = new Date("2026-08-24T03:24:00:000");
-    let spy = vi.spyOn(currentDate, "getDate");
-    daysUntilChristmas(currentDate);
+    let spy = vi.spyOn(testCurrentDate, "getDate");
+    daysUntilChristmas(testCurrentDate);
     expect(spy).toHaveBeenCalled();
   });
+
+  test("it returns the correct number of days until christmas", () => {
+    expect(daysUntilChristmas(currentDate).toEqual(122))
+  })
 });
