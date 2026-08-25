@@ -5,11 +5,11 @@ import { daysUntilChristmas } from "../src/untestable1.mjs";
 describe("Untestable 1: days until Christmas", () => {
   let testCurrentDate;
   beforeEach(() => {
-    testCurrentDate = new Date("2026-08-24T03:24:00:000");
+    testCurrentDate = new Date("2026-08-25T03:24:00");
   });
 
   test("it accepts a current date", () => {
-    expect(daysUntilChristmas(currentDate)).to.be.a("number");
+    expect(daysUntilChristmas(testCurrentDate)).to.be.a("number");
   });
 
   test("it uses the current year", () => {
@@ -31,6 +31,6 @@ describe("Untestable 1: days until Christmas", () => {
   });
 
   test("it returns the correct number of days until christmas", () => {
-    expect(daysUntilChristmas(currentDate).toEqual(122))
+    expect(daysUntilChristmas(testCurrentDate)).toEqual(122)
   })
 });

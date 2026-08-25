@@ -23,6 +23,5 @@ export function daysUntilChristmas(currentDate) {
     christmasDay.setFullYear(new Date().getFullYear() + 1);
   }
   const diffMillis = christmasDay.getTime() - today.getTime();
-  console.log(Math.floor(diffMillis / millisPerDay))
   return Math.floor(diffMillis / millisPerDay);
 }
