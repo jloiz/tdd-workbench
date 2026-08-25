@@ -16,4 +16,9 @@ describe("Untestable 2: a dice game", () => {
     expect(diceHandValue(1,4)).toEqual(4)
     expect(diceHandValue(2,6)).toEqual(6)
   })
+
+    test("it returns the die value plus 100 matched dice", () => {
+    expect(diceHandValue(4,4)).toEqual(104)
+    expect(diceHandValue(6,6)).toEqual(106)
+  })
 });
