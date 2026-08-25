@@ -17,4 +17,5 @@ export function diceHandValue(die1, die2) {
 /*
  Hard to test due to random numbers
  Need to pass a seed
+ Need to decouple logic
 */
