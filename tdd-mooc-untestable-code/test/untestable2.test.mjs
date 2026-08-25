@@ -12,7 +12,8 @@ describe("Untestable 2: a dice game", () => {
     expect(diceHandValue(1,4)).to.be.a("number")
   })
 
-  // test("it returns the high die for mismatched dice", () => {
-  //   expect(diceHandValue())
-  // })
+  test("it returns the high die for mismatched dice", () => {
+    expect(diceHandValue(1,4)).toEqual(4)
+    expect(diceHandValue(2,6)).toEqual(6)
+  })
 });
