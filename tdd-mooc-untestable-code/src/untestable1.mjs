@@ -19,5 +19,6 @@ export function daysUntilChristmas2() {
   export function daysUntilChristmas(currentDate) {
     let year = currentDate.getFullYear()
     let month = currentDate.getMonth()
+    let day = currentDate.getDate()
     return 1
   }

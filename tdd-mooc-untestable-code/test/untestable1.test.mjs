@@ -26,7 +26,7 @@ describe("Untestable 1: days until Christmas", () => {
 
   test("it uses the current day", () => {
     let currentDate = new Date("2026-08-24T03:24:00:000");
-    let spy = vi.spyOn(currentDate, "getDay");
+    let spy = vi.spyOn(currentDate, "getDate");
     daysUntilChristmas(currentDate);
     expect(spy).toHaveBeenCalled();
   });
