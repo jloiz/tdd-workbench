@@ -60,3 +60,11 @@ export class PasswordService {
     await this.users.save(user);
   }
 }
+
+/*
+ Hard to test due to the DB.
+ Need to test the basic read, write and db connection. Positive and negative cases
+ Need to refactor out old password check
+ Go with the 'just use docker' approach
+ Tests will need to be able to connect (beforeEach vs beforeAll)
+*/
