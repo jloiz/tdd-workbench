@@ -20,16 +20,6 @@ export async function parsePeopleCsv(filePath) {
   });
 }
 
-export async function readCsv(filePath) {
-  const csvData = await readFile(filePath, {encoding: "utf-8"})
-  console.log(csvData)
-  const records = parse(csvData, {
-    skipEmptyLines: true,
-    trim: true,
-  });
-  console.log(records)
-  return records;
-}
 
 /*
  Hard to test due to the file system access
@@ -40,3 +30,28 @@ export async function readCsv(filePath) {
  need to test parsing a person
 
 */
+
+export function parsePeople(records) {
+  const parsedRecords = records.map(([firstName, lastName, age, gender]) => {
+    const person = {
+      firstName,
+      lastName,
+      gender: gender.charAt(0).toLowerCase(),
+    };
+    if (age !== "") {
+      person.age = parseInt(age);
+    }
+    return person;
+  });
+
+  return parsedRecords
+}
+
+export async function readCsv(filePath) {
+  const csvData = await readFile(filePath, {encoding: "utf-8"})
+  const records = parse(csvData, {
+    skipEmptyLines: true,
+    trim: true,
+  });
+  return records;
+}
