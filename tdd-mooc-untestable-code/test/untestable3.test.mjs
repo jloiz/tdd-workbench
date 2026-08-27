@@ -18,7 +18,10 @@ describe("Untestable 3: CSV file parsing", () => {
   test("it reads a file", async () => {
      const data = await readCsv("test/data/people.csv")
      expect(data).to.exist
-  })
+  });
 
-  //test("it returns valid records", async ()
+  test("it returns valid records", async () =>{
+    const data = await readCsv("test/data/people.csv")
+    expect(data).toEqual([["Loid", "Forger", "", "Male"]])
+  });
 });

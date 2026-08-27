@@ -22,10 +22,12 @@ export async function parsePeopleCsv(filePath) {
 
 export async function readCsv(filePath) {
   const csvData = await readFile(filePath, {encoding: "utf-8"})
+  console.log(csvData)
   const records = parse(csvData, {
     skipEmptyLines: true,
     trim: true,
   });
+  console.log(records)
   return records;
 }
 
