@@ -20,7 +20,6 @@ export async function parsePeopleCsv(filePath) {
   });
 }
 
-
 /*
  Hard to test due to the file system access
  Multiple responsibilities to be broken out (read, parse, business logic)
@@ -44,11 +43,11 @@ export function parsePeople(records) {
     return person;
   });
 
-  return parsedRecords
+  return parsedRecords;
 }
 
 export async function readCsv(filePath) {
-  const csvData = await readFile(filePath, {encoding: "utf-8"})
+  const csvData = await readFile(filePath, { encoding: "utf-8" });
   const records = parse(csvData, {
     skipEmptyLines: true,
     trim: true,
