@@ -37,7 +37,15 @@ describe("Can mutate records into a uniform form", () => {
 
   test("it converts gender words to a lowercase letter", () => {
     const parsedRecords = parsePeople(testRecords)
-
+    console.log(parsedRecords)
     expect(parsedRecords.every(person => ["m", "f"].includes(person.gender))).to.be.true
   })
+
+  test("it removes age if it is undefined", () => {
+    const missingAgeRecords = [["Loid", "Forger", "", "Male"]]
+    const parsedRecords = parsePeople(missingAgeRecords)
+    expect(parsedRecords[0].age).to.be.undefined
+  })
+
+  
 })
