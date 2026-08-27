@@ -1,6 +1,7 @@
 import { beforeEach, describe, test } from "vitest";
 import { expect } from "chai";
 import { parsePeople, parsePeopleCsv, readCsv } from "../src/untestable3.mjs";
+import { parse } from "csv-parse";
 
 // example input:
 // Loid,Forger,,Male
@@ -22,15 +23,21 @@ describe("Can read a csv file and return records", () => {
 
 });
 
-describe("Can mutate records into a unitform form", () => {
+describe("Can mutate records into a uniform form", () => {
   let testRecords;
   beforeEach(() => {
     testRecords = [["Loid", "Forger", "", "Male"], ["Anya", "Forger", "6", "Female"]]
   });
 
-  test("it returns an aray of objects", () => {
+  test("it returns an array of objects", () => {
     const parsedRecords = parsePeople(testRecords)
     expect(parsedRecords).to.be.a("array")
     expect(parsedRecords.every(person => typeof person === "object")).to.be.true;
+  });
+
+  test("it converts gender words to a lowercase letter", () => {
+    const parsedRecords = parsePeople(testRecords)
+
+    expect(parsedRecords.every(person => ["m", "f"].includes(person.gender))).to.be.true
   })
 })
