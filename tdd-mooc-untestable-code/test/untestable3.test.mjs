@@ -1,6 +1,6 @@
 import { describe, test } from "vitest";
 import { expect } from "chai";
-import { parsePeopleCsv } from "../src/untestable3.mjs";
+import { parsePeopleCsv, readCsv } from "../src/untestable3.mjs";
 
 // example input:
 // Loid,Forger,,Male
@@ -14,4 +14,11 @@ describe("Untestable 3: CSV file parsing", () => {
       expect(await parsePeopleCsv("people.csv")).to.deep.equal([]);
     } catch (e) {}
   });
+
+  test("it reads a file", async () => {
+     const data = await readCsv("test/data/people.csv")
+     expect(data).to.exist
+  })
+
+  //test("it returns valid records", async ()
 });
