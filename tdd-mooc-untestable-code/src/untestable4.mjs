@@ -108,18 +108,18 @@ export class PasswordService {
   dbUser;
   passwordVerifier;
 
-  constructor(dbUser, passwordVerifier){
+  constructor(dbUser, passwordVerifier) {
     this.dbUser = dbUser;
-    this.passwordVerifier = passwordVerifier
+    this.passwordVerifier = passwordVerifier;
   }
 
-  async changePassword(userId, oldPassword, newPassword){
+  async changePassword(userId, oldPassword, newPassword) {
     const user = await this.dbUser.getById(userId);
 
-    const isVerified = await this.passwordVerifier.verify(user.passwordHash, oldPassword)
+    const isVerified = await this.passwordVerifier.verify(user.passwordHash, oldPassword);
     if (isVerified) {
       user.passwordHash = await argon2.hashSync(newPassword);
-      await this.dbUser.save(user)
+      await this.dbUser.save(user);
     }
   }
 }
@@ -129,7 +129,7 @@ export class PasswordVerificationService {
     if (!argon2.verifySync(realPasswordHash, passwordProvided)) {
       throw new Error("wrong old password");
     } else {
-      return true
+      return true;
     }
   }
 }
