@@ -104,7 +104,9 @@ export class PostgresUser {
   }
 }
 
-export class PasswordService {}
+export class PasswordService {
+  
+}
 
 export class PasswordVerificationService {
   verify(realPasswordHash, passwordProvided) {

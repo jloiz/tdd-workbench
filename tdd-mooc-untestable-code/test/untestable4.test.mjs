@@ -1,5 +1,5 @@
 import { afterAll, afterEach, beforeAll, beforeEach, describe, test, vi } from "vitest";
-import { PasswordVerificationService, PostgresUser } from "../src/untestable4.mjs";
+import { PasswordService, PasswordVerificationService, PostgresUser } from "../src/untestable4.mjs";
 import { execSync } from "node:child_process";
 import pg from "pg";
 import { expect } from "chai";
@@ -109,11 +109,6 @@ describe("Can interface with the database provided a connection", () => {
   })
 });
 
-
-// describe('Can change a password securely', () => {
-  
-// })
-
 describe('Can validate a password', () => {
   let verifier;
 
@@ -139,4 +134,37 @@ describe('Can validate a password', () => {
     const actualPasswordHash = hashSync(actualPassword);
     expect(() => verifier.verify(actualPasswordHash, passwordProvided)).to.throw('wrong old password')
   })
+
+
 });
+
+describe('can change a password securely', () => {
+   let verifier;
+
+  beforeAll(async () => {
+    execSync("docker compose up -d");
+    await connectToDb();
+    // clear before run for clean workspace and to enable peeking
+    await dropTables();
+    await createTables();
+    await popluateTables()
+  });
+
+  afterAll(async () => {
+    await db.end()
+    //execSync('docker compose down')
+  })
+
+  beforeEach(() => {
+    pgUser = new PostgresUser(db)
+    verifier =  new PasswordVerificationService()
+  })
+
+
+  test('it can accept a password veritfier and a database connection', () => {
+    const service = new PasswordService(pgUser, verifier)
+    expect(service).to.not.be.undefined
+    expect(service.pgUser).toEqual(pgUser)
+    expect(service.verifier).toEqual(verifier)
+  })
+})
