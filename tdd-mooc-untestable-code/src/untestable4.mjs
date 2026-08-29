@@ -112,6 +112,10 @@ export class PasswordService {
     this.dbUser = dbUser;
     this.passwordVerifier = passwordVerifier
   }
+
+  async changePassword(userId, oldPassword, newPassword){
+    const isVerified = this.passwordVerifier.verify
+  }
 }
 
 export class PasswordVerificationService {

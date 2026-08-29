@@ -140,6 +140,7 @@ describe('Can validate a password', () => {
 
 describe('can change a password securely', () => {
    let verifier;
+   let service;
 
   beforeAll(async () => {
     execSync("docker compose up -d");
@@ -158,13 +159,33 @@ describe('can change a password securely', () => {
   beforeEach(() => {
     pgUser = new PostgresUser(db)
     verifier =  new PasswordVerificationService()
+    service = new PasswordService(pgUser, verifier)
   })
 
 
   test('it can accept a password veritfier and a database connection', () => {
-    const service = new PasswordService(pgUser, verifier)
     expect(service).to.not.be.undefined
     expect(service.dbUser).toEqual(pgUser)
     expect(service.passwordVerifier).toEqual(verifier)
   })
+
+  test('it fetches the users details', () => {
+    const spy = vi.spyOn(pgUser, 'getById')
+    const userId = 5;
+    const oldPassword = 'pass_5'
+    const newPassword = 'i_forgot_my_password_again'
+    service.changePassword(userId, oldPassword, newPassword)
+    expect(spy).toHaveBeenCalled()
+  })
+
+  test('it verifies the old password before changing', () => {
+    const spy = vi.spyOn(verifier, 'verify')
+    const userId = 5;
+    const oldPassword = 'pass_5'
+    const newPassword = 'i_forgot_my_password_again'
+    service.changePassword(userId, oldPassword, newPassword)
+    expect(spy).toHaveBeenCalled()
+  })
+
+  
 })
