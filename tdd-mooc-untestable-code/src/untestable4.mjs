@@ -76,4 +76,8 @@ export class PostgresUser {
   constructor(db) {
     this.dbConn = db;
   }
+
+  #rowToUser(row) {
+    return { userId: row.user_id, passwordHash: row.password_hash };
+  }
 }

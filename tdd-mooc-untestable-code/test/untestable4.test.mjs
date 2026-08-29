@@ -1,20 +1,12 @@
 import { afterAll, afterEach, beforeAll, beforeEach, describe, test } from "vitest";
-import { PasswordService, PostgresUserDao, PostgresUser } from "../src/untestable4.mjs";
+import { PostgresUser } from "../src/untestable4.mjs";
 import { execSync } from "node:child_process";
 import pg from "pg";
-import { verify } from "@node-rs/argon2";
 import { expect } from "chai";
+import { readFileSync } from "fs";
 
-describe("Untestable 4: enterprise application", () => {
-  // let service;
-  // beforeEach(() => {
-  //   service = new PasswordService();
 
-  // });
-
-  // afterEach(() => {
-  //   //PostgresUserDao.getInstance().close();
-  // });
+describe("Can interface with the database provided a connection", () => {
 
   let db;
   let pgUser;
@@ -46,9 +38,21 @@ describe("Untestable 4: enterprise application", () => {
     }
   }
 
+  async function createTables() {
+    await db.query(readFileSync("./src/create-tables.sql", { encoding: "utf8", flag: "r" }))
+  }
+
+  async function dropTables() {
+    await db.query(readFileSync("./src/drop-tables.sql", { encoding: "utf8", flag: "r" }))
+  }
+
+
   beforeAll(async () => {
     execSync("docker compose up -d");
     await connectToDb();
+    // clear before run for clean workspace and to enable peeking
+    await dropTables();
+    await createTables();
   });
 
   afterAll(() => {
