@@ -70,6 +70,8 @@ export class PasswordServiceOld {
  Dependency inject the database connection
 */
 
+// REFACTORED CODE BELOW
+
 export class PostgresUser {
   dbConn;
 

@@ -16,6 +16,8 @@ export function daysUntilChristmasOld() {
   - Relies on the current date
   */
 
+// REFACTORED CODE BELOW
+
 export function daysUntilChristmas(currentDate) {
   const today = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
   const christmasDay = new Date(currentDate.getFullYear(), 12 - 1, 25);
