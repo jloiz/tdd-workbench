@@ -17,6 +17,7 @@ describe("Untestable 4: enterprise application", () => {
   // });
 
   let db;
+  let pgUser;
 
   async function connectToDb() {
     const connInfo = {
@@ -50,8 +51,15 @@ describe("Untestable 4: enterprise application", () => {
     await connectToDb();
   });
 
+  afterAll(() => {
+    db.end()
+  })
+
+  beforeEach(() => {
+    pgUser = new PostgresUser(db)
+  })
+
   test("it can be constructed with a database connection", async () => {
-    const pgUser = new PostgresUser(db);
     expect(pgUser).to.exist;
   });
 });
