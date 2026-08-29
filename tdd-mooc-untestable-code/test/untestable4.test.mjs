@@ -146,7 +146,7 @@ describe('can change a password securely', () => {
    let oldPassword;
    let newPassword;
    const hashedUser = {userId: 10, passwordHash: hashSync('pass_10')}
-   
+
   beforeAll(async () => {
     execSync("docker compose up -d");
     await connectToDb();
@@ -209,7 +209,6 @@ describe('can change a password securely', () => {
   })
 
   test('it actually has saved the user with a new password', async () => {
-    console.log("HERE")
     await service.changePassword(userId, oldPassword, newPassword)
     const updatedUser = await pgUser.getById(hashedUser.userId)
     expect(updatedUser.userId).to.equal(hashedUser.userId)
