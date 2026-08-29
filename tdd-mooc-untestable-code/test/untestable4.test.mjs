@@ -172,6 +172,10 @@ describe('can change a password securely', () => {
     pgUser.save(hashedUser);
   })
 
+  afterEach(async () => {
+   await  pgUser.save(hashedUser)
+  })
+
 
   test('it can accept a password veritfier and a database connection', () => {
     expect(service).to.not.be.undefined
@@ -192,10 +196,10 @@ describe('can change a password securely', () => {
     expect(spy).toHaveBeenCalledWith(expect.anything(), oldPassword)
   })
 
-  test('it hashes the new password prior to save', async () => {
-    const spy = vi.spyOn(argon2, 'hashSync');
+  test('it hashes the new password prior to save and saves', async () => {
+    const spyHash = vi.spyOn(argon2, 'hashSync');
     await service.changePassword(userId, oldPassword, newPassword)
-    expect(spy).toHaveBeenCalledWith(newPassword)
+    expect(spyHash).toHaveBeenCalledWith(newPassword)
   })
 
   test('it saves the new user password', async () => {
@@ -203,6 +207,8 @@ describe('can change a password securely', () => {
     await service.changePassword(userId, oldPassword, newPassword)
     expect(spy).toHaveBeenCalled()
   })
+
+  
 
   
 })
