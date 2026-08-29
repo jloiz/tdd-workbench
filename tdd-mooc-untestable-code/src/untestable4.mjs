@@ -114,6 +114,8 @@ export class PasswordService {
   }
 
   async changePassword(userId, oldPassword, newPassword){
+    const user = await this.dbUser.getById(userId);
+
     const isVerified = this.passwordVerifier.verify
   }
 }
