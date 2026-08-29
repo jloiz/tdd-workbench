@@ -205,9 +205,10 @@ describe("can change a password securely", () => {
   });
 
   test("it actually has saved the user with a new password", async () => {
+    const originalUser = await pgUser.getById(hashedUser.userId)
     await service.changePassword(userId, oldPassword, newPassword);
     const updatedUser = await pgUser.getById(hashedUser.userId);
-    expect(updatedUser.userId).to.equal(hashedUser.userId);
-    expect(updatedUser.passwordHash).to.not.equal(hashedUser.passwordHash);
+    expect(updatedUser.userId).to.equal(originalUser.userId);
+    expect(updatedUser.passwordHash).to.not.equal(originalUser.passwordHash);
   });
 });
