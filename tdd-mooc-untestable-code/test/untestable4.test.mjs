@@ -4,11 +4,7 @@ import { execSync } from "node:child_process";
 import pg from "pg";
 import { expect } from "chai";
 import { readFileSync } from "fs";
-
-
-describe("Can interface with the database provided a connection", () => {
-
-  let db;
+let db;
   let pgUser;
 
   async function connectToDb() {
@@ -53,6 +49,7 @@ describe("Can interface with the database provided a connection", () => {
     }
   }
 
+describe("Can interface with the database provided a connection", () => {
 
   beforeAll(async () => {
     execSync("docker compose up -d");
@@ -74,4 +71,6 @@ describe("Can interface with the database provided a connection", () => {
   test("it can be constructed with a database connection", async () => {
     expect(pgUser).to.exist;
   });
+
+  test()
 });
