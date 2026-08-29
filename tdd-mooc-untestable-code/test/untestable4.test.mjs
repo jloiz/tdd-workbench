@@ -72,10 +72,17 @@ describe("Can interface with the database provided a connection", () => {
     expect(pgUser).to.exist;
   });
 
-  test('it can get a user by id', () => {
+  test('it can get a user by id', async () => {
     const spy = vi.spyOn(db, 'query')
     
-    pgUser.getById(1)
+    await pgUser.getById(1)
     expect(spy).toHaveBeenCalled()
+  })
+
+  test('it gets the correct user by id', async () => {
+    const expectedResult = {userId: 2, passwordHash: 'pass_2'}
+    
+    const result = await pgUser.getById(2)
+    expect(result).toEqual(expectedResult);
   })
 });
