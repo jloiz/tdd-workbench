@@ -85,4 +85,15 @@ describe("Can interface with the database provided a connection", () => {
     const result = await pgUser.getById(2)
     expect(result).toEqual(expectedResult);
   })
+
+  test('it can write a new user', async () => {
+    const newUser = {userId: 6, passwordHash: 'pass_6'}
+    const spy = vi.spyOn(db, 'query')
+    await pgUser.save(newUser)
+    expect(spy).toHaveBeenCalled()
+    result = pgUser.getById(6)
+    expect(result).toEqual(newUser)
+  })
+
+  // test('it does a update on a duplicate write')
 });
