@@ -4,7 +4,8 @@ import { execSync } from "node:child_process";
 import pg from "pg";
 import { expect } from "chai";
 import { readFileSync } from "fs";
-let db;
+
+  let db;
   let pgUser;
 
   async function connectToDb() {
@@ -60,8 +61,9 @@ describe("Can interface with the database provided a connection", () => {
     await popluateTables()
   });
 
-  afterAll(() => {
-    db.end()
+  afterAll(async () => {
+    await db.end()
+    execSync('docker compose down')
   })
 
   beforeEach(() => {
@@ -95,5 +97,12 @@ describe("Can interface with the database provided a connection", () => {
     expect(result).toEqual(newUser)
   })
 
-  // test('it does a update on a duplicate write')
+  test('it does a update on a duplicate write', async () => {
+    const existingUser = {userId: 5, passwordHash: 'i_forgot_my_password'}
+    const spy = vi.spyOn(db, 'query')
+    await pgUser.save(existingUser)
+    expect(spy).toHaveBeenCalled()
+    const result = await pgUser.getById(5)
+    expect(result).toEqual(existingUser)
+  })
 });

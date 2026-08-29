@@ -48,7 +48,7 @@ export class PostgresUserDao {
   }
 }
 
-export class PasswordService {
+export class PasswordServiceOld {
   users = PostgresUserDao.getInstance();
 
   async changePassword(userId, oldPassword, newPassword) {
