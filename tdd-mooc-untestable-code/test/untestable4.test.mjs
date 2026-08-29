@@ -142,6 +142,9 @@ describe('can change a password securely', () => {
    let verifier;
    let service;
    const hashedUser = {userId: 10, passwordHash: hashSync('pass_10')}
+   let userId;
+   let oldPassword;
+   let newPassword;
 
   beforeAll(async () => {
     execSync("docker compose up -d");
@@ -161,6 +164,9 @@ describe('can change a password securely', () => {
     pgUser = new PostgresUser(db)
     verifier =  new PasswordVerificationService()
     service = new PasswordService(pgUser, verifier)
+    userId = 10;
+    oldPassword = 'pass_10'
+    newPassword = 'i_forgot_my_password_again'
     // create hashed user
     pgUser.save(hashedUser);
   })
@@ -174,21 +180,19 @@ describe('can change a password securely', () => {
 
   test('it fetches the users details', async () => {
     const spy = vi.spyOn(pgUser, 'getById')
-    const userId = 10;
-    const oldPassword = 'pass_10'
-    const newPassword = 'i_forgot_my_password_again'
     service.changePassword(userId, oldPassword, newPassword)
     expect(spy).toHaveBeenCalled()
   })
 
   test('it verifies the old password before changing', async () => {
     const spy = vi.spyOn(verifier, 'verify')
-    const userId = 10;
-    const oldPassword = 'pass_10'
-    const newPassword = 'i_forgot_my_password_again'
     await service.changePassword(userId, oldPassword, newPassword)
     expect(spy).toHaveBeenCalled()
     expect(spy).toHaveBeenCalledWith(expect.anything(), oldPassword)
+  })
+
+  test('it hashes the new password prior to save', () => {
+
   })
 
   
