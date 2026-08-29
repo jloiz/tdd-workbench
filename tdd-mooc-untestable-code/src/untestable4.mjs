@@ -81,7 +81,7 @@ export class PostgresUser {
     return { userId: row.user_id, passwordHash: row.password_hash };
   }
 
-    async getById(userId) {
+  async getById(userId) {
     const { rows } = await this.dbConn.query(
       `select user_id, password_hash
        from users
@@ -89,5 +89,15 @@ export class PostgresUser {
       [userId],
     );
     return rows.map(this.#rowToUser)[0] || null;
+  }
+
+  async save(user) {
+    await this.dbConn.query(
+      `insert into users (user_id, password_hash)
+       values ($1, $2)
+       on conflict (user_id) do update
+           set password_hash = excluded.password_hash`,
+      [user.userId, user.passwordHash],
+    );
   }
 }

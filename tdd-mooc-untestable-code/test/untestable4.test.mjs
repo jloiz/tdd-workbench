@@ -91,7 +91,7 @@ describe("Can interface with the database provided a connection", () => {
     const spy = vi.spyOn(db, 'query')
     await pgUser.save(newUser)
     expect(spy).toHaveBeenCalled()
-    result = pgUser.getById(6)
+    const result = await pgUser.getById(6)
     expect(result).toEqual(newUser)
   })
 
