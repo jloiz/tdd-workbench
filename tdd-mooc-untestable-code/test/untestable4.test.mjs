@@ -4,6 +4,8 @@ import { execSync } from "node:child_process";
 import pg from "pg";
 import { expect } from "chai";
 import { readFileSync } from "fs";
+import { hashSync } from "@node-rs/argon2";
+
 
   let db;
   let pgUser;
@@ -120,10 +122,14 @@ describe('Can validate a password', () => {
   });
 
   test('it validates a correct password', () => {
-    const passwordProvided = 'pass_3'
-    const actualPassword = 'pass_3'
 
-    verifier.verify(passwordProvided, actualPassword)
+    const actualPassword = 'pass_3'
+    const passwordProvided = 'pass_3'
+    const actualPasswordHash = hashSync(actualPassword);
+    
+    const doPasswordsMatch = verifier.verify(actualPasswordHash, passwordProvided)
+
+    expect(doPasswordsMatch).to.be.true
 
   })
 });

@@ -104,11 +104,14 @@ export class PostgresUser {
   }
 }
 
-export class PasswordService {
+export class PasswordService {}
 
+export class PasswordVerificationService {
+  verify(realPasswordHash, passwordProvided) {
+    if (!argon2.verifySync(realPasswordHash, passwordProvided)) {
+      throw new Error("wrong old password");
+    } else {
+      return true
+    }
+  }
 }
-
-export class PasswordVerificationService{
-
-}
-
