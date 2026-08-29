@@ -80,4 +80,14 @@ export class PostgresUser {
   #rowToUser(row) {
     return { userId: row.user_id, passwordHash: row.password_hash };
   }
+
+    async getById(userId) {
+    const { rows } = await this.dbConn.query(
+      `select user_id, password_hash
+       from users
+       where user_id = $1`,
+      [userId],
+    );
+    return rows.map(this.#rowToUser)[0] || null;
+  }
 }

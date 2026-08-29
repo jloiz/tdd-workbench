@@ -1,4 +1,4 @@
-import { afterAll, afterEach, beforeAll, beforeEach, describe, test } from "vitest";
+import { afterAll, afterEach, beforeAll, beforeEach, describe, test, vi } from "vitest";
 import { PostgresUser } from "../src/untestable4.mjs";
 import { execSync } from "node:child_process";
 import pg from "pg";
@@ -72,5 +72,10 @@ describe("Can interface with the database provided a connection", () => {
     expect(pgUser).to.exist;
   });
 
-  test()
+  test('it can get a user by id', () => {
+    const spy = vi.spyOn(db, 'query')
+    
+    pgUser.getById(1)
+    expect(spy).toHaveBeenCalled()
+  })
 });
