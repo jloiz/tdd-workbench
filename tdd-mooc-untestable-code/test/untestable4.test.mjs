@@ -46,6 +46,13 @@ describe("Can interface with the database provided a connection", () => {
     await db.query(readFileSync("./src/drop-tables.sql", { encoding: "utf8", flag: "r" }))
   }
 
+  async function popluateTables() {
+    for (let i = 0; i < 5; i++) {
+      await db.query(`insert into users (user_id, password_hash)
+        values ($1, $2);`, [i.toString(), `pass_${i}`])
+    }
+  }
+
 
   beforeAll(async () => {
     execSync("docker compose up -d");
@@ -53,6 +60,7 @@ describe("Can interface with the database provided a connection", () => {
     // clear before run for clean workspace and to enable peeking
     await dropTables();
     await createTables();
+    await popluateTables()
   });
 
   afterAll(() => {
