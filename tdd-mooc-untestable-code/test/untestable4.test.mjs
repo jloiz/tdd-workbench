@@ -132,4 +132,11 @@ describe('Can validate a password', () => {
     expect(doPasswordsMatch).to.be.true
 
   })
+
+  test('it validates am incorrect password', () => {
+    const actualPassword = 'pass_3'
+    const passwordProvided = 'pass_4'
+    const actualPasswordHash = hashSync(actualPassword);
+    expect(() => verifier.verify(actualPasswordHash, passwordProvided)).to.throw('wrong old password')
+  })
 });
