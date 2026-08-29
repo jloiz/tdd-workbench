@@ -115,12 +115,11 @@ export class PasswordService {
 
   async changePassword(userId, oldPassword, newPassword){
     const user = await this.dbUser.getById(userId);
-    let updatedUser = structuredClone(user);
 
     const isVerified = await this.passwordVerifier.verify(user.passwordHash, oldPassword)
     if (isVerified) {
-      updatedUser.passwordHash = argon2.hashSync(newPassword);
-      await this.dbUser.save(updatedUser)
+      user.passwordHash = await argon2.hashSync(newPassword);
+      await this.dbUser.save(user)
     }
   }
 }

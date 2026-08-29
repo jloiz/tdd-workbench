@@ -66,7 +66,7 @@ describe("Can interface with the database provided a connection", () => {
 
   afterAll(async () => {
     await db.end()
-    //execSync('docker compose down')
+    execSync('docker compose down')
   })
 
   beforeEach(() => {
@@ -142,11 +142,11 @@ describe('Can validate a password', () => {
 describe('can change a password securely', () => {
    let verifier;
    let service;
-   const hashedUser = {userId: 10, passwordHash: hashSync('pass_10')}
    let userId;
    let oldPassword;
    let newPassword;
-
+   const hashedUser = {userId: 10, passwordHash: hashSync('pass_10')}
+   
   beforeAll(async () => {
     execSync("docker compose up -d");
     await connectToDb();
@@ -158,7 +158,7 @@ describe('can change a password securely', () => {
 
   afterAll(async () => {
     await db.end()
-    //execSync('docker compose down')
+    execSync('docker compose down')
   })
 
   beforeEach(() => {
@@ -208,7 +208,11 @@ describe('can change a password securely', () => {
     expect(spy).toHaveBeenCalled()
   })
 
-  
-
-  
+  test('it actually has saved the user with a new password', async () => {
+    console.log("HERE")
+    await service.changePassword(userId, oldPassword, newPassword)
+    const updatedUser = await pgUser.getById(hashedUser.userId)
+    expect(updatedUser.userId).to.equal(hashedUser.userId)
+    expect(updatedUser.passwordHash).to.not.equal(hashedUser.passwordHash)
+  })
 })
