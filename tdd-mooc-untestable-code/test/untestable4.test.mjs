@@ -164,7 +164,7 @@ describe('can change a password securely', () => {
   test('it can accept a password veritfier and a database connection', () => {
     const service = new PasswordService(pgUser, verifier)
     expect(service).to.not.be.undefined
-    expect(service.pgUser).toEqual(pgUser)
-    expect(service.verifier).toEqual(verifier)
+    expect(service.dbUser).toEqual(pgUser)
+    expect(service.passwordVerifier).toEqual(verifier)
   })
 })

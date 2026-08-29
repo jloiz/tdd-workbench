@@ -105,7 +105,13 @@ export class PostgresUser {
 }
 
 export class PasswordService {
-  
+  dbUser;
+  passwordVerifier;
+
+  constructor(dbUser, passwordVerifier){
+    this.dbUser = dbUser;
+    this.passwordVerifier = passwordVerifier
+  }
 }
 
 export class PasswordVerificationService {
