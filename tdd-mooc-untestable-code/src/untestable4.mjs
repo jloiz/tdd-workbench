@@ -117,6 +117,9 @@ export class PasswordService {
     const user = await this.dbUser.getById(userId);
 
     const isVerified = await this.passwordVerifier.verify(user.passwordHash, oldPassword)
+    if (isVerified) {
+      user.passwordHash = argon2.hashSync(newPassword);
+    }
   }
 }
 
