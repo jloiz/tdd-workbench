@@ -198,5 +198,11 @@ describe('can change a password securely', () => {
     expect(spy).toHaveBeenCalledWith(newPassword)
   })
 
+  test('it saves the new user password', async () => {
+    const spy = vi.spyOn(pgUser, 'save');
+    await service.changePassword(userId, oldPassword, newPassword)
+    expect(spy).toHaveBeenCalled()
+  })
+
   
 })
