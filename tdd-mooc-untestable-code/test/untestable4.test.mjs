@@ -1,5 +1,5 @@
 import { afterAll, afterEach, beforeAll, beforeEach, describe, test, vi } from "vitest";
-import { PostgresUser } from "../src/untestable4.mjs";
+import { PasswordVerificationService, PostgresUser } from "../src/untestable4.mjs";
 import { execSync } from "node:child_process";
 import pg from "pg";
 import { expect } from "chai";
@@ -63,7 +63,7 @@ describe("Can interface with the database provided a connection", () => {
 
   afterAll(async () => {
     await db.end()
-    execSync('docker compose down')
+    //execSync('docker compose down')
   })
 
   beforeEach(() => {
@@ -104,5 +104,26 @@ describe("Can interface with the database provided a connection", () => {
     expect(spy).toHaveBeenCalled()
     const result = await pgUser.getById(5)
     expect(result).toEqual(existingUser)
+  })
+});
+
+
+// describe('Can change a password securely', () => {
+  
+// })
+
+describe('Can validate a password', () => {
+  let verifier;
+
+  beforeEach(() => {
+    verifier = new PasswordVerificationService()
+  });
+
+  test('it validates a correct password', () => {
+    const passwordProvided = 'pass_3'
+    const actualPassword = 'pass_3'
+
+    verifier.verify(passwordProvided, actualPassword)
+
   })
 });

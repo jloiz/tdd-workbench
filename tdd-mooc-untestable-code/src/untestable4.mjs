@@ -101,3 +101,12 @@ export class PostgresUser {
     );
   }
 }
+
+export class PasswordService {
+
+}
+
+export class PasswordVerificationService{
+
+}
+
