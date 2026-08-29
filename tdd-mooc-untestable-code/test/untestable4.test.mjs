@@ -5,6 +5,7 @@ import pg from "pg";
 import { expect } from "chai";
 import { readFileSync } from "fs";
 import { hashSync } from "@node-rs/argon2";
+import argon2 from "@node-rs/argon2";
 
 
   let db;
@@ -191,8 +192,10 @@ describe('can change a password securely', () => {
     expect(spy).toHaveBeenCalledWith(expect.anything(), oldPassword)
   })
 
-  test('it hashes the new password prior to save', () => {
-
+  test('it hashes the new password prior to save', async () => {
+    const spy = vi.spyOn(argon2, 'hashSync');
+    await service.changePassword(userId, oldPassword, newPassword)
+    expect(spy).toHaveBeenCalledWith(newPassword)
   })
 
   
