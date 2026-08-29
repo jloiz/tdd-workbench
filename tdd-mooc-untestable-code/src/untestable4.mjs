@@ -67,4 +67,13 @@ export class PasswordService {
  Need to refactor out old password check
  Go with the 'just use docker' approach
  Tests will need to be able to connect (beforeEach vs beforeAll)
+ Dependency inject the database connection
 */
+
+export class PostgresUser {
+  dbConn;
+
+  constructor(db) {
+    this.dbConn = db
+  }
+}
