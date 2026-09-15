@@ -41,14 +41,14 @@ describe("Gilded Rose", () => {
   });
 
 
-  test("Aged Brie", () => {
+  test("Aged Brie, qualit under 50", () => {
     const gildedRose = new Shop([new Item("Aged Brie", -1, 49)]);
     const items = gildedRose.updateQuality();
     expect(items[0]).toEqual(new Item("Aged Brie", -2, 50));
   });
 
 
-  test("Aged Brie, positive sellin", () => {
+  test("Aged Brie, positive sellin, quality under 50", () => {
     const gildedRose = new Shop([new Item("Aged Brie", 5, 49)]);
     const items = gildedRose.updateQuality();
     expect(items[0]).toEqual(new Item("Aged Brie", 4, 50));
