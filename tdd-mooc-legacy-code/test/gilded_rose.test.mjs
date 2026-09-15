@@ -41,6 +41,20 @@ describe("Gilded Rose", () => {
   });
 
 
+  test("Aged Brie", () => {
+    const gildedRose = new Shop([new Item("Aged Brie", -1, 49)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0]).toEqual(new Item("Aged Brie", -2, 50));
+  });
+
+
+  test("Aged Brie, positive sellin", () => {
+    const gildedRose = new Shop([new Item("Aged Brie", 5, 49)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0]).toEqual(new Item("Aged Brie", 4, 50));
+  });
+
+
   test("Sulfuras, Hand of Ragnaros, positive sellin", () => {
     const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 5, 51)]);
     const items = gildedRose.updateQuality();
