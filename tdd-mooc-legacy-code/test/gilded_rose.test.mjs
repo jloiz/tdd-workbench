@@ -8,4 +8,11 @@ describe("Gilded Rose", () => {
     const items = gildedRose.updateQuality();
     expect(items[0]).toEqual(new Item("foo", -1, 0));
   });
+
+    test("Backstage passes", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 0, 0)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0]).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", -1, 0));
+  });
+  
 });
