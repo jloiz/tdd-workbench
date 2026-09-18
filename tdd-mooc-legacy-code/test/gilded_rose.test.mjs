@@ -99,9 +99,39 @@ describe("Gilded Rose", () => {
     expect(items[0]).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", -2, 0));
   });
 
-    test("Backstage passes, positive sellin, quality below 50", () => {
+  test("Backstage passes, positive sellin, quality below 50", () => {
     const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 1, 49)]);
     const items = gildedRose.updateQuality();
     expect(items[0]).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 0, 50));
+  });
+
+  test("Backstage passes, positive sellin, quality 50", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 1, 50)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0]).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 0, 50));
+  });
+
+  test("Backstage passes, positive sellin, quality above 50", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 1, 49)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0]).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 0, 50));
+  });
+
+  test("Backstage passes, positive sellin 12, quality 0", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 12, 0)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0]).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 11, 1));
+  });
+
+  test("Backstage passes, positive sellin 11, quality 0", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 11, 0)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0]).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 10, 1));
+  });
+
+  test("Backstage passes, positive sellin 10, quality 0", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 10, 0)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0]).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 9, 2));
   });
 });
