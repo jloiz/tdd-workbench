@@ -134,4 +134,23 @@ describe("Gilded Rose", () => {
     const items = gildedRose.updateQuality();
     expect(items[0]).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 9, 2));
   });
+
+  test("Backstage passes, positive sellin 7, quality 0", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 7, 0)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0]).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 6, 2));
+  });
+
+  test("Backstage passes, positive sellin 6, quality 0", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 6, 0)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0]).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 5, 2));
+  });
+
+  test("Backstage passes, positive sellin 5, quality 0", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 5, 0)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0]).toEqual(new Item("Backstage passes to a TAFKAL80ETC concert", 4, 3));
+  });
+
 });
